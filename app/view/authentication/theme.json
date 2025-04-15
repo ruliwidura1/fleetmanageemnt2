@@ -1,0 +1,17 @@
+{
+  "link":
+  [
+    {
+      "rel": "stylesheet",
+      "href": "https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"
+    },
+    {
+      "rel": "stylesheet",
+      "href": "{{cdn_url}}assets/css/jquery.gritter.css"
+    },
+    {
+      "rel": "stylesheet",
+      "href": "{{cdn_url}}skin/admin/css/bootstrap.min.css"
+    }
+  ]
+}

@@ -40,7 +40,9 @@ class JI_Controller extends \SENE_Controller
             $this->user_login = true;
         }
 
-        
+        if (!isset($session->admin)) {
+            $this->sessions->admin = new stdClass();
+        }
         if (isset($session->admin->id)) {
             $this->admin_login = true;
         }
