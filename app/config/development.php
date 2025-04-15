@@ -16,7 +16,7 @@
  * Site Base URL with http:// or https:// prefix and trailing slash
  * @var string
  */
-$site = "http://".$_SERVER['HTTP_HOST']."/";
+$site = "http://".$_SERVER['HTTP_HOST']."/fleet_management2/";
 /**
  * URL parse method
  *   - REQUEST_URI, suitable for Nginx
@@ -45,7 +45,7 @@ $cdn_url = '';
 $db['host']  = 'localhost';
 $db['user']  = 'root';
 $db['pass']  = '';
-$db['name']  = 'seme_framework';
+$db['name']  = 's3demo_fleetmgt2';
 $db['port'] = '3306';
 $db['charset'] = 'utf8mb4';
 $db['engine'] = 'mysqli';
@@ -70,9 +70,9 @@ $timezone = 'Asia/Jakarta';
 /* all var $core_* value in lower case string*/
 /* @var string */
 /****************************/
-$core_prefix = '';
-$core_controller = '';
-$core_model = '';
+$core_prefix = 'ji_';
+$core_controller = 'controller';
+$core_model = 'model';
 
 /********************************/
 /* == Controller Configuration == */
@@ -120,3 +120,8 @@ $semevar['email_from'] = 'noreply@thecloudalert.com';
 $semevar['email_reply'] = 'hi@thecloudalert.com';
 $semevar['app_name'] = 'Seme Framework';
 $semevar['app_logo'] = 'Seme Framework';
+
+$semevar['site_title'] = 'Seme Framework';
+$semevar['site_version'] = '1.0.0';
+$semevar['admin_site_title'] = 'Admin Page';
+$semevar['admin_site_title_suffix'] = ' - '.$semevar['admin_site_title'];

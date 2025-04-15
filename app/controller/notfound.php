@@ -15,7 +15,11 @@ class NotFound extends SENE_Controller
     }
     public function index()
     {
+        $data = array();
         header("HTTP/1.0 404 Not Found");
-        echo 'Notfound';
+        $this->setTheme('front');
+        $this->setTitle('Notfound - Error 404');
+        $this->loadLayout("notfound",$data);
+        $this->render();
     }
 }
