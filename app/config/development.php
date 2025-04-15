@@ -123,5 +123,7 @@ $semevar['app_logo'] = 'Seme Framework';
 
 $semevar['site_title'] = 'Seme Framework';
 $semevar['site_version'] = '1.0.0';
+$semevar['admin_site_suffix'] = ' - Admin Fleet Management';
+
 $semevar['admin_site_title'] = 'Admin Page';
 $semevar['admin_site_title_suffix'] = ' - '.$semevar['admin_site_title'];

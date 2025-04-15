@@ -35,7 +35,7 @@ class Kendaraan extends \JI_Controller
             die();
         }
 
-        $this->setTitle('Fleet Management: Kendaraan ');
+        $this->setTitle('Fleet Management: Kendaraan '.$this->config->semevar->admin_site_suffix);
         $this->putThemeContent('fleetmanagement/kendaraan/home_modal', $data);
         $this->putThemeContent('fleetmanagement/kendaraan/home', $data);
         $this->putJsContent('fleetmanagement/kendaraan/home_bottom', $data);
