@@ -63,12 +63,12 @@
 					<a href="#" class="sidebar-nav-menu ">
 						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
 						<i class="fa fa-cog fa-spin sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Perusahaan</span>
+						<span class="sidebar-nav-mini-hide">Fleetmanagement</span>
 					</a>
 					<ul class="">
 						<li>
-							<a href="<?=base_url_admin('perusahaan/master/')?>" class="">
-								Data Master Perusahaan
+							<a href="<?=base_url_admin('fleetmanagement/kendaraan/')?>" class="">
+								Kendaraan
 							</a>
 						</li>
 					</ul>

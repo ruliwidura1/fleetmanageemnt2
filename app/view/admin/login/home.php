@@ -35,7 +35,7 @@
             </div>
             <div class="form-group form-actions">
                 <div class="col-xs-6">
-                    <?=$this->config_semevar('admin_site_title')?> <label class="" style="color: grey; font-weight: lighter; font-size: smaller;">version <?=$this->config_semevar('site_version')?></label>
+                    <label class="" style="color: grey; font-weight: lighter; font-size: smaller;">version</label>
                 </div>
                 <div class="col-xs-6 text-right">
                     <button type="submit" class="btn btn-sm btn-primary btn-submit">Login <i id="icon-submit" class="fa fa-angle-right"></i></button>

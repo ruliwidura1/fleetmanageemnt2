@@ -53,7 +53,7 @@ class Login extends \JI_Controller
         if (!isset($data_initial['sess']->admin)) {
             $this->session_current_check();
         }
-        
+
         $data_initial['sess']->admin = $apm;
         $this->setKey($data_initial['sess']);
 
@@ -69,7 +69,7 @@ class Login extends \JI_Controller
             return true;
         }
 
-		$this->setTitle('Login ' . $this->config_semevar('admin_site_title_suffix'));
+		$this->setTitle('Login ');
 
         $failed_flag = intval($this->input->request('failed', 0));
         if ($failed_flag > 0) {
@@ -93,7 +93,7 @@ class Login extends \JI_Controller
 
             return false;
         }
-		
+
 		$username = $this->validate_username();
 		if (!$username)
         {
@@ -132,11 +132,11 @@ class Login extends \JI_Controller
 		$data = $this->__init();
         if ($this->validate_admin_session()) {
             redir(base_url_admin());
-            
+
             return true;
         } else {
             redir(base_url_admin('login'));
-            
+
             return false;
         }
 	}
