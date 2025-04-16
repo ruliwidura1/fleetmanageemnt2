@@ -1,33 +1,34 @@
 <div id="page-content">
-	<!-- Static Layout Header -->
-	<div class="content-header">
+	<!-- Dashboard 2 Header -->
+	<div class="content-header content-header-media">
 		<div class="header-section">
-			<h1>
-				<i class="gi gi-show_big_thumbnails"></i>Static Layout<br><small>This is the default layout</small>
-			</h1>
-		</div>
-	</div>
-	<ul class="breadcrumb breadcrumb-top">
-		<li>Admin</li>
-		<li><a href="<?=base_url_admin()?>">Home</a></li>
-		<li><a href="<?=base_url_admin()?>">Example</a></li>
-	</ul>
-	<!-- END Static Layout Header -->
-	
-	<!-- Dummy Content -->
-	<div class="block full block-alt-noborder">
-		<h3 class="sub-header text-center"><strong>Dummy Content</strong> for layout demostration</h3>
-		<div class="row">
-			<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-				<article>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque?</p>
-					<p>Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum. Donec vitae ultrices dolor? Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque?</p>
-					<p>Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum. Donec vitae ultrices dolor? Donec lacinia venenatis metus at bibendum? In hac habitasse platea dictumst. Proin ac nibh rutrum lectus rhoncus eleifend. Sed porttitor pretium venenatis. Suspendisse potenti. Aliquam quis ligula elit. Aliquam at orci ac neque semper dictum. Sed tincidunt scelerisque ligula, et facilisis nulla hendrerit non. Suspendisse potenti. Pellentesque non accumsan orci. Praesent at lacinia dolor. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus.</p>
-				</article>
+			<div class="row">
+				<!-- Main Title (hidden on small devices for the statistics to fit) -->
+				<div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
+					<h1>
+						Halo <strong><?= $sess->admin->nama; ?></strong>
+					</h1>
+				</div>
+				<!-- END Main Title -->
+
+				<!-- Top Stats -->
+				<div class="col-md-8 col-lg-6">
+					<div class="row text-center">
+
+						<div class="col-xs-12 col-sm-12">
+							<h2 class="animation-hatch">
+								<?= $this->tgl->convert('now', 'hari_tanggal') ?><br>
+								<small><i class="fa fa-clock-o"></i> <span id="waktu_jam">00</span>:<span id="waktu_menit">00</span>:<span id="waktu_detik">00</span></small>
+							</h2>
+						</div>
+
+					</div>
+				</div>
+				<!-- END Top Stats -->
 			</div>
 		</div>
+		<!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+		<img src="<?=base_url()?>skin/admin/img/placeholders/headers/dashboard_header.png" alt="header image" class="animation-pulseSlow">
 	</div>
-	<!-- END Dummy Content -->
 </div>
+<!-- END Dashboard 2 Header -->

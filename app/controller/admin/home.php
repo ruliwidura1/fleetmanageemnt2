@@ -18,8 +18,8 @@
 			redir(base_url_admin('login'),0);
 			die();
 		}
-		
-		$this->setTitle("Dashboard ");
+
+		$this->setTitle("Dashboard ".$this->config->semevar->admin_site_suffix);
 
 		$this->putThemeContent("home/home",$data);
 		$this->putJsContent("home/home_bottom",$data);
