@@ -71,6 +71,41 @@
 								Kendaraan
 							</a>
 						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/driver/')?>" class="">
+								Driver
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/muatan/')?>" class="">
+								Muatan
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/tujuanpengiriman/')?>" class="">
+								Tujuan Pengirim
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/departure/')?>" class="">
+								Departure
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/arrival/')?>" class="">
+								Arrival
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/pajak/')?>" class="">
+								Pajak
+							</a>
+						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
+								Bahan Bakar
+							</a>
+						</li>
 					</ul>
 				</li>
 			</ul>
