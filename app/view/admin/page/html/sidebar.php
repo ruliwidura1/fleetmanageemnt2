@@ -62,7 +62,7 @@
 				<li class="">
 					<a href="#" class="sidebar-nav-menu ">
 						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
-						<i class="fa fa-cog fa-spin sidebar-nav-icon"></i>
+						<i class="fa fa-users sidebar-nav-icon"></i>
 						<span class="sidebar-nav-mini-hide">Fleetmanagement</span>
 					</a>
 					<ul class="">
