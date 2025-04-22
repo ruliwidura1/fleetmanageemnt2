@@ -63,6 +63,20 @@
 					<a href="#" class="sidebar-nav-menu ">
 						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
 						<i class="fa fa-users sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Akun</span>
+					</a>
+					<ul class="">
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
+								Pengguna (Admin)
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="">
+					<a href="#" class="sidebar-nav-menu ">
+						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+						<i class="fa fa-hdd-o sidebar-nav-icon"></i>
 						<span class="sidebar-nav-mini-hide">Fleetmanagement</span>
 					</a>
 					<ul class="">
@@ -104,6 +118,20 @@
 						<li>
 							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
 								Bahan Bakar
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="">
+					<a href="#" class="sidebar-nav-menu ">
+						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
+						<i class="fa fa fa-file-text sidebar-nav-icon"></i>
+						<span class="sidebar-nav-mini-hide">Pengaturan</span>
+					</a>
+					<ul class="">
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
+								Laporan
 							</a>
 						</li>
 					</ul>

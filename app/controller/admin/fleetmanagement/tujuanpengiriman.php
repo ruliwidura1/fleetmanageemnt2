@@ -111,7 +111,7 @@ class TujuanPengiriman extends \JI_Controller
 		}
 		$dpm = $this->dpm->id($id);
 		$cmm = $this->cmm->id($dpm->c_muatan_id);
-
+	
 		if (!isset($dpm->id) || !isset($cmm->id)) {
 			redir(base_url_admin('fleetmanagement/tujuanpengiriman/'));
 			die();
@@ -125,5 +125,5 @@ class TujuanPengiriman extends \JI_Controller
 		$this->putJsContent("fleetmanagement/tujuanpengiriman/detail_bottom",$data);
 		$this->loadLayout('col-2-left',$data);
 		$this->render();
-    }
+    } 
 }

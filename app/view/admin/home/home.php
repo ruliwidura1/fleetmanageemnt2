@@ -6,7 +6,7 @@
 				<!-- Main Title (hidden on small devices for the statistics to fit) -->
 				<div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
 					<h1>
-						Halo <strong>Mimind</strong>
+						Halo <strong><?= $sess->admin->nama; ?></strong>
 					</h1>
 				</div>
 				<!-- END Main Title -->
