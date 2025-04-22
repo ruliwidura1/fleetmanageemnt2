@@ -77,7 +77,7 @@
 					<a href="#" class="sidebar-nav-menu ">
 						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
 						<i class="fa fa-hdd-o sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Fleetmanagement</span>
+						<span class="sidebar-nav-mini-hide">Fleet Management</span>
 					</a>
 					<ul class="">
 						<li>
@@ -126,12 +126,12 @@
 					<a href="#" class="sidebar-nav-menu ">
 						<i class="fa fa-angle-left sidebar-nav-indicator sidebar-nav-mini-hide"></i>
 						<i class="fa fa fa-file-text sidebar-nav-icon"></i>
-						<span class="sidebar-nav-mini-hide">Pengaturan</span>
+						<span class="sidebar-nav-mini-hide">Laporan</span>
 					</a>
 					<ul class="">
 						<li>
 							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
-								Laporan
+								Pengiriman
 							</a>
 						</li>
 					</ul>
