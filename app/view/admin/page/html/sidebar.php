@@ -67,7 +67,7 @@
 					</a>
 					<ul class="">
 						<li>
-							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
+							<a href="<?=base_url_admin('akun/pengguna/')?>" class="">
 								Pengguna (Admin)
 							</a>
 						</li>
@@ -130,7 +130,7 @@
 					</a>
 					<ul class="">
 						<li>
-							<a href="<?=base_url_admin('fleetmanagement/bahanbakar/')?>" class="">
+							<a href="<?=base_url_admin('laporan/pengiriman/')?>" class="">
 								Pengiriman
 							</a>
 						</li>
