@@ -115,7 +115,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="ieis_active">Status *</label>
                             <div class="col-md-8">
-                                <select id="iis_active" name="is_active" class="form-control" required>
+                                <select id="ieis_active" name="is_active" class="form-control" required>
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>
