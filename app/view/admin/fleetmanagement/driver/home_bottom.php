@@ -38,12 +38,13 @@ if(jQuery('#drTable').length>0){
 						NProgress.start();
 						var id = $(this).find("td").html();
 						ieid = id;
-						var url = '<?=base_url(); ?>api_admin/fleetmanagement/bahanbakar/detail/'+id;
+						var url = '<?=base_url(); ?>api_admin/fleetmanagement/driver/detail/'+id;
 						$.get(url).done(function(response){
                             if(response.status==200 || response.status=='200'){
 							var dta = response.data;
 								$("#ieid").val(dta.id);
 								$("#ienama").val(dta.nama);
+								$("#iesim").val(dta.sim);
 								$("#ieis_active").val(dta.is_active);
 
 								$("#modal_option").modal("show");
@@ -245,11 +246,4 @@ $("#aedit").on("click",function(e){
 	setTimeout(function(){
 		$("#modal_edit").modal("show");
 	},333);
-});
-
-
-//fill data
-var data_fill = <?=json_encode($bdm)?>;
-$.each(data_fill,function(k,v){
-	$("#ie"+k).val(v);
 });
