@@ -107,6 +107,7 @@ $config_file_array = array('development.php','staging.php','production.php');
 $semevar = array();
 $routes = array();
 foreach ($config_file_array as $cfa) {
+    require_once($GLOBALS['SEMEDIR']->app_config.'constants.php');
     if (file_exists($GLOBALS['SEMEDIR']->app_config.$cfa) && is_readable($GLOBALS['SEMEDIR']->app_config.$cfa)) {
         $config_file_found++;
         $config_values['file'] = $GLOBALS['SEMEDIR']->app_config.$cfa;

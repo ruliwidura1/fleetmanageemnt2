@@ -95,9 +95,27 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="ieis_active">Status*</label>
+                            <label class="col-md-4 control-label" for="iesim">SIM*</label>
                             <div class="col-md-8">
-                                <select id="ieis_active" name="is_active" class="form-control" required>
+                                <select id="iesim" name="sim" class="form-control" required>
+                                    <option value="SIM A">SIM A</option>
+                                    <option value="SIM B1">SIM B1</option>
+                                    <option value="SIM B2">SIM B2</option>
+                                    <option value="SIM C">SIM C</option>
+                                    <option value="SIM C1">SIM C1</option>
+                                    <option value="SIM C2">SIM C2</option>
+                                    <option value="SIM D">SIM D</option>
+                                    <option value="SIM A Umum">SIM A Umum</option>
+                                    <option value="SIM B1 Umum">SIM B1 Umum</option>
+                                    <option value="SIM B2 Umum">SIM B2 Umum</option>
+                                    <option value="SIM Internasional">SIM Internasional</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="ieis_active">Status *</label>
+                            <div class="col-md-8">
+                                <select id="iis_active" name="is_active" class="form-control" required>
                                     <option value="1">Aktif</option>
                                     <option value="0">Tidak Aktif</option>
                                 </select>

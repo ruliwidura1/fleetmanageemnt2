@@ -50,7 +50,7 @@ function showDetail() {
     }
     $().btnSubmit('finished');
   }).fail(function(){
-    
+    gritter("<?=DATATABLES_AJAX_FAILED_MSG?>", "<?=DATATABLES_AJAX_FAILED_CLASS?>");
     $().btnSubmit('finished');
   });
 }
@@ -91,7 +91,7 @@ if(jQuery('#drTable').length>0){
 					});
 					fnCallback(response);
 				}).fail(function (response, status, headers, config) {
-					
+					gritter("<?=DATATABLES_AJAX_FAILED_MSG?>", "<?=DATATABLES_AJAX_FAILED_CLASS?>");
           $().btnSubmit('finished');
 				});
 			},
@@ -141,15 +141,15 @@ $("#baru_modal").on("shown.bs.modal",function(e){
 			success: function(data){
 				if (data.status=="200") {
           $("#baru_modal").modal("hide");
-          
+          gritter('<?=AJAX_CREATE_SUCCESS_MSG?>', '<?=AJAX_CREATE_SUCCESS_CLASS?>');
           drTable.ajax.reload();
 				} else {
-					
+					gritter('<h4>Gagal</h4><p>['+data.status+'] '+data.message+'</p>', '<?=AJAX_CREATE_FAILED_CLASS?>');
           $().btnSubmit('finished');
 				}
 			},
 			error: function() {
-				
+				gritter('<?=AJAX_CREATE_ERROR_MSG?>', '<?=AJAX_CREATE_ERROR_CLASS?>');
         $().btnSubmit('finished');
 				return false;
 			}
@@ -247,15 +247,15 @@ $("#edit_modal_form").on("submit",function(e){
 		success: function(respon){
 			if (respon.status == 200) {
         $("#edit_modal").modal("hide");
-				
+				gritter('<?=AJAX_UPDATE_SUCCESS_MSG?>', '<?=AJAX_UPDATE_SUCCESS_CLASS?>');
 				drTable.ajax.reload();
 			} else {
-				
+				gritter('<h4>Gagal</h4><p>['+data.status+'] '+data.message+'</p>', '<?=AJAX_UPDATE_FAILED_CLASS?>');
         $().btnSubmit('finished');
 			}
 		},
 		error: function(){
-      
+      gritter('<?=AJAX_UPDATE_ERROR_MSG?>', '<?=AJAX_UPDATE_ERROR_CLASS?>');
       $().btnSubmit('finished');
 			return false;
 		}
@@ -416,17 +416,17 @@ $("#hapus_button").on("click",function(e){
 			var url = '<?=base_url('api_admin/akun/pengguna/hapus/'); ?>'+id;
 			$.get(url).done(function(response){
 				if(response.status=="200" || response.status==200){
-          
+          gritter('<?=AJAX_DELETE_SUCCESS_MSG?>','<?=AJAX_DELETE_SUCCESS_CLASS?>');
 
           $("#edit_modal").modal("hide");
 					$("#option_modal").modal("hide");
 
           drTable.ajax.reload();
 				}else{
-					
+					gritter('<h4>Gagal</h4><p>['+data.status+'] '+data.message+'</p>', '<?=AJAX_DELETE_FAILED_CLASS?>');
 				}
 			}).fail(function() {
-        
+        gritter('<?=AJAX_DELETE_ERROR_MSG?>','<?=AJAX_DELETE_ERROR_CLASS?>');
 				$().btnSubmit('finished');
 			});
 		}

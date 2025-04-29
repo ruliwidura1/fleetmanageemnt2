@@ -29,6 +29,7 @@ class B_Driver_Model extends SENE_Model
 		$this->db->flushQuery();
 		$this->db->select('id');
 		$this->db->select('nama');
+		$this->db->select('sim');
 		$this->db->select('is_active');
 		$this->db->from($this->tbl, $this->tbl_as);
 		if (strlen($keyword) > 1) {

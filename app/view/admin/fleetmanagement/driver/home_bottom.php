@@ -1,14 +1,7 @@
-var growlPesan = '<h4>Error</h4><p>Tidak dapat diproses, silakan coba beberapa saat lagi!</p>';
-var growlType = 'danger';
-var drTable = {};
 var ieid = '';
-App.datatables();
+var drTable = {};
 
-$(".input-select2").select2({
-	width: "100%"
-});
-
-function gritter(pesan,jenis="info"){
+function gritter(pesan,jenis="warning"){
 	$.bootstrapGrowl(pesan, {
 		type: jenis,
 		delay: 2500,
@@ -16,78 +9,68 @@ function gritter(pesan,jenis="info"){
 	});
 }
 
+App.datatables();
 if(jQuery('#drTable').length>0){
 	drTable = jQuery('#drTable')
 	.on('preXhr.dt', function ( e, settings, data ){
 		NProgress.start();
 		$('.btn-submit').prop('disabled',true);
-		$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
+		$('.icon-submit').addClass('fa-circle-o-notch');
+		$('.icon-submit').addClass('fa-spin');
 	}).DataTable({
-			"order"				: [[ 0, "desc" ]],
-			"responsive"	  	: true,
+			"order"					: [[ 0, "desc" ]],
+			"responsive"	  : true,
 			"bProcessing"		: true,
 			"bServerSide"		: true,
 			"sAjaxSource"		: "<?=base_url("api_admin/fleetmanagement/driver/"); ?>",
-			"fnServerParams": function ( aoData ) {
-				aoData.push(
-					{ "name": "utype", "value": $("#fl_utype").val() }
-				);
-			},
 			"fnServerData"	: function (sSource, aoData, fnCallback, oSettings) {
+
 				oSettings.jqXHR = $.ajax({
 					dataType 	: 'json',
 					method 		: 'POST',
 					url 		: sSource,
 					data 		: aoData
-				}).done(function (response, status, headers, config) {
-					console.log(response);
+				}).success(function (response, status, headers, config) {
 					$("#modal-preloader").modal("hide");
 					$('#drTable > tbody').off('click', 'tr');
 					$('#drTable > tbody').on('click', 'tr', function (e) {
 						e.preventDefault();
+						NProgress.start();
 						var id = $(this).find("td").html();
 						ieid = id;
-						$("#modal_option").modal("show");
-						$("#adetail").attr("href","<?=base_url_admin("fleetmanagement/driver/detail/")?>"+ieid);
-						$("#aedit").attr("href","<?=base_url_admin("fleetmanagement/driver/edit/")?>"+ieid);
+						var url = '<?=base_url(); ?>api_admin/fleetmanagement/bahanbakar/detail/'+id;
+						$.get(url).done(function(response){
+                            if(response.status==200 || response.status=='200'){
+							var dta = response.data;
+								$("#ieid").val(dta.id);
+								$("#ienama").val(dta.nama);
+								$("#ieis_active").val(dta.is_active);
+
+								$("#modal_option").modal("show");
+							}else{
+								gritter('<h4>Error</h4><p>Tidak dapat mengambil detail data</p>','danger');
+							}
+                            NProgress.done();
+						}).fail(function(){
+							NProgress.done();
+							gritter('<h4>Error</h4><p>Tidak dapat mengambil detail data</p>','danger');
+						});
 					});
 
-					$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
 					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
 					NProgress.done();
-
 					fnCallback(response);
-				}).fail(function (response, status, headers, config) {
-					gritter("<h4>Error</h4><p>Tidak dapat mengambil data, coba beberapa saat lagi</p>",'warning');
-					$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
+				}).error(function (response, status, headers, config) {
+					gritter('<h4>Error</h4><p>Tidak dapat mengambil data</p>','danger');
 					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
 					NProgress.done();
 				});
-			},
-	});
-	$('.dataTables_filter input').attr('placeholder', 'Cari');
-	$("#fl_do").on("click",function(e){
-		e.preventDefault();
-		drTable.ajax.reload();
-
-		NProgress.start();
-		var fd = {};
-		fd.utype = $("#fl_utype").val();
-		$.post('<?=base_url("api_admin/fleetmanagement/driver/statistik/")?>',fd).done(function(dt) {
-			NProgress.done();
-			if (dt.status == 200) {
-				$("#kendaraan_tersedia").html(dt.data.tersedia);
-				$("#kendaraan_digunakan").html(dt.data.digunakan);
-				$("#kendaraan_diperbaiki").html(dt.data.diperbaiki);
-			} else {
-				gritter('<h4>Error</h4><p>Tidak dapat mengambil statistik data kendaraan, silakan coba lagi nanti</p>', 'danger');
 			}
-		}).fail(function() {
-			NProgress.done();
-			gritter('<h4>Error</h4><p>Tidak dapat mengambil statistik data kendaraan, silakan coba lagi nanti</p>', 'warning');
-		});
 	});
-	$("#fl_do").trigger("click");
 }
 
 //tambah
@@ -95,52 +78,178 @@ $("#atambah").on("click",function(e){
 	e.preventDefault();
 	$("#modal_tambah").modal("show");
 });
+$("#modal_tambah").on("shown.bs.modal",function(e){
+	$("#ftambah").off("submit");
+	$("#ftambah").on("submit",function(e){
+		e.preventDefault();
+		NProgress.start();
+		$('.btn-submit').prop('disabled',true);
+		$('.icon-submit').addClass('fa-circle-o-notch');
+		$('.icon-submit').addClass('fa-spin');
 
-//change icon
-$("#aicon_change").on("click",function(e){
-	e.preventDefault();
-	$("#modal_option").modal("hide");
-	setTimeout(function(){
-		$("#ficon_change").trigger("reset");
-		$("#modal_icon_change").modal("show");
-	},500);
+		var fd = new FormData($(this)[0]);
+		var url = '<?=base_url('api_admin/fleetmanagement/driver/tambah/');?>';
+		$.ajax({
+			type: 'post',
+			url: url,
+			data: fd,
+			processData: false,
+			contentType: false,
+			success: function(respon){
+				if(respon.status == 200){
+					$("#modal_tambah").modal("hide");
+					setTimeout(function(){
+						gritter('<h4>Berhasil</h4><p>Data baru berhasil disimpan</p>','success');
+						$('.btn-submit').prop('disabled',false);
+						$('.icon-submit').removeClass('fa-circle-o-notch');
+						$('.icon-submit').removeClass('fa-spin');
+						NProgress.done();
+						drTable.ajax.reload();
+					}, 666);
+				}else{
+					gritter('<h4>Gagal</h4><p>'+respon.message+'</p>','danger');
+					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
+					NProgress.done();
+				}
+			},
+			error:function(){
+				setTimeout(function(){
+					gritter('<h4>Error</h4><p>Proses tambah data tidak bisa dilakukan, coba beberapa saat lagi</p>','warning');
+					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
+					NProgress.done();
+				}, 666);
+				return false;
+			}
+		});
+	});
 });
-//listener on modal tambah show
+
+$("#modal_tambah").on("hidden.bs.modal",function(e){
+	$("#modal_tambah").find("form").trigger("reset");
+});
+
+$("#modal_edit").on("shown.bs.modal",function(e){
+	//
+});
+$("#modal_edit").on("hidden.bs.modal",function(e){
+	$("#modal_edit").find("form").trigger("reset");
+});
+$("#fedit").on("submit",function(e){
+	e.preventDefault();
+	NProgress.start();
+	$('.btn-submit').prop('disabled',true);
+	$('.icon-submit').addClass('fa-circle-o-notch');
+	$('.icon-submit').addClass('fa-spin');
+	var fd = new FormData($(this)[0]);
+	var url = '<?=base_url("api_admin/fleetmanagement/driver/edit/"); ?>'+ieid;
+	$.ajax({
+		type: $(this).attr('method'),
+		url: url,
+		data: fd,
+		processData: false,
+		contentType: false,
+		success: function(respon){
+			NProgress.done();
+			if(respon.status == 200){
+				$("#modal_edit").modal("hide");
+				setTimeout(function(){
+					gritter('<h4>Berhasil</h4><p>Proses ubah data telah berhasil!</p>','success');
+					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
+					NProgress.done();
+					drTable.ajax.reload();
+				}, 666);
+			}else{
+				setTimeout(function(){
+					gritter('<h4>Gagal</h4><p>'+respon.message+'</p>','danger');
+					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
+					NProgress.done();
+				}, 666);
+			}
+		},
+		error:function(){
+			NProgress.done();
+			setTimeout(function(){
+				gritter('<h4>Error</h4><p>Proses ubah data tidak bisa dilakukan, coba beberapa saat lagi</p>','warning');
+				$('.btn-submit').prop('disabled',false);
+				$('.icon-submit').removeClass('fa-circle-o-notch');
+				$('.icon-submit').removeClass('fa-spin');
+				NProgress.done();
+			}, 666);
+			return false;
+		}
+	});
+});
 
 //hapus
-$("#bhapus").on("click",function(e){
+$("#ahapus").on("click",function(e){
 	e.preventDefault();
-	if(ieid){
-		var c = confirm('Apakah kamu yakin?');
+	var id = ieid;
+	if(id){
+		var c = confirm('apakah anda yakin?');
 		if(c){
 			NProgress.start();
 			$('.btn-submit').prop('disabled',true);
-			$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
-			var url = '<?=base_url('api_admin/fleetmanagement/driver/hapus/')?>'+ieid;
+			$('.icon-submit').addClass('fa-circle-o-notch');
+			$('.icon-submit').addClass('fa-spin');
+			var url = '<?=base_url('api_admin/fleetmanagement/driver/hapus/'); ?>'+id;
 			$.get(url).done(function(response){
-				NProgress.done();
-				if(response.status==200){
-					gritter('<h4>Sukses</h4><p>Data berhasil dihapus</p>','success');
-					$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
-					$('.btn-submit').prop('disabled',false);
-					NProgress.done();
-
-					drTable.ajax.reload();
-					$("#modal_option").modal("hide");
-					$("#modal_edit").modal("hide");
+				if(response.status == 200 || response.status == 200){
+					setTimeout(function(){
+						gritter('<h4>Berhasil</h4><p>Data berhasil dihapus</p>','success');
+						$('.btn-submit').prop('disabled',false);
+						$('.icon-submit').removeClass('fa-circle-o-notch');
+						$('.icon-submit').removeClass('fa-spin');
+						NProgress.done();
+						drTable.ajax.reload();
+						$("#modal_option").modal("hide");
+					}, 666);
 				}else{
-					gritter('<h4>Gagal</h4><p>'+response.message+'</p>','danger');
-
-					$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
-					$('.btn-submit').prop('disabled',false);
-					NProgress.done();
+					setTimeout(function(){
+						gritter('<h4>Gagal</h4><p>'+respon.message+'</p>','danger');
+						$('.btn-submit').prop('disabled',false);
+						$('.icon-submit').removeClass('fa-circle-o-notch');
+						$('.icon-submit').removeClass('fa-spin');
+						NProgress.done();
+					}, 666);
 				}
 			}).fail(function() {
-				gritter('<h4>Error</h4><p>Tidak dapat menghapus data, Cobalah beberapa saat lagi</p>','danger');
-				$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
-				$('.btn-submit').prop('disabled',false);
-				NProgress.done();
+				setTimeout(function(){
+					gritter('<h4>Error</h4><p>Proses penghapusan tidak bisa dilakukan, coba beberapa saat lagi</p>','warning');
+					$('.btn-submit').prop('disabled',false);
+					$('.icon-submit').removeClass('fa-circle-o-notch');
+					$('.icon-submit').removeClass('fa-spin');
+					NProgress.done();
+				}, 666);
 			});
 		}
 	}
+});
+
+$("#bhapus").on("click",function(e){
+	e.preventDefault();
+	$("#ahapus").trigger("click");
+});
+
+//option
+$("#aedit").on("click",function(e){
+	e.preventDefault();
+	$("#modal_option").modal("hide");
+	setTimeout(function(){
+		$("#modal_edit").modal("show");
+	},333);
+});
+
+
+//fill data
+var data_fill = <?=json_encode($bdm)?>;
+$.each(data_fill,function(k,v){
+	$("#ie"+k).val(v);
 });

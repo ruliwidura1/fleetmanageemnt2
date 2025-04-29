@@ -30,6 +30,7 @@
   				<tr>
 					<th class="text-center">ID</th>
 					<th>Driver</th>
+					<th>SIM</th>
 					<th>Status</th>
   				</tr>
   			</thead>
