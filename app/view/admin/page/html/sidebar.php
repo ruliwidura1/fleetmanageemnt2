@@ -120,6 +120,11 @@
 								Bahan Bakar
 							</a>
 						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/jenismerkkendaraan/')?>" class="">
+								Jenis Dan Merk Kendaraan
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li class="">
