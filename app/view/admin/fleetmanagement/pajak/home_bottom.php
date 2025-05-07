@@ -53,13 +53,13 @@ if(jQuery('#drTable').length>0){
 							var dta = response.data;				
 								$("#ieid").val(dta.id);
 								$("#iea_vehicle_id").val(dta.a_vehicle_id);
-                $("#iejenis_kendaraan").val(dta.jenis_kendaraan);
-                $("#ieplat_nomor").val(dta.plat_nomor);
-                $("#ietahun_pembuatan").val(dta.tahun_pembuatan);
-                $("#ieberlaku").val(dta.berlaku);
+								$("#iejenis_kendaraan").val(dta.jenis_kendaraan);
+								$("#ieplat_nomor").val(dta.plat_nomor);
+								$("#ietahun_pembuatan").val(dta.tahun_pembuatan);
+								$("#ieberlaku").val(dta.berlaku);
 								$("#ienominal_pajak").val(dta.nominal_pajak);
 								$("#ieperpanjang_pajak").val(dta.perpanjang_pajak);
-                $("#ieberlaku").val(dta.berlaku);
+								$("#ieberlaku").val(dta.berlaku);
 
 
 								$("#modal_option").modal("show");

@@ -16,7 +16,7 @@
  * Site Base URL with http:// or https:// prefix and trailing slash
  * @var string
  */
-$site = "http://".$_SERVER['HTTP_HOST']."/fleet_management2/";
+$site = "http://".$_SERVER['HTTP_HOST']."/fleet_management_new/";
 /**
  * URL parse method
  *   - REQUEST_URI, suitable for Nginx
@@ -45,7 +45,7 @@ $cdn_url = '';
 $db['host']  = 'localhost';
 $db['user']  = 'root';
 $db['pass']  = '';
-$db['name']  = 's3demo_fleetmgt2';
+$db['name']  = 's3demo_fleetmgt_new';
 $db['port'] = '3306';
 $db['charset'] = 'utf8mb4';
 $db['engine'] = 'mysqli';

@@ -58,9 +58,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="ia_vehicle_id">Jenis Kendaraan *</label>
+                            <label class="col-md-4 control-label" for="ijenis_kendaraan">Jenis Kendaraan *</label>
                             <div class="col-md-8">
-                                <select id="ia_vehicle_id" name="a_vehicle_id" class="form-control input-select2" required>
+                                <select id="ijenis_kendaraan" name="jenis_kendaraan" class="form-control input-select2" required>
                                     <option value="">-- Pilih Kendaraan --</option>
                                     <?php if (isset($utype_list)) {
                                         foreach ($utype_list as $v) { ?>
@@ -71,9 +71,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="ia_vehicle_id">Plat Nomor *</label>
+                            <label class="col-md-4 control-label" for="ino_pol">Plat Nomor *</label>
                             <div class="col-md-8">
-                                <select id="ia_vehicle_id" name="a_vehicle_id" class="form-control input-select2" required>
+                                <select id="ino_pol" name="no_pol" class="form-control input-select2" required>
                                     <option value="">-- Pilih Kendaraan --</option>
                                     <?php if (isset($nopol_list)) {
                                         foreach ($nopol_list as $v) { ?>
@@ -159,9 +159,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="iea_vehicle_id">Jenis Kendaraan *</label>
+                            <label class="col-md-4 control-label" for="iejenis_kendaraan">Jenis Kendaraan *</label>
                             <div class="col-md-8">
-                                <select id="iea_vehicle_id" name="a_vehicle_id" class="form-control" required>
+                                <select id="iejenis_kendaraan" name="jenis_kendaraan" class="form-control" required>
                                     <?php if (isset($utype_list)) {
                                         foreach ($utype_list as $v) { ?>
                                             <option value="<?= $v->id ?>"><?= $v->utype ?></option>
@@ -171,9 +171,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="iea_vehicle_id">Plat Nomor *</label>
+                            <label class="col-md-4 control-label" for="ieno_pol">Plat Nomor *</label>
                             <div class="col-md-8">
-                                <select id="iea_vehicle_id" name="a_vehicle_id" class="form-control" required>
+                                <select id="ieno_pol" name="no_pol" class="form-control" required>
                                     <?php if (isset($nopol_list)) {
                                         foreach ($nopol_list as $v) { ?>
                                             <option value="<?= $v->id ?>"><?= $v->no_pol ?></option>
