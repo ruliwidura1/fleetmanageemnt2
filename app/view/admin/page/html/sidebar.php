@@ -125,6 +125,11 @@
 								Jenis Dan Merk Kendaraan
 							</a>
 						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/pemeliharaanservice/')?>" class="">
+								Pemeliharaan & Service
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li class="">
