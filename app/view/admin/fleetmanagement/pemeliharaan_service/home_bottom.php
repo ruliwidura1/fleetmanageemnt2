@@ -2,16 +2,14 @@ var growlPesan = '<h4>Error</h4><p>Tidak dapat diproses, silakan coba beberapa s
 var growlType = 'danger';
 var drTable = {};
 var ieid = '';
+
 App.datatables();
 
-$(".input-select2").select2({
-	width: "100%"
-});
 
 function gritter(pesan,jenis="info"){
 	$.bootstrapGrowl(pesan, {
 		type: jenis,
-		delay: 2500,
+		delay: 3456,
 		allow_dismiss: true
 	});
 }
@@ -23,14 +21,16 @@ if(jQuery('#drTable').length>0){
 		$('.btn-submit').prop('disabled',true);
 		$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
 	}).DataTable({
-			"order"				: [[ 0, "desc" ]],
-			"responsive"	  	: true,
+			"order"					: [[ 0, "desc" ]],
+			"responsive"	  : true,
 			"bProcessing"		: true,
 			"bServerSide"		: true,
-			"sAjaxSource"		: "<?=base_url("api_admin/fleetmanagement/pemeliharaanservice/"); ?>",
+			"sAjaxSource"		: "<?=base_url("api_admin/fleetmanagement/pemeliharaan_service"); ?>",
 			"fnServerParams": function ( aoData ) {
 				aoData.push(
-					{ "name": "utype", "value": $("#fl_utype").val() }
+          { "name": "is_active", "value": $("#fl_is_active").val() },
+					{ "name": "sdate", "value": $("#fl_sdate").val() },
+					{ "name": "edate", "value": $("#fl_edate").val() }
 				);
 			},
 			"fnServerData"	: function (sSource, aoData, fnCallback, oSettings) {
@@ -41,15 +41,14 @@ if(jQuery('#drTable').length>0){
 					data 		: aoData
 				}).done(function (response, status, headers, config) {
 					console.log(response);
-					$("#modal-preloader").modal("hide");
 					$('#drTable > tbody').off('click', 'tr');
 					$('#drTable > tbody').on('click', 'tr', function (e) {
 						e.preventDefault();
 						var id = $(this).find("td").html();
 						ieid = id;
 						$("#modal_option").modal("show");
-						$("#adetail").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaanservice/detail/")?>"+ieid);
-						$("#aedit").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaanservice/edit/")?>"+ieid);
+						$("#adetail").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaan_service/detail/")?>"+ieid);
+						$("#aedit").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaan_service/edit/")?>"+ieid);
 					});
 
 					$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
@@ -66,28 +65,10 @@ if(jQuery('#drTable').length>0){
 			},
 	});
 	$('.dataTables_filter input').attr('placeholder', 'Cari');
-	$("#fl_do").on("click",function(e){
+	$("#fl_button").on("click",function(e){
 		e.preventDefault();
 		drTable.ajax.reload();
-
-		NProgress.start();
-		var fd = {};
-		fd.utype = $("#fl_utype").val();
-		$.post('<?=base_url("api_admin/fleetmanagement/pemeliharaanservice/statistik/")?>',fd).done(function(dt) {
-			NProgress.done();
-			if (dt.status == 200) {
-				$("#kendaraan_tersedia").html(dt.data.tersedia);
-				$("#kendaraan_digunakan").html(dt.data.digunakan);
-				$("#kendaraan_diperbaiki").html(dt.data.diperbaiki);
-			} else {
-				gritter('<h4>Error</h4><p>Tidak dapat mengambil statistik data kendaraan, silakan coba lagi nanti</p>', 'danger');
-			}
-		}).fail(function() {
-			NProgress.done();
-			gritter('<h4>Error</h4><p>Tidak dapat mengambil statistik data kendaraan, silakan coba lagi nanti</p>', 'warning');
-		});
 	});
-	$("#fl_do").trigger("click");
 }
 
 //tambah
@@ -95,7 +76,6 @@ $("#atambah").on("click",function(e){
 	e.preventDefault();
 	$("#modal_tambah").modal("show");
 });
-
 //change icon
 $("#aicon_change").on("click",function(e){
 	e.preventDefault();
@@ -107,6 +87,7 @@ $("#aicon_change").on("click",function(e){
 });
 //listener on modal tambah show
 
+
 //hapus
 $("#bhapus").on("click",function(e){
 	e.preventDefault();
@@ -116,7 +97,7 @@ $("#bhapus").on("click",function(e){
 			NProgress.start();
 			$('.btn-submit').prop('disabled',true);
 			$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
-			var url = '<?=base_url('api_admin/fleetmanagement/pemeliharaanservice/hapus/')?>'+ieid;
+			var url = '<?=base_url('api_admin/fleetmanagement/pemeliharaan_service/hapus/')?>'+ieid;
 			$.get(url).done(function(response){
 				NProgress.done();
 				if(response.status==200){

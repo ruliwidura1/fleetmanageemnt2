@@ -1,15 +1,15 @@
 <?php
-class Pemeliharaanservice extends JI_Controller
+class Pemeliharaan_Service extends JI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
         $this->lib("seme_purifier");
-        $this->load('a_vehicle_concern');
         $this->load("api_admin/a_pemeliharaan_service_model", 'apsm');
+
         $this->current_parent = 'fleetmanagement';
-        $this->current_page = 'fleetmanagement_pemeliharaanservice';
+        $this->current_page = 'fleetmanagement_pemeliharaan_service';
     }
 
     public function index()
@@ -28,7 +28,7 @@ class Pemeliharaanservice extends JI_Controller
         $draw = $this->input->post("draw");
         $sval = $this->input->post("search");
         $sSearch = $this->input->post("sSearch");
-        $utype = $this->input->post("utype", '');
+        $is_active = $this->input->post("is_active", '');
         $sEcho = $this->input->post("sEcho");
         $page = $this->input->post("iDisplayStart");
         $pagesize = $this->input->post("iDisplayLength");
@@ -36,33 +36,51 @@ class Pemeliharaanservice extends JI_Controller
         $iSortCol_0 = $this->input->post("iSortCol_0");
         $sSortDir_0 = $this->input->post("sSortDir_0");
 
-        $sortCol = "date";
+        $sdate = $this->input->request("sdate");
+        $edate = $this->input->request("edate");
+
+        if (strlen($sdate) == 10 && strlen($edate) == 10) {
+            $sdate = date("Y-m-d", strtotime($sdate));
+            $edate = date("Y-m-d", strtotime($edate));
+        } else if (strlen($sdate) == 10 && strlen($edate) != 10) {
+            $sdate = date("Y-m-d", strtotime($sdate));
+            $edate = $sdate;
+        } else if (strlen($sdate) != 10 && strlen($edate) == 10) {
+            $edate = date("Y-m-d", strtotime($edate));
+            $sdate = $edate;
+        }
+
+        $sortCol = "id";
         $sortDir = strtoupper($sSortDir_0);
         if (empty($sortDir)) $sortDir = "DESC";
         if (strtolower($sortDir) != "desc") {
             $sortDir = "ASC";
         }
 
-        $tbl_as = $this->apsm->tbl_as;
-
         switch ($iSortCol_0) {
             case 0:
-                $sortCol = "$tbl_as.id";
+                $sortCol = "id";
                 break;
             case 1:
-                $sortCol = "$tbl_as.jadwal_pemeliharaan_rutin";
+                $sortCol = "cdate";
                 break;
             case 2:
-                $sortCol = "$tbl_as.permintaan_perbaikan";
+                $sortCol = "jenis_kendaraan";
                 break;
             case 3:
-                $sortCol = "$tbl_as.biaya_perawatan";
+                $sortCol = "deskripsi_kerusakan";
                 break;
             case 4:
-                $sortCol = "$tbl_as.riwayat_perbaikan";
+                $sortCol = "tindakan_perbaikan";
+                break;
+            case 5:
+                $sortCol = "biaya_perbaikan";
+                break;
+            case 6:
+                $sortCol = "is_active";
                 break;
             default:
-                $sortCol = "$tbl_as.id";
+                $sortCol = "id";
         }
 
         if (empty($draw)) $draw = 0;
@@ -73,18 +91,28 @@ class Pemeliharaanservice extends JI_Controller
 
         $this->status = 200;
         $this->message = 'Berhasil';
-        $dcount = $this->apsm->countAll($keyword, $utype);
-        $ddata = $this->apsm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $utype);
+        $dcount = $this->apsm->countAll($keyword, $is_active, $sdate, $edate);
+        $ddata = $this->apsm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $is_active, $sdate, $edate);
 
         foreach ($ddata as &$gd) {
-            if (isset($gd->nama)) {
-                $gd->nama = htmlentities(rtrim($gd->nama, ' - '));
+            if (isset($gd->jumlah_muatan) && isset($gd->satuan)) {
+                $gd->jumlah_muatan .= ' '.$gd->satuan;
+            }
+            if (isset($gd->tindakan_perbaikan)) {
+                $gd->tindakan_perbaikan .= ' Kg';
             }
             if (isset($gd->is_active)) {
-                if (!empty($gd->is_active)) {
-                    $gd->is_active = '<label class="label label-success">Aktif</label>';
-                } else {
-                    $gd->is_active = '<label class="label label-default">Tidak Aktif</label>';
+                $gd->is_active = !empty($gd->is_active)
+                    ? '<label class="label label-success">Aktif</label>'
+                    : '<label class="label label-default">Tidak Aktif</label>';
+            }
+            if (isset($gd->kapasitas_kendaraan)) {
+                if ($gd->kapasitas_kendaraan == 1) {
+                    $gd->kapasitas_kendaraan = '<label class="label label-info">Sesuai</label>';
+                } elseif ($gd->kapasitas_kendaraan == 2) {
+                    $gd->kapasitas_kendaraan = '<label class="label label-warning">Kurang</label>';
+                } elseif ($gd->kapasitas_kendaraan == 3) {
+                    $gd->kapasitas_kendaraan = '<label class="label label-danger">Lebih</label>';
                 }
             }
         }
@@ -116,8 +144,27 @@ class Pemeliharaanservice extends JI_Controller
                 }
             }
         }
-        if (!isset($di['nama'])) $di['nama'] = "";
-        if (strlen($di['nama']) <= 0) {
+
+        if (isset($di['a_vehicle_id'])) {
+            $combined_value = explode(' - ', $di['a_vehicle_id']);
+            if (count($combined_value) == 2) {
+                $di['a_vehicle_utype'] = $combined_value[0];
+                $di['a_vehicle_no_pol'] = $combined_value[1];
+            } else {
+                $di['a_vehicle_utype'] = '';
+                $di['a_vehicle_no_pol'] = '';
+            }
+        }
+
+        if (!isset($di['cdate'])) $di['cdate'] = "";
+        if (!isset($di['b_driver_id'])) $di['b_driver_id'] = "";
+        if (!isset($di['jenis_kendaraan'])) $di['jenis_kendaraan'] = "";
+        if (!isset($di['tanggal_perbaikan'])) $di['tanggal_perbaikan'] = "";
+        if (!isset($di['deskripsi_kerusakan'])) $di['deskripsi_kerusakan'] = "";
+        if (!isset($di['tindakan_perbaikan'])) $di['tindakan_perbaikan'] = "";
+        if (!isset($di['biaya_perbaikan'])) $di['biaya_perbaikan'] = "";
+
+        if (strlen($di['cdate']) > 1 && strlen($di['b_driver_id']) > 1 && strlen($di['a_vehicle_id']) > 1 && strlen($di['jumlah_muatan']) > 1 && strlen($di['berat']) > 1 && strlen($di['kapasitas_kendaraan']) > 1) {
             $this->status = 101;
             $this->message = 'Diperlukan satu atau lebih paramater';
             $this->__json_out($data);
@@ -126,7 +173,6 @@ class Pemeliharaanservice extends JI_Controller
         $this->apsm->trans_start();
         $apsm_id = $this->apsm->getLastId();
 
-        $di['id'] = $apsm_id;
         $res = $this->apsm->set($di);
         if ($res) {
             $this->apsm->trans_commit();
@@ -140,7 +186,6 @@ class Pemeliharaanservice extends JI_Controller
         $this->apsm->trans_end();
         $this->__json_out($data);
     }
-
     public function detail($id)
     {
         $id = (int) $id;
@@ -167,7 +212,6 @@ class Pemeliharaanservice extends JI_Controller
         }
         $this->__json_out($data);
     }
-
     public function edit($id)
     {
         $d = $this->__init();
@@ -176,7 +220,7 @@ class Pemeliharaanservice extends JI_Controller
         $id = (int) $id;
         if ($id <= 0) {
             $this->status = 444;
-            $this->message = 'Invalid Kendaraan ID';
+            $this->message = 'Invalid Muatan ID';
             $this->__json_out($data);
             die();
         }
@@ -190,29 +234,38 @@ class Pemeliharaanservice extends JI_Controller
         }
         $pengguna = $d['sess']->admin;
 
-
         $du = $_POST;
 
-        if (isset($du['id'])) unset($du['id']);
-        if (!isset($du['nama'])) $du['nama'] = "";
-        if (strlen($du['nama']) <= 0) {
-            $this->status = 110;
-            $this->message = 'Nama harus diisi';
-            $this->__json_out($data);
-            die();
+        if (isset($du['a_vehicle_id'])) {
+            $combined_value = explode(' - ', $du['a_vehicle_id']);
+            if (count($combined_value) == 2) {
+                $du['a_vehicle_utype'] = $combined_value[0];
+                $du['a_vehicle_no_pol'] = $combined_value[1];
+            } else {
+                $du['a_vehicle_utype'] = '';
+                $du['a_vehicle_no_pol'] = '';
+            }
         }
 
-        $res = $this->apsm->update($id, $du);
-        if ($res) {
-            $this->status = 200;
-            $this->message = 'Success';
+        if (isset($du['id'])) {
+            unset($du['id']);
+        }
+
+        if ($id > 0) {
+            $res = $this->apsm->update($id, $du);
+            if ($res) {
+                $this->status = 200;
+                $this->message = 'Perubahan berhasil diterapkan';
+            } else {
+                $this->status = 901;
+                $this->message = 'Tidak dapat melakukan perubahan ke basis data';
+            }
         } else {
-            $this->status = 901;
-            $this->message = 'Tidak dapat menambahkan data kendaraan';
+            $this->status = 448;
+            $this->message = 'ID Tidak ditemukan';
         }
         $this->__json_out($data);
     }
-
     public function hapus($id)
     {
         $id = (int) $id;
@@ -246,26 +299,8 @@ class Pemeliharaanservice extends JI_Controller
             $this->message = 'Berhasil';
         } else {
             $this->status = 902;
-            $this->message = 'Tidak dapat menghapus data kendaraan';
+            $this->message = 'Tidak dapat menghapus data muatan';
         }
-        $this->__json_out($data);
-    }
-
-    public function statistik()
-    {
-        $d = $this->__init();
-        $data = array();
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-
-        $this->status = 200;
-        $this->message = 'Berhasil';
-        
         $this->__json_out($data);
     }
 

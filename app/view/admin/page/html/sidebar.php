@@ -126,7 +126,7 @@
 							</a>
 						</li>
 						<li>
-							<a href="<?=base_url_admin('fleetmanagement/pemeliharaanservice/')?>" class="">
+							<a href="<?=base_url_admin('fleetmanagement/pemeliharaan_service/')?>" class="">
 								Pemeliharaan & Service
 							</a>
 						</li>
