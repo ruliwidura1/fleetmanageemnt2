@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group">
-                    <a id="aback" href="<?= base_url_admin('fleetmanagement/pemeliharaan_service/'); ?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
+                    <a id="aback" href="<?= base_url_admin('fleetmanagement/pemeliharaanservice/'); ?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
                 </div>
             </div>
         </div>
@@ -12,7 +12,7 @@
     <ul class="breadcrumb breadcrumb-top">
         <li>Admin</li>
         <li>Fleet Management</li>
-        <li>Muatan</li>
+        <li>Pemeliharaan Service</li>
         <li>Tambah</li>
     </ul>
     <!-- END Static Layout Header -->

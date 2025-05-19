@@ -9,7 +9,7 @@ $("#ftambah").on("submit",function(e){
 	$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
 
 	var fd = new FormData($(this)[0]);
-	var url = '<?= base_url("api_admin/fleetmanagement/pemeliharaan_service/baru/")?>';
+	var url = '<?= base_url("api_admin/fleetmanagement/pemeliharaanservice/baru/")?>';
 
 	$.ajax({
 		type: $(this).attr('method'),
@@ -21,7 +21,7 @@ $("#ftambah").on("submit",function(e){
 			if(respon.status==200){
 				gritter('<h4>Sukses</h4><p>Data berhasil ditambahkan</p>','success');
 				setTimeout(function(){
-					window.location = '<?=base_url_admin('fleetmanagement/pemeliharaan_service/')?>';
+					window.location = '<?=base_url_admin('fleetmanagement/pemeliharaanservice/')?>';
 				},3000);
 			}else{
 				gritter('<h4>Gagal</h4><p>'+respon.message+'</p>','danger');

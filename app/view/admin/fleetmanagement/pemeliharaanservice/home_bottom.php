@@ -25,7 +25,7 @@ if(jQuery('#drTable').length>0){
 			"responsive"	  : true,
 			"bProcessing"		: true,
 			"bServerSide"		: true,
-			"sAjaxSource"		: "<?=base_url("api_admin/fleetmanagement/pemeliharaan_service"); ?>",
+			"sAjaxSource"		: "<?=base_url("api_admin/fleetmanagement/pemeliharaanservice"); ?>",
 			"fnServerParams": function ( aoData ) {
 				aoData.push(
           { "name": "is_active", "value": $("#fl_is_active").val() },
@@ -47,8 +47,8 @@ if(jQuery('#drTable').length>0){
 						var id = $(this).find("td").html();
 						ieid = id;
 						$("#modal_option").modal("show");
-						$("#adetail").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaan_service/detail/")?>"+ieid);
-						$("#aedit").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaan_service/edit/")?>"+ieid);
+						$("#adetail").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaanservice/detail/")?>"+ieid);
+						$("#aedit").attr("href","<?=base_url_admin("fleetmanagement/pemeliharaanservice/edit/")?>"+ieid);
 					});
 
 					$('.icon-submit').removeClass('fa-circle-o-notch fa-spin');
@@ -97,7 +97,7 @@ $("#bhapus").on("click",function(e){
 			NProgress.start();
 			$('.btn-submit').prop('disabled',true);
 			$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
-			var url = '<?=base_url('api_admin/fleetmanagement/pemeliharaan_service/hapus/')?>'+ieid;
+			var url = '<?=base_url('api_admin/fleetmanagement/pemeliharaanservice/hapus/')?>'+ieid;
 			$.get(url).done(function(response){
 				NProgress.done();
 				if(response.status==200){

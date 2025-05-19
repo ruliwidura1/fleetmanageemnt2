@@ -5,7 +5,7 @@
             <div class="col-md-6">&nbsp;</div>
             <div class="col-md-6">
                 <div class="btn-group pull-right">
-                    <a id="" href="<?= base_url_admin('fleetmanagement/pemeliharaan_service/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
+                    <a id="" href="<?= base_url_admin('fleetmanagement/pemeliharaanservice/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
                 </div>
             </div>
         </div>
