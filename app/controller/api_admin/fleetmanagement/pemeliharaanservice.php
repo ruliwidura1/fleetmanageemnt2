@@ -62,7 +62,7 @@ class Pemeliharaanservice extends JI_Controller
       $sortCol = "$tbl_as.tindakan_perbaikan";
       break;
       case 5:
-      $sortCol = "$tbl_as.biaya_perbaikan";
+      $sortCol = "$tbl_as.nominal_pajak";
       break;
       case 6:
       $sortCol = "$tbl_as.is_active";
@@ -201,8 +201,8 @@ class Pemeliharaanservice extends JI_Controller
     $du = $_POST;
 
     if (isset($du['id'])) unset($du['id']);
-    if (!isset($du['nama'])) $du['nama'] = "";
-    if (strlen($du['nama']) <= 0) {
+    if (!isset($du['jenis_kendaraan'])) $du['jenis_kendaraan'] = "";
+    if (strlen($du['jenis_kendaraan']) <= 0) {
       $this->status = 110;
       $this->message = 'Nama harus diisi';
       $this->__json_out($data);

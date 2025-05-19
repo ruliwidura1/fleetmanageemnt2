@@ -74,18 +74,18 @@ class Pemeliharaanservice extends \JI_Controller
 			die();
 		}
 
-		$avm = $this->avm->id($id);
-		if(!isset($avm->id)){
+		$apm = $this->apm->id($id);
+		if(!isset($apm->id)){
 			redir(base_url_admin('fleetmanagement/pemeliharaanservice/'));
 			die();
 		}
 
 		$pengguna = $data['sess']->admin;
 
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Edit #'.$avm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: jenis merk kendaraan: Edit #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		$data['avm'] = $avm;
-		unset($avm);
+		$data['apm'] = $apm;
+		unset($apm);
 
 		$this->putThemeContent("fleetmanagement/pemeliharaanservice/edit_modal",$data);
 		$this->putThemeContent("fleetmanagement/pemeliharaanservice/edit",$data);
@@ -106,17 +106,17 @@ class Pemeliharaanservice extends \JI_Controller
 			redir(base_url_admin('fleetmanagement/pemeliharaanservice/'));
 			die();
 		}
-		$avm = $this->avm->id($id);
-		if(!isset($avm->id)){
+		$apm = $this->apm->id($id);
+		if(!isset($apm->id)){
 			redir(base_url_admin('fleetmanagement/pemeliharaanservice/'));
 			die();
 		}
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Detail #'.$avm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: jenis merk kendaraan: Detail #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		$avm->nama = htmlentities($apm->nama);
+		$apm->nama = htmlentities($apm->nama);
 
-		$data['avm'] = $avm;
-		$data['avm']->parent = $this->avm->id($avm->id);
+		$data['apm'] = $apm;
+		$data['apm']->parent = $this->apm->id($apm->id);
 		// unset($acm);
 
 		$this->putThemeContent("fleetmanagement/pemeliharaanservice/detail",$data);
