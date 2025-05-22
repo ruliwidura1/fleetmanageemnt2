@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group">
-                    <a id="aback" href="<?= base_url_admin('fleetmanagement/kendaraan/'); ?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
+                    <a id="aback" href="<?= base_url_admin('fleetmanagement/pemeliharaanservice/'); ?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
                 </div>
             </div>
         </div>
@@ -41,8 +41,8 @@
                     <input id="ietindakan_perbaikan" type="text" class="form-control" name="tindakan_perbaikan" placeholder="Warna Kendaraan" />
                 </div>
                 <div class="col-md-4">
-                    <label for="ienominal_pajak" class="control-label">Biaya Perbaikan</label>
-                    <input id="ienominal_pajak" type="text" class="form-control" name="nominal_pajak" placeholder="Kapasitas Kendaraan" required />
+                    <label for="iebiaya_perbaikan" class="control-label">Biaya Perbaikan</label>
+                    <input id="iebiaya_perbaikan" type="text" class="form-control" name="biaya_perbaikan" placeholder="Kapasitas Kendaraan" required />
                 </div>
                 <div class="col-md-4">
                     <label for="ieis_active" class="control-label">Status</label>

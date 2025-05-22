@@ -43,9 +43,8 @@
           <input id="itindakan_perbaikan" name="tindakan_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
         </div>
         <div class="col-md-4">
-          <label class="control-label" for="inominal_pajak">Biaya Perbaikan *</label>
-          <input id="inominal_pajak" type="text" name="nominal_pajak" class="form-control" required />
-          <input id="ihnominal_pajak" type="hidden" name="nominal_pajak" class="form-control" value="0" />
+          <label class="control-label" for="ibiaya_perbaikan">Biaya Perbaikan *</label>
+          <input id="ibiaya_perbaikan" name="biaya_perbaikan" type="text" class="form-control" placeholder="Berapa biaya perbaikan" required />
         </div>
         <div class="col-md-4">
           <label class="control-label" for="iis_active">Status</label>

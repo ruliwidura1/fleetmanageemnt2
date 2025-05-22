@@ -113,7 +113,7 @@ class Pemeliharaanservice extends \JI_Controller
 		}
 		$this->setTitle('Fleet Management: jenis merk kendaraan: Detail #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		$apm->nama = htmlentities($apm->nama);
+		
 
 		$data['apm'] = $apm;
 		$data['apm']->parent = $this->apm->id($apm->id);

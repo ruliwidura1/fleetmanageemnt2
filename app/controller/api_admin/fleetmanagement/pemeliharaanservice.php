@@ -62,7 +62,7 @@ class Pemeliharaanservice extends JI_Controller
       $sortCol = "$tbl_as.tindakan_perbaikan";
       break;
       case 5:
-      $sortCol = "$tbl_as.nominal_pajak";
+      $sortCol = "$tbl_as.biaya_perbaikan";
       break;
       case 6:
       $sortCol = "$tbl_as.is_active";
