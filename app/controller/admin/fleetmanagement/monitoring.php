@@ -74,18 +74,18 @@ class Monitoring extends \JI_Controller
 			die();
 		}
 
-		$apm = $this->apm->id($id);
-		if(!isset($apm->id)){
+		$cmm = $this->cmm->id($id);
+		if(!isset($cmm->id)){
 			redir(base_url_admin('fleetmanagement/monitoring/'));
 			die();
 		}
 
 		$pengguna = $data['sess']->admin;
 
-		$this->setTitle('Fleet Management: monitoring dan Pelacakan: Edit #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: monitoring dan Pelacakan: Edit #'.$cmm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		$data['apm'] = $apm;
-		unset($apm);
+		$data['cmm'] = $cmm;
+		unset($cmm);
 
 		$this->putThemeContent("fleetmanagement/monitoring/edit_modal",$data);
 		$this->putThemeContent("fleetmanagement/monitoring/edit",$data);
@@ -106,17 +106,17 @@ class Monitoring extends \JI_Controller
 			redir(base_url_admin('fleetmanagement/monitoring/'));
 			die();
 		}
-		$apm = $this->apm->id($id);
-		if(!isset($apm->id)){
+		$cmm = $this->cmm->id($id);
+		if(!isset($cmm->id)){
 			redir(base_url_admin('fleetmanagement/monitoring/'));
 			die();
 		}
-		$this->setTitle('Fleet Management: Monitoring dan Pelacakan: Detail #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: Monitoring dan Pelacakan: Detail #'.$cmm->id.' '.$this->config->semevar->admin_site_suffix);
 
 
 
-		$data['apm'] = $apm;
-		$data['apm']->parent = $this->apm->id($apm->id);
+		$data['cmm'] = $cmm;
+		$data['cmm']->parent = $this->cmm->id($cmm->id);
 		// unset($acm);
 
 		$this->putThemeContent("fleetmanagement/monitoring/detail",$data);

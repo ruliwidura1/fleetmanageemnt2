@@ -201,8 +201,8 @@ class Monitoring extends JI_Controller
     $du = $_POST;
 
     if (isset($du['id'])) unset($du['id']);
-    if (!isset($du['jenis_kendaraan'])) $du['jenis_kendaraan'] = "";
-    if (strlen($du['jenis_kendaraan']) <= 0) {
+    if (!isset($du['integrasi_gps_tracking'])) $du['integrasi_gps_tracking'] = "";
+    if (strlen($du['integrasi_gps_tracking']) <= 0) {
       $this->status = 110;
       $this->message = 'Nama harus diisi';
       $this->__json_out($data);
