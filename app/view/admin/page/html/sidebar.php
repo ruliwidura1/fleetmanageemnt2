@@ -130,6 +130,11 @@
 								Pemeliharaan & Service
 							</a>
 						</li>
+						<li>
+							<a href="<?=base_url_admin('fleetmanagement/monitoring/')?>" class="">
+							Monitoring dan Pelacakan
+							</a>
+						</li>
 					</ul>
 				</li>
 				<li class="">
