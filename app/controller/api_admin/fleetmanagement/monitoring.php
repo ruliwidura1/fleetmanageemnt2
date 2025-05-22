@@ -123,8 +123,8 @@ class Monitoring extends JI_Controller
         }
       }
     }
-    if (!isset($di['jenis_kendaraan'])) $di['jenis_kendaraan'] = "";
-    if (strlen($di['jenis_kendaraan']) <= 0) {
+    if (!isset($di['geofencing'])) $di['geofencing'] = "";
+    if (strlen($di['geofencing']) <= 0) {
       $this->status = 101;
       $this->message = 'Diperlukan satu atau lebih paramater';
       $this->__json_out($data);

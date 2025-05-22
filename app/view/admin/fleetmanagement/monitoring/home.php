@@ -5,7 +5,7 @@
             <div class="col-md-6">&nbsp;</div>
             <div class="col-md-6">
                 <div class="btn-group pull-right">
-                    <a id="" href="<?= base_url_admin('fleetmanagement/pemeliharaanservice/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
+                    <a id="" href="<?= base_url_admin('fleetmanagement/monitoring/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
     <ul class="breadcrumb breadcrumb-top">
         <li>Admin</li>
         <li>Fleet Management</li>
-        <li>Muatan</li>
+        <li>Monitoring</li>
     </ul>
     <!-- END Static Layout Header -->
 
@@ -67,10 +67,10 @@
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
-                        <th>Integrasi GPS Tracking</th>
-                        <th>Pelacakan Posisi Realtime Kendaraan</th>
-                        <th>Riwayat Rute Perjalanan</th>
-                        <th>Alert Perjalanan Berlebih</th>
+                        <th>Keberadaan Kendaraan</th>
+                        <th>Jalur yang di tempuh</th>
+                        <th>Target Waktu</th>
+                        <th>Biaya Bahan Bakar</th>
                         <th>Geofencing</th>
                         <th>Status</th>
                     </tr>
