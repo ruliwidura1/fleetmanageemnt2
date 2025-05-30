@@ -50,21 +50,27 @@ class Pemeliharaanservice extends JI_Controller
       $sortCol = "$tbl_as.id";
       break;
       case 1:
-      $sortCol = "$tbl_as.jenis_kendaraan";
+      $sortCol = "$tbl_as.nama";
       break;
       case 2:
-      $sortCol = "$tbl_as.tanggal_perbaikan";
+      $sortCol = "$tbl_as.jenis_kendaraan";
       break;
       case 3:
-      $sortCol = "$tbl_as.deskripsi_kerusakan";
+      $sortCol = "$tbl_as.tanggal_perbaikan";
       break;
       case 4:
-      $sortCol = "$tbl_as.tindakan_perbaikan";
+      $sortCol = "$tbl_as.deskripsi_kerusakan";
       break;
       case 5:
-      $sortCol = "$tbl_as.biaya_perbaikan";
+      $sortCol = "$tbl_as.tindakan_perbaikan";
       break;
       case 6:
+      $sortCol = "$tbl_as.biaya_perbaikan";
+      break;
+      case 7:
+      $sortCol = "$tbl_as.perbaikan";
+      break;
+      case 8:
       $sortCol = "$tbl_as.is_active";
       break;
       default:

@@ -27,6 +27,10 @@
 
       <div class="form-group">
         <div class="col-md-4">
+          <label class="control-label" for="inama">Nama *</label>
+          <input id="ijnama" name="nama" type="text" class="form-control" placeholder="Nama Barang yang dimuat" required />
+        </div>
+        <div class="col-md-4">
           <label class="control-label" for="ijenis_kendaraan">Jenis Kendaraan *</label>
           <input id="ijenis_kendaraan" name="jenis_kendaraan" type="text" class="form-control" placeholder="Nama Barang yang dimuat" required />
         </div>
@@ -34,10 +38,10 @@
           <label class="control-label" for="itanggal_perbaikan">Tgl Perbaikan</label>
           <input id="itanggal_perbaikan" name="tanggal_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
         </div>
-        <div class="col-md-4">
-          <label class="control-label" for="ideskripsi_kerusakan">Deskripsi Kerusakan *</label>
-          <input id="ideskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder="Nama Barang yang dimuat" required />
-        </div>
+        <div class="col-md-12">
+					<label for="ideskripsi_kerusakan">Deskripsi Kerusakan *</label>
+					<textarea id="ideskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder="Keluhan"></textarea>
+				</div>
         <div class="col-md-4">
           <label class="control-label" for="itindakan_perbaikan">Tindakan Perbaikan *</label>
           <input id="itindakan_perbaikan" name="tindakan_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
@@ -47,12 +51,21 @@
           <input id="ibiaya_perbaikan" name="biaya_perbaikan" type="text" class="form-control" placeholder="Berapa biaya perbaikan" required />
         </div>
         <div class="col-md-4">
+          <label class="control-label" for="iperbaikan">Perbaikan</label>
+          <select id="iperbaikan" name="perbaikan" class="form-control">
+            <option value="Di Perbaiki">Di Perbaiki</option>
+            <option value="Belum Di Perbaiki">Belum Di Perbaiki</option>
+            <option value="Selesai">Selesai</option>
+          </select>
+        </div>
+        <div class="col-md-4">
           <label class="control-label" for="iis_active">Status</label>
           <select id="iis_active" name="is_active" class="form-control">
             <option value="1">Aktif</option>
             <option value="0">Tidak Aktif</option>
           </select>
         </div>
+
       </div>
 
       <div class="form-group">

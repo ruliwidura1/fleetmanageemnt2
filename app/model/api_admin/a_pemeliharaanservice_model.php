@@ -25,11 +25,13 @@ class A_Pemeliharaanservice_Model extends \Model\A_Vehicle_Concern
     {
         $this->db->flushQuery();
         $this->db->select_as("$this->tbl_as.id", "id", 0);
+        $this->db->select_as("$this->tbl_as.nama", "nama", 0);
         $this->db->select_as("$this->tbl_as.jenis_kendaraan", "jenis_kendaraan", 0);
         $this->db->select_as("$this->tbl_as.tanggal_perbaikan", "tanggal_perbaikan", 0);
         $this->db->select_as("$this->tbl_as.deskripsi_kerusakan", "deskripsi_kerusakan", 0);
         $this->db->select_as("$this->tbl_as.tindakan_perbaikan", "tindakan_perbaikan", 0);
         $this->db->select_as("$this->tbl_as.biaya_perbaikan", "biaya_perbaikan", 0);
+        $this->db->select_as("$this->tbl_as.perbaikan", "perbaikan", 0);
         $this->db->select_as("$this->tbl_as.is_active", "is_active", 0);
         $this->db->from($this->tbl, $this->tbl_as);
         $this->filter_keyword($keyword);

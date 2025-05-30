@@ -67,11 +67,13 @@
                 <thead>
                     <tr>
                         <th class="text-center">ID</th>
+                        <th>Nama</th>
                         <th>Jenis Kendaraan</th>
                         <th>Tanggal Perbaikan</th>
                         <th>Deskripsi Kerusakan</th>
                         <th>Tindakan Perbaikan</th>
                         <th>Biaya Perbaikan</th>
+                        <th>Perbaikan</th>
                         <th>Status</th>
                     </tr>
                 </thead>

@@ -32,10 +32,10 @@
                     <label for="ietanggal_perbaikan" class="control-label">Tanggal Perbaikan *</label>
                     <input id="ietanggal_perbaikan" type="text" class="form-control" name="tanggal_perbaikan" placeholder="Plat Nomor Kendaraan" required />
                 </div>
-                <div class="col-md-4">
-                    <label for="iedeskripsi_kerusakan" class="control-label">Deskripsi Kerusakan</label>
-                    <input id="iedeskripsi_kerusakan" type="text" class="form-control" name="deskripsi_kerusakan" placeholder="Merk Kendaraan" />
-                </div>
+                <div class="col-md-12">
+        					<label for="iedeskripsi_kerusakan">Deskripsi Kerusakan *</label>
+        					<textarea id="iedeskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder="Keluhan"></textarea>
+        				</div>
                 <div class="col-md-4">
                     <label for="ietindakan_perbaikan" class="control-label">Tindakan Perbaikan</label>
                     <input id="ietindakan_perbaikan" type="text" class="form-control" name="tindakan_perbaikan" placeholder="Warna Kendaraan" />
@@ -43,6 +43,14 @@
                 <div class="col-md-4">
                     <label for="iebiaya_perbaikan" class="control-label">Biaya Perbaikan</label>
                     <input id="iebiaya_perbaikan" type="text" class="form-control" name="biaya_perbaikan" placeholder="Kapasitas Kendaraan" required />
+                </div>
+                <div class="col-md-4">
+                  <label class="control-label" for="ieperbaikan">Perbaikan</label>
+                  <select id="ieperbaikan" name="perbaikan" class="form-control">
+                    <option value="Di Perbaiki">Di Perbaiki</option>
+                    <option value="Belum Di Perbaiki">Belum Di Perbaiki</option>
+                    <option value="Selesai">Selesai</option>
+                  </select>
                 </div>
                 <div class="col-md-4">
                     <label for="ieis_active" class="control-label">Status</label>
