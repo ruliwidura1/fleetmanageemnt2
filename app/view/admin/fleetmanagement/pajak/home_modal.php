@@ -103,7 +103,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="iperpanjang_pajak">Perpanjang Pajak *</label>
+                            <label class="col-md-4 control-label" for="ieperpanjang_pajak">Perpanjang Pajak *</label>
                             <div class="col-md-8">
                                 <input id="iperpanjang_pajak" type="text" name="perpanjang_pajak" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" required />
                             </div>

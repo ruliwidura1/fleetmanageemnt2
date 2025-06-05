@@ -49,16 +49,17 @@
         <div class="col-md-4">
           <label class="control-label" for="ibiaya_perbaikan">Biaya Perbaikan *</label>
           <input id="ibiaya_perbaikan" name="biaya_perbaikan" type="text" class="form-control" placeholder="Berapa biaya perbaikan" required />
+          <input id="ihbiaya_perbaikan" type="hidden" name="biaya_perbaikan" class="form-control" value="0" />
+
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
           <label class="control-label" for="iperbaikan">Perbaikan</label>
           <select id="iperbaikan" name="perbaikan" class="form-control">
-            <option value="Di Perbaiki">Di Perbaiki</option>
-            <option value="Belum Di Perbaiki">Belum Di Perbaiki</option>
-            <option value="Selesai">Selesai</option>
+            <?php $this->getThemeElement('page/components/option_status_perbaikan');?>
           </select>
         </div>
-        <div class="col-md-4">
+        
+        <div class="col-md-2">
           <label class="control-label" for="iis_active">Status</label>
           <select id="iis_active" name="is_active" class="form-control">
             <option value="1">Aktif</option>

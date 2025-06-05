@@ -24,6 +24,10 @@
         </div>
         <form id="fedit" action="<?= base_url_admin(); ?>" method="post" enctype="multipart/form-data" class="form-bordered form-horizontal" onsubmit="return false;">
             <div class="form-group">
+              <div class="col-md-4">
+                  <label for="ienama" class="control-label">Nama *</label>
+                  <input id="ienama" type="text" class="form-control" name="nama" placeholder="Nama Anda" required />
+              </div>
                 <div class="col-md-4">
                     <label for="iejenis_kendaraan" class="control-label">Jenis Kendaraan *</label>
                     <input id="iejenis_kendaraan" type="text" class="form-control" name="jenis_kendaraan" placeholder="Nama Kendaraan" required />
@@ -44,15 +48,13 @@
                     <label for="iebiaya_perbaikan" class="control-label">Biaya Perbaikan</label>
                     <input id="iebiaya_perbaikan" type="text" class="form-control" name="biaya_perbaikan" placeholder="Kapasitas Kendaraan" required />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                   <label class="control-label" for="ieperbaikan">Perbaikan</label>
                   <select id="ieperbaikan" name="perbaikan" class="form-control">
-                    <option value="Di Perbaiki">Di Perbaiki</option>
-                    <option value="Belum Di Perbaiki">Belum Di Perbaiki</option>
-                    <option value="Selesai">Selesai</option>
+                    <?php $this->getThemeElement('page/components/option_status_perbaikan');?>
                   </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <label for="ieis_active" class="control-label">Status</label>
                     <select id="ieis_active" class="form-control" name="is_active">
                         <option value="1">Aktif</option>
