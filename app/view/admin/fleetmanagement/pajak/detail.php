@@ -18,12 +18,17 @@
     <!-- END Static Layout Header -->
 
     <div class="block full">
-        <div class="block-title">
-            <h4><strong>Informasi Detail</strong></h4>
+      <div class="text-center image12">
+        <img src="<?= base_url('media/group1.png') ?>" alt="Nature" class="responsive" width="330" height="130">
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3><?= $avm->nama ?></h3>
         </div>
+      </div>
         <div class="row">
             <div class="col-md-12">
-                <table class="table table-bordered">
+                <table class="table table-borderless">
                     <tbody>
                         <tr>
                             <th>ID</th>

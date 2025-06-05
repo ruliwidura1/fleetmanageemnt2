@@ -35,7 +35,7 @@ class Pemeliharaanservice extends \JI_Controller
             die();
         }
 
-        $this->setTitle('Fleet Management: jenis merk kendaraan '.$this->config->semevar->admin_site_suffix);
+        $this->setTitle('Fleet Management: Pemeliharaan Dan Service '.$this->config->semevar->admin_site_suffix);
         $this->putThemeContent('fleetmanagement/pemeliharaanservice/home_modal', $data);
         $this->putThemeContent('fleetmanagement/pemeliharaanservice/home', $data);
         $this->putJsContent('fleetmanagement/pemeliharaanservice/home_bottom', $data);
@@ -52,7 +52,7 @@ class Pemeliharaanservice extends \JI_Controller
 		}
 		$pengguna = $data['sess']->admin;
 
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Baru '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: Pemeliharaan Dan Service: Baru '.$this->config->semevar->admin_site_suffix);
 		$this->putThemeContent("fleetmanagement/pemeliharaanservice/tambah_modal",$data);
 		$this->putThemeContent("fleetmanagement/pemeliharaanservice/tambah",$data);
 		$this->putJsContent("fleetmanagement/pemeliharaanservice/tambah_bottom",$data);
@@ -82,7 +82,7 @@ class Pemeliharaanservice extends \JI_Controller
 
 		$pengguna = $data['sess']->admin;
 
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Edit #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: Pemeliharaan Dan Service: Edit #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
 
 		$data['apm'] = $apm;
 		unset($apm);
@@ -111,9 +111,9 @@ class Pemeliharaanservice extends \JI_Controller
 			redir(base_url_admin('fleetmanagement/pemeliharaanservice/'));
 			die();
 		}
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Detail #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: Pemeliharaan Dan Service: Detail #'.$apm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		
+
 
 		$data['apm'] = $apm;
 		$data['apm']->parent = $this->apm->id($apm->id);

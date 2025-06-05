@@ -12,21 +12,24 @@
     <ul class="breadcrumb breadcrumb-top">
         <li>Admin</li>
         <li>Fleet Management</li>
-        <li><a href="<?= base_url_admin("fleetmanagement/pajak/") ?>">Pajak</a></li>
+        <li><a href="<?= base_url_admin("fleetmanagement/pemeliharaanservice/") ?>">Pemeliharaan Dan Service</a></li>
         <li>Detail #<?= $apm->id ?></li>
     </ul>
     <!-- END Static Layout Header -->
 
     <div class="block full">
+      <div class="block-title">
+          <h4><strong>Informasi Detail</strong></h4>
+      </div>
         <div class="text-center image12">
-            <img src="<?= base_url('media/iconlogo.png') ?>" alt="Nature" class="responsive" width="200" height="160">
+            <img src="<?= base_url('media/group1.png') ?>" alt="Nature" class="responsive" width="330" height="130">
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
             <h3><?= $apm->nama ?></h3>
           </div>
         </div>
-        <div class="row">
+        <div class="row"  style="border-top: 1px solid #eee;">
             <div class="col-md-12">
                 <table class="table table-borderless">
                     <tbody>
