@@ -74,18 +74,18 @@ class Jenismerkkendaraan extends \JI_Controller
 			die();
 		}
 
-		$avm = $this->avm->id($id);
-		if(!isset($avm->id)){
+		$ajmm = $this->ajmm->id($id);
+		if(!isset($ajmm->id)){
 			redir(base_url_admin('fleetmanagement/jenismerkkendaraan/'));
 			die();
 		}
 
 		$pengguna = $data['sess']->admin;
 
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Edit #'.$avm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: jenis merk kendaraan: Edit #'.$ajmm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		$data['avm'] = $avm;
-		unset($avm);
+		$data['ajmm'] = $ajmm;
+		unset($ajmm);
 
 		$this->putThemeContent("fleetmanagement/jenismerkkendaraan/edit_modal",$data);
 		$this->putThemeContent("fleetmanagement/jenismerkkendaraan/edit",$data);
@@ -106,17 +106,17 @@ class Jenismerkkendaraan extends \JI_Controller
 			redir(base_url_admin('fleetmanagement/jenismerkkendaraan/'));
 			die();
 		}
-		$avm = $this->avm->id($id);
-		if(!isset($avm->id)){
+		$ajmm = $this->ajmm->id($id);
+		if(!isset($ajmm->id)){
 			redir(base_url_admin('fleetmanagement/jenismerkkendaraan/'));
 			die();
 		}
-		$this->setTitle('Fleet Management: jenis merk kendaraan: Detail #'.$avm->id.' '.$this->config->semevar->admin_site_suffix);
+		$this->setTitle('Fleet Management: jenis merk kendaraan: Detail #'.$ajmm->id.' '.$this->config->semevar->admin_site_suffix);
 
-		$avm->nama = htmlentities($avm->nama);
+		$ajmm->nama = htmlentities($ajmm->nama);
 
-		$data['avm'] = $avm;
-		$data['avm']->parent = $this->avm->id($avm->id);
+		$data['ajmm'] = $ajmm;
+		$data['ajmm']->parent = $this->ajmm->id($ajmm->id);
 		// unset($acm);
 
 		$this->putThemeContent("fleetmanagement/jenismerkkendaraan/detail",$data);
