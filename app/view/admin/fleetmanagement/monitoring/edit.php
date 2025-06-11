@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="btn-group">
-                    <a id="aback" href="<?= base_url_admin('fleetmanagement/pemeliharaanservice/'); ?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
+                    <a id="aback" href="<?= base_url_admin('fleetmanagement/acservice/'); ?>" class="btn btn-default"><i class="fa fa-chevron-left"></i> Kembali</a>
                 </div>
             </div>
         </div>
