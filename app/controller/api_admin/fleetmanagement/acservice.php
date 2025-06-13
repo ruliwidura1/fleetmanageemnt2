@@ -53,21 +53,24 @@ class Acservice extends JI_Controller
       $sortCol = "$tbl_as.pelanggan_nama";
       break;
       case 2:
-      $sortCol = "$tbl_as.pk";
+      $sortCol = "$tbl_as.telp";
       break;
       case 3:
       $sortCol = "$tbl_as.deskripsi_kerusakan";
       break;
       case 4:
-      $sortCol = "$tbl_as.teknisi_1_nama";
+      $sortCol = "$tbl_as.tanggal_perbaikan";
       break;
       case 5:
-      $sortCol = "$tbl_as.teknisi_2_nama";
+      $sortCol = "$tbl_as.teknisi_1_nama";
       break;
       case 6:
-      $sortCol = "$tbl_as.teknisi_3_nama";
+      $sortCol = "$tbl_as.teknisi_2_nama";
       break;
       case 7:
+      $sortCol = "$tbl_as.teknisi_3_nama";
+      break;
+      case 8:
       default:
       $sortCol = "$tbl_as.id";
     }

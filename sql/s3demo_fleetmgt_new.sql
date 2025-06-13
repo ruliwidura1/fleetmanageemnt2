@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 28 Bulan Mei 2025 pada 06.35
+-- Waktu pembuatan: 13 Jun 2025 pada 10.37
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.0.30
 
@@ -76,24 +76,6 @@ INSERT INTO `a_modules` (`identifier`, `name`, `path`, `level`, `has_submenu`, `
 ('erpmaster', 'ERP Master', '#', 0, 1, NULL, 1, 'denied', 1, 20, 'fa fa-hdd-o', 'internal', 'admin'),
 ('erpmaster_aset', 'Aset', 'erpmaster/aset', 1, 0, 'erpmaster', 1, 'denied', 1, 12, 'fa fa-home', 'internal', 'admin'),
 ('erpmaster_pengguna', 'Pengguna', 'erpmaster/pengguna', 1, 0, 'erpmaster', 1, 'denied', 1, 12, 'fa fa-home', 'internal', 'admin');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `a_pemeliharaanservice`
---
-
-CREATE TABLE `a_pemeliharaanservice` (
-  `id` int(3) NOT NULL,
-  `jenis_kendaraan` varchar(255) NOT NULL,
-  `tanggal_perbaikan` date NOT NULL,
-  `deskripsi_kerusakan` varchar(255) NOT NULL,
-  `tindakan_perbaikan` date NOT NULL,
-  `biaya_perbaikan` varchar(255) NOT NULL,
-  `is_active` int(3) NOT NULL,
-  `perbaikan` int(3) NOT NULL,
-  `nama` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -220,18 +202,19 @@ INSERT INTO `b_bensin` (`id`, `a_vehicle_id`, `tgl_beli`, `jenis`, `kapasitas`, 
 CREATE TABLE `b_driver` (
   `id` int(3) NOT NULL,
   `nama` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `is_active` int(1) NOT NULL DEFAULT 1
+  `is_active` int(1) NOT NULL DEFAULT 1,
+  `sim` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `b_driver`
 --
 
-INSERT INTO `b_driver` (`id`, `nama`, `is_active`) VALUES
-(1, 'Setyo Indrawan', 1),
-(2, 'Gegen Yosea', 1),
-(3, 'Irwan Novanto', 1),
-(4, 'Jorse Winton', 1);
+INSERT INTO `b_driver` (`id`, `nama`, `is_active`, `sim`) VALUES
+(1, 'Setyo Indrawan', 1, ''),
+(2, 'Gegen Yosea', 1, ''),
+(3, 'Irwan Novanto', 1, ''),
+(4, 'Jorse Winton', 1, '');
 
 -- --------------------------------------------------------
 
@@ -261,6 +244,32 @@ INSERT INTO `b_pajak` (`id`, `a_vehicle_id`, `tahun_pembuatan`, `berlaku`, `nomi
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `c_acservice`
+--
+
+CREATE TABLE `c_acservice` (
+  `id` int(3) NOT NULL,
+  `pelanggan_nama` varchar(255) NOT NULL,
+  `pk` varchar(255) NOT NULL,
+  `teknisi_1_nama` varchar(255) NOT NULL,
+  `teknisi_2_nama` varchar(255) NOT NULL,
+  `teknisi_3_nama` varchar(255) NOT NULL,
+  `telp` varchar(15) NOT NULL,
+  `tanggal_perbaikan` date NOT NULL,
+  `deskripsi_kerusakan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `c_acservice`
+--
+
+INSERT INTO `c_acservice` (`id`, `pelanggan_nama`, `pk`, `teknisi_1_nama`, `teknisi_2_nama`, `teknisi_3_nama`, `telp`, `tanggal_perbaikan`, `deskripsi_kerusakan`) VALUES
+(19, 'Jihan Fahriza Amalina ', '0.15', 'Abdul Hamid ', 'Erik Hasibuan', 'Wage Rudolf Supratman ', '123456789012', '2025-06-13', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'),
+(20, 'Muhammad Yamin', '12', 'Qarib Abdullah Shakil', 'Riordan Kevin Widagda', 'Robert Ed Stewart', '02266280611', '2025-06-15', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `c_arrival`
 --
 
@@ -280,7 +289,8 @@ CREATE TABLE `c_arrival` (
 --
 
 INSERT INTO `c_arrival` (`id`, `cdate`, `b_driver_id`, `a_vehicle_id`, `jam_masuk`, `destination`, `is_completed`, `is_active`) VALUES
-(1, '2024-07-30', 2, 1, '22:00:00', 'Bandung, Jakarta', 1, 1);
+(1, '2024-07-30', 2, 1, '22:00:00', 'Bandung, Jakarta', 1, 1),
+(2, '2025-06-05', 3, 7, '12:12:00', 'Tegalkembang', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -306,7 +316,8 @@ CREATE TABLE `c_departure` (
 
 INSERT INTO `c_departure` (`id`, `cdate`, `b_driver_id`, `a_vehicle_id`, `jam_keluar`, `area_tujuan`, `destination`, `is_departure`, `is_active`) VALUES
 (1, '2024-07-29', 1, 4, '16:30:00', '2', 'Bandung, Jakarta', 0, 1),
-(2, '2024-08-02', 2, 1, '09:30:00', '2', 'Surabaya, Semarang', 0, 1);
+(2, '2024-08-02', 2, 1, '09:30:00', '2', 'Surabaya, Semarang', 0, 1),
+(3, '2025-06-07', 1, 3, '12:12:00', '2', 'Tegalkembang', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -362,7 +373,8 @@ INSERT INTO `c_muatan` (`id`, `cdate`, `b_driver_id`, `a_vehicle_id`, `barang`, 
 (2, '2024-07-17', 3, 5, 'Kasur Busa', '31 ', 'PCS', '677', 1, 1, '', ''),
 (3, '2024-07-18', 1, 4, 'Kain Cotton', '50', 'ROLL', '650', 2, 1, '', ''),
 (4, '2024-07-25', 1, 2, 'Semen Tiga Roda', '100', 'SAK', '1043', 2, 1, '', ''),
-(5, '2024-08-05', 3, 3, 'Batu Bata', '1000', 'PCS', '3000', 3, 1, '', '');
+(5, '2024-08-05', 3, 3, 'Batu Bata', '1000', 'PCS', '3000', 3, 1, '', ''),
+(6, '2025-06-06', 3, 4, 'Barang anti karat', '10', '121212', '3', 1, 1, '', '');
 
 -- --------------------------------------------------------
 
@@ -444,12 +456,6 @@ ALTER TABLE `a_modules`
   ADD PRIMARY KEY (`identifier`);
 
 --
--- Indeks untuk tabel `a_pemeliharaanservice`
---
-ALTER TABLE `a_pemeliharaanservice`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indeks untuk tabel `a_pengguna`
 --
 ALTER TABLE `a_pengguna`
@@ -491,6 +497,12 @@ ALTER TABLE `b_driver`
 -- Indeks untuk tabel `b_pajak`
 --
 ALTER TABLE `b_pajak`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `c_acservice`
+--
+ALTER TABLE `c_acservice`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -540,12 +552,6 @@ ALTER TABLE `a_jenis_merkkendaraan`
   MODIFY `id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `a_pemeliharaanservice`
---
-ALTER TABLE `a_pemeliharaanservice`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
 -- AUTO_INCREMENT untuk tabel `a_pengguna`
 --
 ALTER TABLE `a_pengguna`
@@ -582,16 +588,22 @@ ALTER TABLE `b_pajak`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT untuk tabel `c_acservice`
+--
+ALTER TABLE `c_acservice`
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
 -- AUTO_INCREMENT untuk tabel `c_arrival`
 --
 ALTER TABLE `c_arrival`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `c_departure`
 --
 ALTER TABLE `c_departure`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `c_monitoring`
@@ -603,7 +615,7 @@ ALTER TABLE `c_monitoring`
 -- AUTO_INCREMENT untuk tabel `c_muatan`
 --
 ALTER TABLE `c_muatan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `d_kirim`

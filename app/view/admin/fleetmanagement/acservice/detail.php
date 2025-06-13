@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="row"  style="border-top: 1px solid #eee;">
-            <div class="col-md-12">
+            <div class="col-md-9">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
@@ -54,6 +54,11 @@
                             <td><?= $cam->pk ?></td>
                         </tr>
                         <tr>
+                            <th>Tanggal Service</th>
+                            <td>:</td>
+                            <td><?= $cam->tanggal_perbaikan ?></td>
+                        </tr>
+                        <tr>
                             <th>Deskripsi kerusakan</th>
                             <td>:</td>
                             <td><?= $cam->deskripsi_kerusakan ?></td>
@@ -73,8 +78,6 @@
                             <td>:</td>
                             <td><?= $cam->teknisi_3_nama ?></td>
                         </tr>
-
-
                     </tbody>
                 </table>
             </div>

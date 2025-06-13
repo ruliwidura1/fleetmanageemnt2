@@ -68,8 +68,9 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <th>Nama Pelanggan</th>
-                        <th>PK</th>
+                        <th>Telepon Pelanggan</th>
                         <th>Deskripsi Service</th>
+                        <th>Tanggal Service</th>
                         <th>Teknisi (1)</th>
                         <th>Teknisi (2)</th>
                         <th>Teknisi (3)</th>
