@@ -68,6 +68,7 @@
                     <tr>
                         <th class="text-center">ID</th>
                         <th>Nama Pelanggan</th>
+                        <th>Merk AC</th>
                         <th>Telepon Pelanggan</th>
                         <th>Deskripsi Service</th>
                         <th>Tanggal Service</th>

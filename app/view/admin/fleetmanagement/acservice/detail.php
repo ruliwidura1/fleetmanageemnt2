@@ -44,6 +44,11 @@
                             <td><?= $cam->pelanggan_nama ?></td>
                         </tr>
                         <tr>
+                            <th>Merk AC</th>
+                            <td>:</td>
+                            <td><?= $cam->merk_ac ?></td>
+                        </tr>
+                        <tr>
                             <th>nomor Telepon Pelanggan</th>
                             <td>:</td>
                             <td><?= $cam->telp ?></td>

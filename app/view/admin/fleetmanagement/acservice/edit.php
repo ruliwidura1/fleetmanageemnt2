@@ -28,29 +28,33 @@
                   <label for="iepelanggan_nama" class="control-label">Nama Pelanggan *</label>
                   <input id="iepelanggan_nama" type="text" class="form-control" name="pelanggan_nama" placeholder="Nama Anda" required />
               </div>
+              <div class="col-md-4">
+                  <label for="iemerk_ac" class="control-label">Merk AC *</label>
+                  <input id="iemerk_ac" type="text" class="form-control" name="merk_ac" placeholder="Merk AC" required />
+              </div>
                 <div class="col-md-4">
                     <label for="ietelp" class="control-label">Nomor Telepon Pelanggan *</label>
-                    <input id="ietelp" type="text" class="form-control" name="telp" placeholder="Nama Kendaraan" required />
+                    <input id="ietelp" type="text" class="form-control" name="telp" placeholder="Telepon/Hp" required />
                 </div>
                 <div class="col-md-4">
                     <label for="iepk" class="control-label">PK *</label>
-                    <input id="iepk" type="text" class="form-control" name="pk" placeholder="Plat Nomor Kendaraan" required />
+                    <input id="iepk" type="text" class="form-control" name="pk" placeholder="Pk" required />
                 </div>
                 <div class="col-md-12">
-        					<label for="iedeskripsi_kerusakan">Deskripsi Kerusaka *</label>
-        					<textarea id="iedeskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder="Keluhan"></textarea>
+        					<label for="iedeskripsi_kerusakan">Deskripsi Kerusakan *</label>
+        					<textarea id="iedeskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder="Deskripsi Kerusakan"></textarea>
         				</div>
                 <div class="col-md-4">
                     <label for="ieteknisi_1_nama" class="control-label">Teknisi (1) *</label>
-                    <input id="ieteknisi_1_nama" type="text" class="form-control" name="teknisi_1_nama" placeholder="Nama Anda" required />
+                    <input id="ieteknisi_1_nama" type="text" class="form-control" name="teknisi_1_nama" placeholder="Nama Teknisi 1" required />
                 </div>
                 <div class="col-md-4">
-                    <label for="ieteknisi_2_nama" class="control-label">Teknisi (2) *</label>
-                    <input id="ieteknisi_2_nama" type="text" class="form-control" name="teknisi_2_nama" placeholder="Nama Anda" required />
+                    <label for="ieteknisi_2_nama" class="control-label">Teknisi (2) </label>
+                    <input id="ieteknisi_2_nama" type="text" class="form-control" name="teknisi_2_nama" placeholder="Nama Teknisi 2"  />
                 </div>
                 <div class="col-md-4">
-                    <label for="ieteknisi_3_nama" class="control-label">Teknisi (3) *</label>
-                    <input id="ieteknisi_3_nama" type="text" class="form-control" name="teknisi_3_nama" placeholder="Nama Anda" required />
+                    <label for="ieteknisi_3_nama" class="control-label">Teknisi (3) </label>
+                    <input id="ieteknisi_3_nama" type="text" class="form-control" name="teknisi_3_nama" placeholder="Nama Teknisi 3"  />
                 </div>
                 <div class="col-md-2">
                   <label class="control-label" for="ietanggal_perbaikan">Tanggal Service</label>
