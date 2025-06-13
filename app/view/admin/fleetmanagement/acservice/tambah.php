@@ -37,7 +37,10 @@
           <label class="control-label" for="ipk">PK *</label>
           <input id="ipk" name="pk" type="text" class="form-control" placeholder="Masukan No telepon anda" required />
         </div>
-
+        <div class="col-md-12">
+					<label for="ideskripsi_kerusakan">Deskripsi Service AC *</label>
+					<textarea id="ideskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder=""></textarea>
+				</div>
         <div class="col-md-5">
           <label class="control-label" for="iteknisi_1_nama">Teknisi 1 *</label>
           <input id="iteknisi_1_nama" name="teknisi_1_nama" type="text" class="form-control" placeholder="Masukan No telepon anda" required />
@@ -57,10 +60,7 @@
       </div>
 
       <div class="form-group">
-        <div class="col-md-12">
-					<label for="ideskripsi_kerusakan">Deskripsi Service AC *</label>
-					<textarea id="ideskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder=""></textarea>
-				</div>
+
       </div>
       <div class="form-group">
 

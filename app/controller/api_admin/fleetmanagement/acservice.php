@@ -56,15 +56,18 @@ class Acservice extends JI_Controller
       $sortCol = "$tbl_as.pk";
       break;
       case 3:
-      $sortCol = "$tbl_as.teknisi_1_nama";
+      $sortCol = "$tbl_as.deskripsi_kerusakan";
       break;
       case 4:
-      $sortCol = "$tbl_as.teknisi_2_nama";
+      $sortCol = "$tbl_as.teknisi_1_nama";
       break;
       case 5:
-      $sortCol = "$tbl_as.teknisi_3_nama";
+      $sortCol = "$tbl_as.teknisi_2_nama";
       break;
       case 6:
+      $sortCol = "$tbl_as.teknisi_3_nama";
+      break;
+      case 7:
       default:
       $sortCol = "$tbl_as.id";
     }
@@ -199,8 +202,8 @@ class Acservice extends JI_Controller
     $du = $_POST;
 
     if (isset($du['id'])) unset($du['id']);
-    if (!isset($du['jenis_kendaraan'])) $du['jenis_kendaraan'] = "";
-    if (strlen($du['jenis_kendaraan']) <= 0) {
+    if (!isset($du['pelanggan_nama'])) $du['pelanggan_nama'] = "";
+    if (strlen($du['pelanggan_nama']) <= 0) {
       $this->status = 110;
       $this->message = 'Nama harus diisi';
       $this->__json_out($data);

@@ -12,7 +12,7 @@ $("#fedit").on("submit",function(e){
 	$('.icon-submit').addClass('fa-circle-o-notch fa-spin');
 
 	var fd = new FormData($(this)[0]);
-	var url = '<?=base_url("api_admin/fleetmanagement/acservice/edit/".$apm->id)?>';
+	var url = '<?=base_url("api_admin/fleetmanagement/acservice/edit/".$cam->id)?>';
 
 	$.ajax({
 		type: $(this).attr('method'),
@@ -50,7 +50,7 @@ $("#fedit").on("submit",function(e){
 
 
 //fill data
-var data_fill = <?=json_encode($apm)?>;
+var data_fill = <?=json_encode($cam)?>;
 $.each(data_fill,function(k,v){
 	$("#ie"+k).val(v);
 });

@@ -27,6 +27,7 @@ class C_Acservice_Model extends \Model\A_Vehicle_Concern
         $this->db->select_as("$this->tbl_as.id", "id", 0);
         $this->db->select_as("$this->tbl_as.pelanggan_nama", "pelanggan_nama", 0);
         $this->db->select_as("$this->tbl_as.pk", "pk", 0);
+        $this->db->select_as("$this->tbl_as.deskripsi_kerusakan", "deskripsi_kerusakan", 0);
         $this->db->select_as("$this->tbl_as.teknisi_1_nama", "teknisi_1_nama", 0);
         $this->db->select_as("$this->tbl_as.teknisi_2_nama", "teknisi_2_nama", 0);
         $this->db->select_as("$this->tbl_as.teknisi_3_nama", "teknisi_3_nama", 0);

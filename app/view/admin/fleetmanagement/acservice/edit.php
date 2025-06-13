@@ -13,7 +13,7 @@
         <li>Admin</li>
         <li>Fleet Management</li>
         <li><a href="<?= base_url_admin("fleetmanagement/kendaraan/") ?>">Kendaraan</a></li>
-        <li>Edit #<?= $apm->id ?></li>
+        <li>Edit #<?= $cam->id ?></li>
     </ul>
     <!-- END Static Layout Header -->
 
@@ -25,41 +25,36 @@
         <form id="fedit" action="<?= base_url_admin(); ?>" method="post" enctype="multipart/form-data" class="form-bordered form-horizontal" onsubmit="return false;">
             <div class="form-group">
               <div class="col-md-4">
-                  <label for="ienama" class="control-label">Nama *</label>
-                  <input id="ienama" type="text" class="form-control" name="nama" placeholder="Nama Anda" required />
+                  <label for="iepelanggan_nama" class="control-label">Nama Pelanggan *</label>
+                  <input id="iepelanggan_nama" type="text" class="form-control" name="pelanggan_nama" placeholder="Nama Anda" required />
               </div>
                 <div class="col-md-4">
-                    <label for="iejenis_kendaraan" class="control-label">Jenis Kendaraan *</label>
-                    <input id="iejenis_kendaraan" type="text" class="form-control" name="jenis_kendaraan" placeholder="Nama Kendaraan" required />
+                    <label for="ietelp" class="control-label">Nomor Telepon Pelanggan *</label>
+                    <input id="ietelp" type="text" class="form-control" name="telp" placeholder="Nama Kendaraan" required />
                 </div>
                 <div class="col-md-4">
-                    <label for="ietanggal_perbaikan" class="control-label">Tanggal Perbaikan *</label>
-                    <input id="ietanggal_perbaikan" type="text" class="form-control" name="tanggal_perbaikan" placeholder="Plat Nomor Kendaraan" required />
+                    <label for="iepk" class="control-label">PK *</label>
+                    <input id="iepk" type="text" class="form-control" name="pk" placeholder="Plat Nomor Kendaraan" required />
                 </div>
                 <div class="col-md-12">
-        					<label for="iedeskripsi_kerusakan">Deskripsi Kerusakan *</label>
+        					<label for="iedeskripsi_kerusakan">Deskripsi Kerusaka *</label>
         					<textarea id="iedeskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder="Keluhan"></textarea>
         				</div>
                 <div class="col-md-4">
-                    <label for="ietindakan_perbaikan" class="control-label">Tindakan Perbaikan</label>
-                    <input id="ietindakan_perbaikan" type="text" class="form-control" name="tindakan_perbaikan" placeholder="Warna Kendaraan" />
+                    <label for="ieteknisi_1_nama" class="control-label">Teknisi (1) *</label>
+                    <input id="ieteknisi_1_nama" type="text" class="form-control" name="teknisi_1_nama" placeholder="Nama Anda" required />
                 </div>
                 <div class="col-md-4">
-                    <label for="iebiaya_perbaikan" class="control-label">Biaya Perbaikan</label>
-                    <input id="iebiaya_perbaikan" type="text" class="form-control" name="biaya_perbaikan" placeholder="Kapasitas Kendaraan" required />
+                    <label for="ieteknisi_2_nama" class="control-label">Teknisi (2) *</label>
+                    <input id="ieteknisi_2_nama" type="text" class="form-control" name="teknisi_2_nama" placeholder="Nama Anda" required />
+                </div>
+                <div class="col-md-4">
+                    <label for="ieteknisi_3_nama" class="control-label">Teknisi (3) *</label>
+                    <input id="ieteknisi_3_nama" type="text" class="form-control" name="teknisi_3_nama" placeholder="Nama Anda" required />
                 </div>
                 <div class="col-md-2">
-                  <label class="control-label" for="ieperbaikan">Perbaikan</label>
-                  <select id="ieperbaikan" name="perbaikan" class="form-control">
-                    <?php $this->getThemeElement('page/components/option_status_perbaikan');?>
-                  </select>
-                </div>
-                <div class="col-md-2">
-                    <label for="ieis_active" class="control-label">Status</label>
-                    <select id="ieis_active" class="form-control" name="is_active">
-                        <option value="1">Aktif</option>
-                        <option value="0">Tidak Aktif</option>
-                    </select>
+                  <label class="control-label" for="ietanggal_perbaikan">Tanggal Service</label>
+                  <input id="ietanggal_perbaikan" name="tanggal_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
                 </div>
             </div>
 

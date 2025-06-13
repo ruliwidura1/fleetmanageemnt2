@@ -127,7 +127,7 @@
 						</li>
 						<li>
 							<a href="<?=base_url_admin('fleetmanagement/acservice/')?>" class="">
-								Pemeliharaan & Service
+								Service AC
 							</a>
 						</li>
 						<li>

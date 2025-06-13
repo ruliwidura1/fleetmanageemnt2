@@ -13,7 +13,7 @@
         <li>Admin</li>
         <li>Fleet Management</li>
         <li><a href="<?= base_url_admin("fleetmanagement/acservice/") ?>">Pemeliharaan Dan Service</a></li>
-        <li>Detail #<?= $apm->id ?></li>
+        <li>Detail #<?= $cam->id ?></li>
     </ul>
     <!-- END Static Layout Header -->
 
@@ -26,7 +26,7 @@
         </div>
         <div class="row">
           <div class="col-md-12 text-center">
-            <h3><?= $apm->nama ?></h3>
+            <h3><?= $cam->pelanggan_nama ?></h3>
           </div>
         </div>
         <div class="row"  style="border-top: 1px solid #eee;">
@@ -36,54 +36,45 @@
                         <tr>
                             <th>ID</th>
                             <td>:</td>
-                            <td><?= $apm->id ?></td>
+                            <td><?= $cam->id ?></td>
                         </tr>
                         <tr>
-                            <th>Jenis Kendaraan</th>
+                            <th>Nama Pelanggan</th>
                             <td>:</td>
-                            <td><?= $apm->jenis_kendaraan ?></td>
+                            <td><?= $cam->pelanggan_nama ?></td>
                         </tr>
                         <tr>
-                            <th>Tanggal Perbaikan</th>
+                            <th>nomor Telepon Pelanggan</th>
                             <td>:</td>
-                            <td><?= $apm->tanggal_perbaikan ?></td>
+                            <td><?= $cam->telp ?></td>
                         </tr>
                         <tr>
-                            <th>Deskripsi Kerusakan</th>
+                            <th>PK</th>
                             <td>:</td>
-                            <td><?= $apm->deskripsi_kerusakan ?></td>
+                            <td><?= $cam->pk ?></td>
                         </tr>
                         <tr>
-                            <th>Tindakan Perbaikan</th>
+                            <th>Deskripsi kerusakan</th>
                             <td>:</td>
-                            <td><?= $apm->tindakan_perbaikan ?></td>
+                            <td><?= $cam->deskripsi_kerusakan ?></td>
                         </tr>
                         <tr>
-                            <th>Biaya Perbaikan</th>
+                            <th>Teknisi (1)</th>
                             <td>:</td>
-                            <td>Rp<?= number_format($apm->biaya_perbaikan, 0, ',', '.') ?></td>
+                            <td><?= $cam->teknisi_1_nama ?></td>
                         </tr>
                         <tr>
-                            <th>Perbaikan</th>
+                            <th>Teknisi (2)</th>
                             <td>:</td>
-                            <td><label class="label label-default"><?= $apm->perbaikan ?></label></td>
+                            <td><?= $cam->teknisi_2_nama ?></td>
                         </tr>
                         <tr>
-                            <th>Status</th>
+                            <th>Teknisi (3)</th>
                             <td>:</td>
-                            <td>
-                                <?php
-                                if ($apm->is_active == 1) {
-                                    $apm->is_active = '<label class="label label-success">Selesai</label>';
-                                } elseif ($apm->is_active == 2) {
-                                    $apm->is_active = '<label class="label label-danger">Proses Pembayaran</label>';
-                                } else {
-                                    $apm->is_active = '<label class="label label-default">belum bayar</label>';
-                                }
-                                ?>
-                                <?= $apm->is_active ?>
-                            </td>
+                            <td><?= $cam->teknisi_3_nama ?></td>
                         </tr>
+
+
                     </tbody>
                 </table>
             </div>
