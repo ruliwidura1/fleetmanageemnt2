@@ -1,0 +1,46 @@
+name: PHP Lint Check
+
+on:
+  push:
+    branches: [ "main", "beta" ]
+  pull_request:
+    branches: [ "main", "beta" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Install PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+
+    - name: PHP lint under app
+      run: |
+        has_errors=0
+        errors=""
+
+        while IFS= read -r file; do
+          output=$(php -l "$file" 2>&1)
+          if [[ "$output" != "No syntax errors detected in $file" ]]; then
+            has_errors=1
+            errors+="$output"$'\n'
+          fi
+        done < <(find app -type f -name "*.php")
+
+        if [ "$has_errors" -ne 0 ]; then
+          echo "PHP Lint Errors:"
+          echo "$errors"
+          exit 1
+        else
+          echo "All PHP files passed lint check."
+        fi
