@@ -75,6 +75,16 @@
                             <td><?= $cam->merk_ac ?></td>
                         </tr>
                         <tr>
+                            <th>Jenis Remot</th>
+                            <td>:</td>
+                            <td><?= $cam->remot_jenis ?></td>
+                        </tr>
+                        <tr>
+                            <th>Remot Kode</th>
+                            <td>:</td>
+                            <td><?= $cam->remot_kode ?></td>
+                        </tr>
+                        <tr>
                             <th>nomor Telepon Pelanggan</th>
                             <td>:</td>
                             <td><?= $cam->telp ?></td>
@@ -108,6 +118,11 @@
                             <th>Teknisi (3)</th>
                             <td>:</td>
                             <td><?= $cam->teknisi_3_nama ?></td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>:</td>
+                            <td><?= $cam->is_proses ?></td>
                         </tr>
                     </tbody>
                 </table>

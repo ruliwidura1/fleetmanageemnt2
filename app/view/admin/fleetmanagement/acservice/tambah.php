@@ -56,7 +56,7 @@
           </select>
         </div>
         <div class="col-md-2">
-          <label class="control-label" for="ipk">Remot Kode</label>
+          <label class="control-label" for="iremot_kode">Remot Kode</label>
           <input id="iremot_kode" name="remot_kode" type="text" class="form-control" placeholder="Remot Kode" />
         </div>
         <div class="col-md-2">
