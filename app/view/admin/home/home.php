@@ -36,7 +36,7 @@
 			<div class="widget">
 				<div class="widget-simple">
 					<a href="javascript:void(0)" class="widget-icon pull-left animation-fadeIn themed-background">
-						<i class="gi gi-film"></i>
+						<i class="fa fa-code-fork"></i>
 					</a>
 					<h4 class="widget-content text-right animation-hatch">
 						<a href="javascript:void(0)">+99 <strong>Digunakan</strong></a>
@@ -50,7 +50,7 @@
 			<div class="widget">
 				<div class="widget-simple themed-background-dark">
 					<a href="javascript:void(0)" class="widget-icon pull-left animation-fadeIn themed-background">
-						<i class="gi gi-picture"></i>
+						<i class="fa fa-car"></i>
 					</a>
 					<h4 class="widget-content widget-content-light text-right animation-hatch">
 						<a href="javascript:void(0)">+99 <strong>Di Perbaiki</strong></a>
@@ -64,7 +64,7 @@
 			<div class="widget">
 				<div class="widget-simple">
 					<a href="javascript:void(0)" class="widget-icon pull-left animation-fadeIn themed-background-fire">
-						<i class="gi gi-picture"></i>
+						<i class="fa fa-thumbs-upo"></i>
 					</a>
 					<h4 class="widget-content text-right animation-hatch">
 						<a href="javascript:void(0)">+99 <strong>Ready</strong></a>
