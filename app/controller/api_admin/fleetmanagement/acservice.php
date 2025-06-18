@@ -56,24 +56,33 @@ class Acservice extends JI_Controller
       $sortCol = "$tbl_as.merk_ac";
       break;
       case 3:
-      $sortCol = "$tbl_as.telp";
+      $sortCol = "$tbl_as.jenis_remot";
       break;
       case 4:
-      $sortCol = "$tbl_as.deskripsi_kerusakan";
+      $sortCol = "$tbl_as.remot_kode";
       break;
       case 5:
-      $sortCol = "$tbl_as.tanggal_perbaikan";
+      $sortCol = "$tbl_as.telp";
       break;
       case 6:
-      $sortCol = "$tbl_as.teknisi_1_nama";
+      $sortCol = "$tbl_as.deskripsi_kerusakan";
       break;
       case 7:
-      $sortCol = "$tbl_as.teknisi_2_nama";
+      $sortCol = "$tbl_as.tanggal_perbaikan";
       break;
       case 8:
-      $sortCol = "$tbl_as.teknisi_3_nama";
+      $sortCol = "$tbl_as.teknisi_1_nama";
       break;
       case 9:
+      $sortCol = "$tbl_as.teknisi_2_nama";
+      break;
+      case 10:
+      $sortCol = "$tbl_as.teknisi_3_nama";
+      break;
+      case 11:
+        $sortCol = "$tbl_as.is_proses";
+      break;
+      case 12:
       default:
       $sortCol = "$tbl_as.id";
     }

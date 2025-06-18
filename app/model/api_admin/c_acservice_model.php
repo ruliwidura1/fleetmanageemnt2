@@ -27,12 +27,15 @@ class C_Acservice_Model extends \Model\A_Vehicle_Concern
         $this->db->select_as("$this->tbl_as.id", "id", 0);
         $this->db->select_as("$this->tbl_as.pelanggan_nama", "pelanggan_nama", 0);
         $this->db->select_as("$this->tbl_as.merk_ac", "merk_ac", 0);
+        $this->db->select_as("$this->tbl_as.remot_jenis", "remot_jenis", 0);
+        $this->db->select_as("$this->tbl_as.remot_kode", "remot_kode", 0);
         $this->db->select_as("$this->tbl_as.telp", "telp", 0);
         $this->db->select_as("$this->tbl_as.deskripsi_kerusakan", "deskripsi_kerusakan", 0);
         $this->db->select_as("$this->tbl_as.tanggal_perbaikan", "tanggal_perbaikan", 0);
         $this->db->select_as("$this->tbl_as.teknisi_1_nama", "teknisi_1_nama", 0);
         $this->db->select_as("$this->tbl_as.teknisi_2_nama", "teknisi_2_nama", 0);
         $this->db->select_as("$this->tbl_as.teknisi_3_nama", "teknisi_3_nama", 0);
+        $this->db->select_as("$this->tbl_as.is_proses", "is_proses", 0);
         $this->db->from($this->tbl, $this->tbl_as);
         $this->filter_keyword($keyword);
 

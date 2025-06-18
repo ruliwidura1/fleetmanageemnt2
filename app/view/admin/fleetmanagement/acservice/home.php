@@ -69,12 +69,15 @@
                         <th class="text-center">ID</th>
                         <th>Nama Pelanggan</th>
                         <th>Merk AC</th>
+                        <th>Jenis Remot</th>
+                        <th>Remot Kode</th>
                         <th>Telepon Pelanggan</th>
                         <th>Deskripsi Service</th>
                         <th>Tanggal Service</th>
                         <th>Teknisi (1)</th>
                         <th>Teknisi (2)</th>
                         <th>Teknisi (3)</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
