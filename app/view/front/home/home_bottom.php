@@ -1,1 +1,0 @@
-alert('This is Hello World from app/view/home/home_bottom.php');

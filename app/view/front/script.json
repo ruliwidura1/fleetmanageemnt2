@@ -1,11 +1,16 @@
 {
-    "script":
-    [
-    {
-      "src": "https://code.jquery.com/jquery-3.5.1.min.js"
-    },
-    {
-      "src": "https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
-    }
+    "script": [
+      {
+        "src": "https://skin-cenah.b-cdn.net/js/vendor/jquery.min.js"
+      },
+      {
+        "src": "https://skin-cenah.b-cdn.net/js/vendor/bootstrap.min.js"
+      },
+      {
+        "src": "https://skin-cenah.b-cdn.net/js/plugins.js?v=0.0.2"
+      },
+      {
+        "src": "https://skin-cenah.b-cdn.net/js/app.js"
+      }
     ]
   }
