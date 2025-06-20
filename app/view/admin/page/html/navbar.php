@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
     </div>
-    
+
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div id="navbar" class="collapse navbar-collapse" >
       <ul class="nav navbar-nav">
