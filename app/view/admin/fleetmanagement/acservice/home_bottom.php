@@ -28,7 +28,7 @@ if(jQuery('#drTable').length>0){
 			"sAjaxSource"		: "<?=base_url("api_admin/fleetmanagement/acservice"); ?>",
 			"fnServerParams": function ( aoData ) {
 				aoData.push(
-          { "name": "is_active", "value": $("#fl_is_active").val() },
+          { "name": "is_proses", "value": $("#fl_is_proses").val() },
 					{ "name": "sdate", "value": $("#fl_sdate").val() },
 					{ "name": "edate", "value": $("#fl_edate").val() }
 				);
@@ -124,4 +124,24 @@ $("#bhapus").on("click",function(e){
 			});
 		}
 	}
+});
+
+$('#btn_dlxls').on('click',function(e){
+	e.preventDefault();
+	$('.btn-submit').prop('disabled',true);
+	$('.icon-submit').addClass('fa-circle-o-notch');
+	$('.icon-submit').addClass('fa-spin');
+
+	var mindate = $("#fl_sdate").val();
+	var maxdate = $("#fl_edate").val();
+	var is_proses = $("#fl_is_proses").val();
+	var url = '<?=base_url_admin('fleetmanagement/acservice/download_xls/') ?>';
+	url = url + '?mindate='+mindate+'&maxdate='+maxdate+'&is_proses='+is_proses;
+
+	setTimeout(function(){
+		$('.btn-submit').prop('disabled',false);
+		$('.icon-submit').removeClass('fa-circle-o-notch');
+		$('.icon-submit').removeClass('fa-spin');
+		window.location = url;
+	},999);
 });

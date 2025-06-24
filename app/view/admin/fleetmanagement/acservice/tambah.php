@@ -86,8 +86,8 @@
         <div class="col-md-6">
           <label class="control-label" for="iis_proses">Status</label>
           <select id="iis_proses" name="is_proses" class="form-control">
-            <option value="Dalam Proses">Dalam Proses</option>
-            <option value="Selesai">Selesai</option>
+            <option value="1">Dalam Proses</option>
+            <option value="0">Selesai</option>
           </select>
         </div>
       </div>

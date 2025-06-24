@@ -5,6 +5,7 @@
             <div class="col-md-6">&nbsp;</div>
             <div class="col-md-6">
                 <div class="btn-group pull-right">
+                  <button id="btn_dlxls" type="button" class="btn btn-warning btn-submit"> <i class="fa fa-download"></i> Download XLS <i class="icon-submit fa"></i></button>
                     <a id="" href="<?= base_url_admin('fleetmanagement/acservice/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
                 </div>
             </div>
@@ -20,7 +21,7 @@
     <!-- Content -->
     <div class="block full">
         <div class="block-title">
-            <h4><strong>Data Muatan</strong></h4>
+            <h4><strong>Data Service Ac</strong></h4>
         </div>
         <div class="row row-filter">
             <!-- <div class="col-md-6">&nbsp;
@@ -44,15 +45,15 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <label for="fl_is_active">Status</label>
+                <label for="fl_is_proses">Status</label>
                 <div class="input-group">
                     <div class="input-group-addon">
                         <i class="fa fa-podcast"></i>
                     </div>
-                    <select id="fl_is_active" class="form-control">
+                    <select id="fl_is_proses" class="form-control">
                         <option value="">-- Semua --</option>
-                        <option value="1">Aktif</option>
-                        <option value="0">Tidak Aktif</option>
+                        <option value="1">Dalam Proses</option>
+                        <option value="0">Selesai</option>
                     </select>
                 </div>
             </div>

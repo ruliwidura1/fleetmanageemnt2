@@ -83,10 +83,10 @@
                     <input id="ietanggal_perbaikan" name="tanggal_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
                 </div>
                 <div class="col-md-6">
-                    <label class="control-label" for="iis_proses">Status</label>
-                    <select id="iis_proses" name="is_proses" class="form-control">
-                        <option value="Dalam Proses">Dalam Proses</option>
-                        <option value="Selesai">Selesai</option>
+                    <label class="control-label" for="ieis_proses">Status</label>
+                    <select id="ieis_proses" name="is_proses" class="form-control">
+                        <option value="1">Dalam Proses</option>
+                        <option value="0">Selesai</option>
                     </select>
                 </div>
             </div>

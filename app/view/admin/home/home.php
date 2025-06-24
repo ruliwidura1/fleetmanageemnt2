@@ -1,6 +1,6 @@
 <style>
 .button {
-	background-color: #5da7e8;
+	background-color: #7abce7;
 	border: none;
 	color: white;
 	padding: 15px 32px;

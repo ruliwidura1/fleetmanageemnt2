@@ -6,7 +6,7 @@ class Acservice extends JI_Controller
   {
     parent::__construct();
     $this->lib("seme_purifier");
-    $this->load('a_vehicle_concern');
+    $this->load('c_acservice_concern');
     $this->load("api_admin/c_acservice_model", 'cam');
     $this->current_parent = 'fleetmanagement';
     $this->current_page = 'fleetmanagement_acservice';
@@ -91,22 +91,26 @@ class Acservice extends JI_Controller
     if (empty($pagesize)) $pagesize = 10;
     if (empty($page)) $page = 0;
 
+    $sdate = $this->input->request('sdate');
+    $edate = $this->input->request('edate');
+    $is_proses = $this->input->request('is_proses');
+
     $keyword = $sSearch;
 
     $this->status = 200;
     $this->message = 'Berhasil';
-    $dcount = $this->cam->countAll($keyword, $utype);
-    $ddata = $this->cam->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $utype);
+    $dcount = $this->cam->countAll($keyword, $sdate, $edate, $is_proses);
+    $ddata = $this->cam->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $sdate, $edate, $is_proses);
 
     foreach ($ddata as &$gd) {
       if (isset($gd->nama)) {
         $gd->nama = htmlentities(rtrim($gd->nama, ' - '));
       }
-      if (isset($gd->is_active)) {
-        if (!empty($gd->is_active)) {
-          $gd->is_active = '<label class="label label-success">Aktif</label>';
+      if (isset($gd->is_proses)) {
+        if (!empty($gd->is_proses)) {
+          $gd->is_proses = '<label class="label label-success">Sedang di Proses</label>';
         } else {
-          $gd->is_active = '<label class="label label-default">Tidak Aktif</label>';
+          $gd->is_proses = '<label class="label label-default">Selesai</label>';
         }
       }
     }
