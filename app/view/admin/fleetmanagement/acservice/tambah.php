@@ -29,7 +29,7 @@
           <label class="control-label" for="ipelanggan_nama">Nama Pelanggan *</label>
           <input id="ipelanggan_nama" name="pelanggan_nama" type="text" class="form-control" placeholder="Masukan Nama anda" required />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-6">
           <label class="control-label" for="itelp">Nomor Hp Pelanggan *</label>
           <input id="itelp" name="telp" type="text" class="form-control" placeholder="Masukan No telepon anda" required />
         </div>
@@ -55,11 +55,11 @@
             <option value="Tidak Original">Tidak Original</option>
           </select>
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="control-label" for="iremot_kode">Remot Kode</label>
           <input id="iremot_kode" name="remot_kode" type="text" class="form-control" placeholder="Remot Kode" />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-3">
           <label class="control-label" for="ipk">PK</label>
           <input id="ipk" name="pk" type="text" class="form-control" placeholder="PK" />
         </div>
@@ -67,11 +67,11 @@
           <label for="ideskripsi_kerusakan">Deskripsi Service AC *</label>
           <textarea id="ideskripsi_kerusakan" name="deskripsi_kerusakan" type="text" class="form-control" placeholder=""></textarea>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <label class="control-label" for="iteknisi_1_nama">Teknisi 1 *</label>
           <input id="iteknisi_1_nama" name="teknisi_1_nama" type="text" class="form-control" placeholder="Nama Teknisi 1" required />
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
           <label class="control-label" for="iteknisi_2_nama">Teknisi 2 </label>
           <input id="iteknisi_2_nama" name="teknisi_2_nama" type="text" class="form-control" placeholder="Nama Teknisi 2" />
         </div>
@@ -79,11 +79,11 @@
           <label class="control-label" for="iteknisi_3_nama">Teknisi 3 </label>
           <input id="iteknisi_3_nama" name="teknisi_3_nama" type="text" class="form-control" placeholder="Nama Teknisi 3" />
         </div>
-        <div class="col-md-2">
+        <div class="col-md-4">
           <label class="control-label" for="itanggal_perbaikan">Tanggal Service</label>
           <input id="itanggal_perbaikan" name="tanggal_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
         </div>
-        <div class="col-md-6">
+        <div class="col-md-4">
           <label class="control-label" for="iis_proses">Status</label>
           <select id="iis_proses" name="is_proses" class="form-control">
             <option value="1">Dalam Proses</option>

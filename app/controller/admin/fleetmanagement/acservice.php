@@ -216,10 +216,20 @@ class Acservice extends \JI_Controller
     //header
     $objWorkSheet
     ->setCellValue('A10', 'No.')
-    ->setCellValue('B10', 'Tanggal')
-    ->setCellValue('C10', 'Nama')
-    ->setCellValue('D10', 'Remot Kode')
-    ->setCellValue('E10', 'No Hp');
+    ->setCellValue('B10', 'Nama')
+    ->setCellValue('C10', 'PK')
+    ->setCellValue('D10', 'Teknisi 1')
+    ->setCellValue('E10', 'Teknisi 2')
+    ->setCellValue('F10', 'Teknisi 3')
+    ->setCellValue('G10', 'No Hp')
+    ->setCellValue('H10', 'Tanggal Perbaikan')
+    ->setCellValue('I10', 'Deskripsi Kerusakan')
+    ->setCellValue('J10', 'Merk AC')
+    ->setCellValue('K10', 'Remot Jenis')
+    ->setCellValue('L10', 'Remot Kode')
+    ->setCellValue('M10', 'Status');
+
+    
 
     //setting gaya untuk header
     $objWorkSheet->getStyle('A10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
@@ -227,6 +237,15 @@ class Acservice extends \JI_Controller
     $objWorkSheet->getStyle('C10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
     $objWorkSheet->getStyle('D10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
     $objWorkSheet->getStyle('E10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('F10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('G10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('H10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('I10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('J10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('K10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('L10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    $objWorkSheet->getStyle('M10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
+    
 
     //set baris secara programming
     $i = 11;
@@ -238,10 +257,19 @@ class Acservice extends \JI_Controller
       //iterasikan data
       foreach ($laporan_data as $row) {
         $objWorkSheet->setCellValue('A' . $i, $nomor);
-        $objWorkSheet->setCellValue('B' . $i, $row->tanggal_perbaikan);
-        $objWorkSheet->setCellValue('C' . $i, $row->pelanggan_nama);
-        $objWorkSheet->setCellValue('D' . $i, $row->remot_kode);
-        $objWorkSheet->setCellValue('E' . $i, $row->telp);
+        $objWorkSheet->setCellValue('B' . $i, $row->pelanggan_nama);
+        $objWorkSheet->setCellValue('C' . $i, $row->pk);
+        $objWorkSheet->setCellValue('D' . $i, $row->teknisi_1_nama);
+        $objWorkSheet->setCellValue('E' . $i, $row->teknisi_2_nama);
+        $objWorkSheet->setCellValue('F' . $i, $row->teknisi_3_nama);
+        $objWorkSheet->setCellValue('G' . $i, $row->telp);
+        $objWorkSheet->setCellValue('H' . $i, $row->tanggal_perbaikan);
+        $objWorkSheet->setCellValue('I' . $i, $row->deskripsi_kerusakan);
+        $objWorkSheet->setCellValue('J' . $i, $row->merk_ac);
+        $objWorkSheet->setCellValue('K' . $i, $row->remot_jenis);
+        $objWorkSheet->setCellValue('L' . $i, $row->remot_kode);
+        $objWorkSheet->setCellValue('M' . $i, $row->is_proses);
+
 
         //set border ke masing2 kolom
         $objWorkSheet->getStyle('A' . $i)->applyFromArray($styleborder);
@@ -249,6 +277,14 @@ class Acservice extends \JI_Controller
         $objWorkSheet->getStyle('C' . $i)->applyFromArray($styleborder);
         $objWorkSheet->getStyle('D' . $i)->applyFromArray($styleborder);
         $objWorkSheet->getStyle('E' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('F' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('G' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('H' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('I' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('J' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('K' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('L' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('M' . $i)->applyFromArray($styleborder);
 
         $i++;
         $nomor++;

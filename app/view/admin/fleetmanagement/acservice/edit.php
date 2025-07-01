@@ -24,9 +24,13 @@
         </div>
         <form id="fedit" action="<?= base_url_admin(); ?>" method="post" enctype="multipart/form-data" class="form-bordered form-horizontal" onsubmit="return false;">
             <div class="form-group">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="iepelanggan_nama" class="control-label">Nama Pelanggan *</label>
                     <input id="iepelanggan_nama" type="text" class="form-control" name="pelanggan_nama" placeholder="Nama Anda" required />
+                </div>
+                <div class="col-md-6">
+                    <label for="ietelp" class="control-label">Nomor Telepon Pelanggan *</label>
+                    <input id="ietelp" type="text" class="form-control" name="telp" placeholder="Telepon/Hp" required />
                 </div>
                 <div class="col-md-3">
                     <label class="control-label" for="iemerk_ac">Merk AC</label>
@@ -50,15 +54,12 @@
                         <option value="Tidak Original">Tidak Original</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label class="control-label" for="ieremot_kode">Remot Kode</label>
                     <input id="ieremot_kode" name="remot_kode" type="text" class="form-control" placeholder="Remot Kode" />
                 </div>
-                <div class="col-md-4">
-                    <label for="ietelp" class="control-label">Nomor Telepon Pelanggan *</label>
-                    <input id="ietelp" type="text" class="form-control" name="telp" placeholder="Telepon/Hp" required />
-                </div>
-                <div class="col-md-4">
+                
+                <div class="col-md-3">
                     <label for="iepk" class="control-label">PK *</label>
                     <input id="iepk" type="text" class="form-control" name="pk" placeholder="Pk" required />
                 </div>
@@ -78,11 +79,11 @@
                     <label for="ieteknisi_3_nama" class="control-label">Teknisi (3) </label>
                     <input id="ieteknisi_3_nama" type="text" class="form-control" name="teknisi_3_nama" placeholder="Nama Teknisi 3" />
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <label class="control-label" for="ietanggal_perbaikan">Tanggal Service</label>
                     <input id="ietanggal_perbaikan" name="tanggal_perbaikan" type="text" class="form-control input-datepicker" value="<?= date("Y-m-d") ?>" data-date-format="yyyy-mm-dd" autocomplete="off" />
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label class="control-label" for="ieis_proses">Status</label>
                     <select id="ieis_proses" name="is_proses" class="form-control">
                         <option value="1">Dalam Proses</option>

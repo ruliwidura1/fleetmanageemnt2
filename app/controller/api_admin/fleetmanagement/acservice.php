@@ -151,9 +151,9 @@ class Acservice extends JI_Controller
       die();
     }
     $this->cam->trans_start();
-    $cam_id = $this->cam->getLastId();
+    
 
-    $di['id'] = $cam_id;
+    
     $res = $this->cam->set($di);
     if ($res) {
       $this->cam->trans_commit();
