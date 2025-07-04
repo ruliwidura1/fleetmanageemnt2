@@ -21,7 +21,7 @@
 				<div class="row" style="margin-top: 1em; ">
 					<div class="col-md-12" style="border-top: 1px #afafaf dashed;">&nbsp;</div>
 					<div class="col-xs-12 btn-group-vertical" style="">
-						<button type="button" class="btn btn-default btn-block text-left" data-dismiss="modal"><i class="fa fa-trash"></i> Tutup</button>
+						<button type="button" class="btn btn-default btn-block text-left" data-dismiss="modal"><i class="fa fa-times"></i> Tutup</button>
 					</div>
 				</div>
 				<!-- END Modal Body -->
