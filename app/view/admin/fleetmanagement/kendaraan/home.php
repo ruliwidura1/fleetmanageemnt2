@@ -41,6 +41,7 @@
             <div class="col-md-6">&nbsp;</div>
             <div class="col-md-6">
                 <div class="btn-group pull-right">
+                  <button id="btn_dlxls" type="button" class="btn btn-warning btn-submit"> <i class="fa fa-download"></i> Download XLS <i class="icon-submit fa"></i></button>
                     <a id="" href="<?= base_url_admin('fleetmanagement/kendaraan/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
                 </div>
             </div>
