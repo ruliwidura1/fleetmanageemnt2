@@ -63,4 +63,18 @@ class A_Vehicle_Concern extends \JI_Model
 
         return $this;
     }
+    protected function filter_is_active($is_active = '')
+    {
+        if (strlen($is_active) > 0) {
+            $this->db->where_as("$this->tbl_as.is_active", $this->db->esc($is_active));
+        }
+        return $this;
+    }
+    protected function filter_created_at($created_at_from = '', $created_at_to = '')
+    {
+        if (strlen($created_at_from) == 10 && strlen($created_at_to) == 10) {
+            $this->db->between("$this->tbl_as.created_at", $this->db->esc($created_at_from), $this->db->esc($created_at_to));
+        }
+        return $this;
+    }
 }

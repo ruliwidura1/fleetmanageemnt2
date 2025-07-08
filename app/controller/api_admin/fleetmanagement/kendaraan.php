@@ -84,12 +84,18 @@ class Kendaraan extends JI_Controller
         if (empty($pagesize)) $pagesize = 10;
         if (empty($page)) $page = 0;
 
+
+        $sdate = $this->input->request('sdate');
+        $edate = $this->input->request('edate');
+        $is_active = $this->input->request('is_active');
+
         $keyword = $sSearch;
 
         $this->status = 200;
         $this->message = 'Berhasil';
-        $dcount = $this->avm->countAll($keyword, $utype);
-        $ddata = $this->avm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $utype);
+        $dcount = $this->avm->countAll($keyword, $sdate, $edate, $is_active);
+        $ddata = $this->avm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $sdate, $edate, $is_active);
+
 
         foreach ($ddata as &$gd) {
             if (isset($gd->nama)) {
@@ -106,74 +112,6 @@ class Kendaraan extends JI_Controller
 
         $this->__jsonDataTable($ddata, $dcount);
     }
-
-    // public function get_data()
-    // {
-    //     $d = $this->__init();
-    //     $data = array();
-    //     if (!$this->admin_login) {
-    //         $this->status = 400;
-    //         $this->message = 'Harus login';
-    //         header("HTTP/1.0 400 Harus login");
-    //         $this->__json_out($data);
-    //         die();
-    //     }
-    //     $pengguna = $d['sess']->admin;
-
-    //     $draw = $this->input->post("draw");
-    //     $sval = $this->input->post("search");
-    //     $sSearch = $this->input->post("sSearch");
-    //     $sEcho = $this->input->post("sEcho");
-    //     $page = $this->input->post("iDisplayStart");
-    //     $pagesize = $this->input->post("iDisplayLength");
-
-    //     $iSortCol_0 = $this->input->post("iSortCol_0");
-    //     $sSortDir_0 = $this->input->post("sSortDir_0");
-
-
-    //     $sortCol = "date";
-    //     $sortDir = strtoupper($sSortDir_0);
-    //     if (empty($sortDir)) $sortDir = "DESC";
-    //     if (strtolower($sortDir) != "desc") {
-    //         $sortDir = "ASC";
-    //     }
-
-    //     switch ($iSortCol_0) {
-    //         case 0:
-    //             $sortCol = "id";
-    //             break;
-    //         case 1:
-    //             $sortCol = "nama";
-    //             break;
-    //         default:
-    //             $sortCol = "id";
-    //     }
-
-    //     if (empty($draw)) $draw = 0;
-    //     if (empty($pagesize)) $pagesize = 10;
-    //     if (empty($page)) $page = 0;
-
-    //     $keyword = $sSearch;
-
-    //     $this->status = 200;
-    //     $this->message = 'Berhasil';
-    //     $dcount = $this->avm->countAll($page, $pagesize, $sortCol, $sortDir, $keyword);
-    //     $ddata = $this->avm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword);
-
-    //     foreach ($ddata as &$gd) {
-    //         if (isset($gd->is_active)) {
-    //             if (!empty($gd->is_active)) {
-    //                 $gd->is_active = 'Aktif';
-    //             } else {
-    //                 $gd->is_active = 'Tidak Aktif';
-    //             }
-    //         }
-    //     }
-
-    //     $data['kendaraan'] = $ddata;
-    //     //sleep(3);
-    //     $this->__json_out($data);
-    // }
 
     public function baru()
     {

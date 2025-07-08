@@ -41,7 +41,7 @@
             <div class="col-md-6">&nbsp;</div>
             <div class="col-md-6">
                 <div class="btn-group pull-right">
-                  <button id="btn_dlxls" type="button" class="btn btn-warning btn-submit"> <i class="fa fa-download"></i> Download XLS <i class="icon-submit fa"></i></button>
+                    <button id="btn_dlxls" type="button" class="btn btn-warning btn-submit"> <i class="fa fa-download"></i> Download XLS <i class="icon-submit fa"></i></button>
                     <a id="" href="<?= base_url_admin('fleetmanagement/kendaraan/baru/') ?>" class="btn btn-info"><i class="fa fa-plus"></i> Baru</a>
                 </div>
             </div>
@@ -77,11 +77,11 @@
 
     <div class="block full">
         <div class="row">
-            <div class="col-md-3">
-                <label for="fl_utype">Tipe Kendaraan</label>
+            <div class="col-md-4">
+                <label for="fl_is_active">Tipe Kendaraan</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-                    <select id="fl_utype" class="form-control input-select2">
+                    <select id="fl_is_active" class="form-control input-select2">
                         <option value="">Pilih Jenis Kendaraan</option>
                         <option value="Pickup">Pickup</option>
                         <option value="Van">Van</option>
@@ -97,7 +97,25 @@
                     </select>
                 </div>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-3">
+                <label>&nbsp;</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input id="fl_sdate" type="text" class="form-control input-datepicker" placeholder="dari tgl" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-') . '01' ?>" />
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label>&nbsp;</label>
+                <div class="input-group">
+                    <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <input id="fl_edate" type="text" class="form-control input-datepicker" placeholder="s.d tgl" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-t') ?>" />
+                </div>
+            </div>
+            <div class="col-md-2">
                 <br />
                 <div class="btn-group pull-right">
                     <a id="fl_do" href="#" class="btn btn-default"><i class="fa fa-filter"> Filter</i></a>

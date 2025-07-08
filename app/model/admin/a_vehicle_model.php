@@ -23,4 +23,9 @@ class A_Vehicle_Model extends \Model\A_Vehicle_Concern
 	{
 		return $this->db->get();
 	}
+	public function laporan_xls($sdate, $edate, $is_active)
+	{
+		$this->filter_is_active($is_active)->filter_created_at($sdate, $edate);
+		return $this->db->get();
+	}
 }

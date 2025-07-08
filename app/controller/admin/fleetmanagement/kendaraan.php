@@ -115,7 +115,7 @@ class Kendaraan extends \JI_Controller
       redir(base_url_admin('fleetmanagement/kendaraan/'));
       die();
     }
-    $this->setTitle('Fleet Management: Pemeliharaan Dan Service: Detail #'.$avm->id.' '.$this->config->semevar->admin_site_suffix);
+    $this->setTitle('Fleet Management: data Kendaraan: Detail #'.$avm->id.' '.$this->config->semevar->admin_site_suffix);
 
 
 
@@ -138,7 +138,7 @@ class Kendaraan extends \JI_Controller
 
     $beli_mindate = $this->input->request('mindate');
     $beli_maxdate = $this->input->request('maxdate');
-    $is_proses = $this->input->request('is_proses');
+    $is_active = $this->input->request('is_active');
 
     if (strlen($beli_mindate) != 10 || strlen($beli_maxdate) != 10) {
       echo 'Rentang waktu tanggal wajib diisi';
@@ -154,7 +154,7 @@ class Kendaraan extends \JI_Controller
 
     //filename builder
     $save_dir = $this->__checkDir(date("Y/m", strtotime($beli_maxdate)));
-    $save_file = 'laporan-pengiriman-barang' . '-' . $tgl_save;
+    $save_file = 'data-kendaraan' . '-' . $tgl_save;
     $save_file = str_replace(' ', '', str_replace('/', '', strtolower($save_file)));
 
     //preset array gaya kolom
@@ -201,17 +201,16 @@ class Kendaraan extends \JI_Controller
     $objWorkSheet->getColumnDimension('H')->setWidth(25);
     $objWorkSheet->getColumnDimension('I')->setWidth(25);
     $objWorkSheet->getColumnDimension('J')->setWidth(25);
-    $objWorkSheet->getColumnDimension('K')->setWidth(25);
 
 
     //building xlsx
-    $objWorkSheet->setCellValue('A1', strtoupper('Laporan Service Ac'))->mergeCells('A1:K1');
+    $objWorkSheet->setCellValue('A1', strtoupper('Data Kendaraan'))->mergeCells('A1:J1');
     $objWorkSheet->getStyle('A1')->getAlignment()->applyFromArray($style);
-    $objWorkSheet->getStyle('A1:K1')->applyFromArray($judul_utama_sty);
+    $objWorkSheet->getStyle('A1:J1')->applyFromArray($judul_utama_sty);
 
-    $objWorkSheet->setCellValue('A2', $tgl)->mergeCells('A2:K2');
+    $objWorkSheet->setCellValue('A2', $tgl)->mergeCells('A2:J2');
     $objWorkSheet->getStyle('A2')->getAlignment()->applyFromArray($style);
-    $objWorkSheet->getStyle('A2:K2')->applyFromArray($style);
+    $objWorkSheet->getStyle('A2:J2')->applyFromArray($style);
 
     //header
     $objWorkSheet
@@ -242,7 +241,7 @@ class Kendaraan extends \JI_Controller
     $i = 11;
     $nomor = 1;
 
-    $laporan_data = $this->avm->laporan_xls($beli_mindate, $beli_maxdate, $is_proses);
+    $laporan_data = $this->avm->laporan_xls($beli_mindate, $beli_maxdate, $is_active);
     //cek data ada ga nya
     if (count($laporan_data)) {
       //iterasikan data
@@ -256,7 +255,7 @@ class Kendaraan extends \JI_Controller
         $objWorkSheet->setCellValue('G' . $i, $row->kapasitas_mesin);
         $objWorkSheet->setCellValue('H' . $i, $row->kapasitas_angkutan);
         $objWorkSheet->setCellValue('I' . $i, $row->availability);
-        $objWorkSheet->setCellValue('J' . $i, $row->status);
+        $objWorkSheet->setCellValue('J' . $i, $row->is_active);
 
 
         //set border ke masing2 kolom
@@ -275,8 +274,8 @@ class Kendaraan extends \JI_Controller
         $nomor++;
       }
     } else {
-      $objWorkSheet->setCellValue('A' . $i, 'Tidak ada data')->mergeCells('A' . $i . ':K' . $i);
-      $objWorkSheet->getStyle('A' . $i . ':K' . $i)->applyFromArray($styleborder);
+      $objWorkSheet->setCellValue('A' . $i, 'Tidak ada data')->mergeCells('A' . $i . ':J' . $i);
+      $objWorkSheet->getStyle('A' . $i . ':J' . $i)->applyFromArray($styleborder);
     }
 
     $objWriter = new Xlsx($objPHPExcel);
