@@ -85,16 +85,16 @@ class Kendaraan extends JI_Controller
         if (empty($page)) $page = 0;
 
 
-        $sdate = $this->input->request('sdate');
-        $edate = $this->input->request('edate');
+        $created_at_from = $this->input->request('created_at_from');
+        $created_at_to = $this->input->request('created_at_to');
         $is_active = $this->input->request('is_active');
 
         $keyword = $sSearch;
 
         $this->status = 200;
         $this->message = 'Berhasil';
-        $dcount = $this->avm->countAll($keyword, $sdate, $edate, $is_active);
-        $ddata = $this->avm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $sdate, $edate, $is_active);
+        $dcount = $this->avm->countAll($keyword, $created_at_from, $created_at_to, $is_active);
+        $ddata = $this->avm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $created_at_from, $created_at_to, $is_active);
 
 
         foreach ($ddata as &$gd) {

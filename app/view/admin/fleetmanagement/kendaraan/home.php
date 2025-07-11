@@ -103,7 +103,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input id="fl_sdate" type="text" class="form-control input-datepicker" placeholder="dari tgl" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-') . '01' ?>" />
+                    <input id="fl_created_at_from" type="text" class="form-control input-datepicker" placeholder="dari tgl" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-') . '01' ?>" />
                 </div>
             </div>
             <div class="col-md-3">
@@ -112,14 +112,12 @@
                     <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                     </div>
-                    <input id="fl_edate" type="text" class="form-control input-datepicker" placeholder="s.d tgl" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-t') ?>" />
+                    <input id="fl_created_at_to" type="text" class="form-control input-datepicker" placeholder="s.d tgl" data-date-format="yyyy-mm-dd" value="<?= date('Y-m-t') ?>" />
                 </div>
             </div>
             <div class="col-md-2">
-                <br />
-                <div class="btn-group pull-right">
-                    <a id="fl_do" href="#" class="btn btn-default"><i class="fa fa-filter"> Filter</i></a>
-                </div>
+                <label>&nbsp;</label>
+                <button id="fl_button" class="btn btn-default btn-block btn-submit"><i class="fa fa-filter icon-submit"></i></button>
             </div>
         </div>
     </div>

@@ -28,17 +28,8 @@ class A_Vehicle_Model extends \Model\A_Vehicle_Concern
         return 0;
     }
 
-    private function filter_keyword($keyword = '')
-    {
-        if (strlen($keyword) > 0) {
-            $this->db->where_as("$this->tbl_as.nama", $keyword, "OR", "%like%", 1, 0);
-            $this->db->where_as("$this->tbl_as.utype", $keyword, "OR", "%like%", 0, 0);
-            $this->db->where_as("$this->tbl_as.no_pol", $keyword, "OR", "%like%", 0, 0);
-            $this->db->where_as("$this->tbl_as.availability", $keyword, "OR", "%like%", 0, 1);
-        }
-    }
+    public function getAll($page = 0, $pagesize = 10, $sortCol = "id", $sortDir = "ASC", $keyword = '', $created_at_from = '', $created_at_to = '', $is_active = '')
 
-    public function getAll($page = 0, $pagesize = 10, $sortCol = "id", $sortDir = "ASC", $keyword = '', $utype = '', $sdate = '', $edate = '')
     {
         $this->db->flushQuery();
         $this->db->select_as("$this->tbl_as.id", "id", 0);
@@ -52,20 +43,20 @@ class A_Vehicle_Model extends \Model\A_Vehicle_Concern
         $this->db->select_as("$this->tbl_as.availability", "availability", 0);
         $this->db->select_as("$this->tbl_as.is_active", "is_active", 0);
         $this->db->from($this->tbl, $this->tbl_as);
-        $this->filter_keyword($keyword)->filter_is_active($is_active)->filter_created_at($sdate, $edate);
+        $this->filter_keyword($keyword)->filter_is_active($is_active)->filter_created_at($created_at_from, $created_at_to);
 
 
         $this->db->order_by($sortCol, $sortDir)->limit($page, $pagesize);
         return $this->db->get("object", 0);
     }
 
-    public function countAll($keyword = '', $utype = '', $sdate = '', $edate = '')
+    public function countAll($keyword = '', $created_at_from = '', $created_at_to = '', $is_active = '')
+
     {
         $this->db->flushQuery();
         $this->db->select_as("COUNT($this->tbl_as.id)", "jumlah", 0);
         $this->db->from($this->tbl, $this->tbl_as);
-        $this->filter_keyword($keyword);
-        $this->filter_keyword($keyword)->filter_is_active($is_active)->filter_sdate($sdate, $edate);
+        $this->filter_keyword($keyword)->filter_is_active($is_active)->filter_created_at($created_at_from, $created_at_to);
 
 
         $d = $this->db->get_first("object", 0);

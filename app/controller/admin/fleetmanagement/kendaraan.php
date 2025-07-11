@@ -136,24 +136,25 @@ class Kendaraan extends \JI_Controller
       die();
     }
 
-    $beli_mindate = $this->input->request('mindate');
-    $beli_maxdate = $this->input->request('maxdate');
+    $created_at_from = $this->input->request('created_at_from');
+    $created_at_to = $this->input->request('created_at_to');
     $is_active = $this->input->request('is_active');
 
-    if (strlen($beli_mindate) != 10 || strlen($beli_maxdate) != 10) {
+    if (strlen($created_at_from) != 10 || strlen($created_at_to) != 10) {
       echo 'Rentang waktu tanggal wajib diisi';
       die();
     }
 
-    $beli_mindate = date("Y-m-d", strtotime($beli_mindate));
-    $beli_maxdate = date("Y-m-d", strtotime($beli_maxdate));
+    $created_at_from = date("Y-m-d", strtotime($created_at_from));
+    $created_at_to = date("Y-m-d", strtotime($created_at_to));
+    
 
     // Prepare date range
-    $tgl_save = str_replace('-', '', $beli_mindate) . '-' . str_replace('-', '', $beli_maxdate);
-    $tgl = 'Periode: ' . $this->__dateIndonesia($beli_mindate, 'tanggal') . ' - ' . $this->__dateIndonesia($beli_maxdate, 'tanggal');
+    $tgl_save = str_replace('-', '', $created_at_from) . '-' . str_replace('-', '', $created_at_to);
+    $tgl = 'Periode: ' . $this->__dateIndonesia($created_at_from, 'tanggal') . ' - ' . $this->__dateIndonesia($created_at_to, 'tanggal');
 
     //filename builder
-    $save_dir = $this->__checkDir(date("Y/m", strtotime($beli_maxdate)));
+    $save_dir = $this->__checkDir(date("Y/m", strtotime($created_at_from)));
     $save_file = 'data-kendaraan' . '-' . $tgl_save;
     $save_file = str_replace(' ', '', str_replace('/', '', strtolower($save_file)));
 
@@ -241,7 +242,7 @@ class Kendaraan extends \JI_Controller
     $i = 11;
     $nomor = 1;
 
-    $laporan_data = $this->avm->laporan_xls($beli_mindate, $beli_maxdate, $is_active);
+    $laporan_data = $this->avm->laporan_xls($created_at_from, $created_at_to, $is_active);
     //cek data ada ga nya
     if (count($laporan_data)) {
       //iterasikan data

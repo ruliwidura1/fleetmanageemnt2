@@ -132,11 +132,11 @@ $('#btn_dlxls').on('click',function(e){
 	$('.icon-submit').addClass('fa-circle-o-notch');
 	$('.icon-submit').addClass('fa-spin');
 
-	var maxdate = $("#fl_edate").val();
-	var mindate = $("#fl_sdate").val();
+	var created_at_from = $("#fl_created_at_from").val();
+	var created_at_to = $("#fl_created_at_to").val();
 	var is_active = $("#fl_is_active").val();
 	var url = '<?=base_url_admin('fleetmanagement/kendaraan/download_xls/') ?>';
-	url = url + '?mindate='+mindate+'&maxdate='+maxdate+'&is_active='+is_active;
+	url = url + '?created_at_from='+created_at_from+'&created_at_to='+created_at_to+'&is_active='+is_active;
 
 	setTimeout(function(){
 		$('.btn-submit').prop('disabled',false);

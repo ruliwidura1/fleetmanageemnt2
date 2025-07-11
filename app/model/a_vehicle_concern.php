@@ -1,19 +1,21 @@
 <?php
+
 namespace Model;
+
 register_namespace(__NAMESPACE__);
 /**
-* Define all general method(s) and constant(s) for b_insentif table,
-*   can be inherited a Concern class also can be reffered as class constants
-*
-* @version 1.0.0
-*
-* @package Model\A_Vehicle\Concern
-* @since 1.0.0
-*/
+ * Define all general method(s) and constant(s) for b_insentif table,
+ *   can be inherited a Concern class also can be reffered as class constants
+ *
+ * @version 1.0.0
+ *
+ * @package Model\A_Vehicle\Concern
+ * @since 1.0.0
+ */
 class A_Vehicle_Concern extends \JI_Model
 {
-	public $tbl 	= 'a_vehicle';
-	public $tbl_as 	= 'av';
+    public $tbl     = 'a_vehicle';
+    public $tbl_as     = 'av';
 
     const COLUMNS = [
         'cdate',
@@ -61,6 +63,16 @@ class A_Vehicle_Concern extends \JI_Model
         $this->labels['is_active'] = new \Seme_Flaglabel();
         $this->labels['is_active']->init_is_active();
 
+        return $this;
+    }
+    protected function filter_keyword($keyword = '')
+    {
+        if (strlen($keyword) > 0) {
+            $this->db->where_as("$this->tbl_as.nama", $keyword, "OR", "%like%", 1, 0);
+            $this->db->where_as("$this->tbl_as.utype", $keyword, "OR", "%like%", 0, 0);
+            $this->db->where_as("$this->tbl_as.no_pol", $keyword, "OR", "%like%", 0, 0);
+            $this->db->where_as("$this->tbl_as.availability", $keyword, "OR", "%like%", 0, 1);
+        }
         return $this;
     }
     protected function filter_is_active($is_active = '')
