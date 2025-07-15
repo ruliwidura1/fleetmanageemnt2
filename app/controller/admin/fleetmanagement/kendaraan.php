@@ -202,6 +202,7 @@ class Kendaraan extends \JI_Controller
     $objWorkSheet->getColumnDimension('H')->setWidth(25);
     $objWorkSheet->getColumnDimension('I')->setWidth(25);
     $objWorkSheet->getColumnDimension('J')->setWidth(25);
+    $objWorkSheet->getColumnDimension('K')->setWidth(25);
 
 
     //building xlsx
@@ -224,7 +225,8 @@ class Kendaraan extends \JI_Controller
     ->setCellValue('G10', 'Kapasitas Mesin')
     ->setCellValue('H10', 'Kapasitas Angkutan')
     ->setCellValue('I10', 'Availability')
-    ->setCellValue('J10', 'Status');    
+    ->setCellValue('J10', 'Tanggal')
+    ->setCellValue('K10', 'Status');    
 
     //setting gaya untuk header
     $objWorkSheet->getStyle('A10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
@@ -237,6 +239,7 @@ class Kendaraan extends \JI_Controller
     $objWorkSheet->getStyle('H10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
     $objWorkSheet->getStyle('I10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);
     $objWorkSheet->getStyle('J10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);    
+    $objWorkSheet->getStyle('K10')->applyFromArray($judul_bold)->getAlignment()->applyFromArray($style);    
 
     //set baris secara programming
     $i = 11;
@@ -257,6 +260,7 @@ class Kendaraan extends \JI_Controller
         $objWorkSheet->setCellValue('H' . $i, $row->kapasitas_angkutan);
         $objWorkSheet->setCellValue('I' . $i, $row->availability);
         $objWorkSheet->setCellValue('J' . $i, $row->is_active);
+        $objWorkSheet->setCellValue('K' . $i, $row->is_active);
 
 
         //set border ke masing2 kolom
@@ -270,13 +274,14 @@ class Kendaraan extends \JI_Controller
         $objWorkSheet->getStyle('H' . $i)->applyFromArray($styleborder);
         $objWorkSheet->getStyle('I' . $i)->applyFromArray($styleborder);
         $objWorkSheet->getStyle('J' . $i)->applyFromArray($styleborder);
+        $objWorkSheet->getStyle('K' . $i)->applyFromArray($styleborder);
 
         $i++;
         $nomor++;
       }
     } else {
-      $objWorkSheet->setCellValue('A' . $i, 'Tidak ada data')->mergeCells('A' . $i . ':J' . $i);
-      $objWorkSheet->getStyle('A' . $i . ':J' . $i)->applyFromArray($styleborder);
+      $objWorkSheet->setCellValue('A' . $i, 'Tidak ada data')->mergeCells('A' . $i . ':K' . $i);
+      $objWorkSheet->getStyle('A' . $i . ':K' . $i)->applyFromArray($styleborder);
     }
 
     $objWriter = new Xlsx($objPHPExcel);

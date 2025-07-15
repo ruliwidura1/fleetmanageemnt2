@@ -74,6 +74,9 @@ class Kendaraan extends JI_Controller
                 $sortCol = "$tbl_as.availability";
                 break;
             case 9:
+                $sortCol = "$tbl_as.created_at";
+                break;
+            case 10:
                 $sortCol = "$tbl_as.is_active";
                 break;
             default:

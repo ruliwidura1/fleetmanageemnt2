@@ -41,6 +41,7 @@ class A_Vehicle_Model extends \Model\A_Vehicle_Concern
         $this->db->select_as("$this->tbl_as.kapasitas_mesin", "kapasitas_mesin", 0);
         $this->db->select_as("$this->tbl_as.kapasitas_angkutan", "kapasitas_angkutan", 0);
         $this->db->select_as("$this->tbl_as.availability", "availability", 0);
+        $this->db->select_as("$this->tbl_as.created_at", "created_at", 0);
         $this->db->select_as("$this->tbl_as.is_active", "is_active", 0);
         $this->db->from($this->tbl, $this->tbl_as);
         $this->filter_keyword($keyword)->filter_is_active($is_active)->filter_created_at($created_at_from, $created_at_to);

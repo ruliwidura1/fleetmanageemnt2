@@ -140,6 +140,7 @@
                         <th>Kapasitas Mesin (CC)</th>
                         <th>Kapasitas Angkutan (KG)</th>
                         <th>Ketersediaan</th>
+                        <th>Tanggal dan Waktu</th>
                         <th>Status</th>
                     </tr>
                 </thead>
