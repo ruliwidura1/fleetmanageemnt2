@@ -14,7 +14,7 @@ class Jenismerkkendaraan extends JI_Controller
 
     public function index()
     {
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login) {
             $this->status = 400;
@@ -165,7 +165,7 @@ class Jenismerkkendaraan extends JI_Controller
 
     public function baru()
     {
-        $d = $this->__init();
+        $d = $this->initialize();
 
         $data = array();
         if (!$this->admin_login) {
@@ -215,7 +215,7 @@ class Jenismerkkendaraan extends JI_Controller
     public function detail($id)
     {
         $id = (int) $id;
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login && empty($id)) {
             $this->status = 400;
@@ -241,7 +241,7 @@ class Jenismerkkendaraan extends JI_Controller
 
     public function edit($id)
     {
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
 
         $id = (int) $id;
@@ -287,7 +287,7 @@ class Jenismerkkendaraan extends JI_Controller
     public function hapus($id)
     {
         $id = (int) $id;
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if ($id <= 0) {
             $this->status = 500;
@@ -324,7 +324,7 @@ class Jenismerkkendaraan extends JI_Controller
 
     public function statistik()
     {
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login) {
             $this->status = 400;

@@ -33,7 +33,7 @@ class Kendaraan extends \JI_Controller
 
   public function index()
   {
-    $data = $this->__init();
+    $data = $this->initialize();
     if (!$this->admin_login) {
       redir(base_url_admin('login'));
       die();
@@ -49,7 +49,7 @@ class Kendaraan extends \JI_Controller
 
   public function baru()
   {
-    $data = $this->__init();
+    $data = $this->initialize();
     if(!$this->admin_login){
       redir(base_url_admin('login'));
       die();
@@ -66,7 +66,7 @@ class Kendaraan extends \JI_Controller
 
   public function edit($id)
   {
-    $data = $this->__init();
+    $data = $this->initialize();
     if(!$this->admin_login){
       redir(base_url_admin('login'));
       die();
@@ -100,7 +100,7 @@ class Kendaraan extends \JI_Controller
 
   public function detail($id)
   {
-    $data = $this->__init();
+    $data = $this->initialize();
     if(!$this->admin_login){
       redir(base_url_admin('login'));
       die();
@@ -130,7 +130,7 @@ class Kendaraan extends \JI_Controller
   }
   public function download_xls()
   {
-    $data = $this->__init();
+    $data = $this->initialize();
     if (!$this->admin_login) {
       redir(base_url('login'));
       die();

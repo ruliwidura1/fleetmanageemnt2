@@ -68,7 +68,7 @@ class JI_Controller extends SENE_Controller
         die();
     }
 
-    public function __init()
+    public function initialize()
     {
         $data = array();
         $sess = $this->getKey();

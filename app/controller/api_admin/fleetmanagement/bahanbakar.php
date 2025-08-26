@@ -22,7 +22,7 @@ class Bahanbakar extends \JI_Controller
     }
     public function index()
     {
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login) {
             $this->status = 400;
@@ -132,7 +132,7 @@ class Bahanbakar extends \JI_Controller
     }
     public function tambah()
     {
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login) {
             $this->status = 400;
@@ -160,7 +160,7 @@ class Bahanbakar extends \JI_Controller
     public function detail($id)
     {
         $id = (int) $id;
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login && empty($id)) {
             $this->status = 400;
@@ -177,7 +177,7 @@ class Bahanbakar extends \JI_Controller
 
     public function edit($id)
     {
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
 
         $id = (int) $id;
@@ -222,7 +222,7 @@ class Bahanbakar extends \JI_Controller
     public function hapus($id)
     {
         $id = (int) $id;
-        $d = $this->__init();
+        $d = $this->initialize();
         $data = array();
         if (!$this->admin_login && empty($id)) {
             $this->status = 400;
