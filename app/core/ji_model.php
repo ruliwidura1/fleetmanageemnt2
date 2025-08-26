@@ -14,9 +14,16 @@ class JI_Model extends \SENE_Model
     /** @var string  */
     public $tbl_as;
 
+        public $table_alias;
+
     public function __construct()
     {
         parent::__construct();
+    }
+    protected function set_table($table, $table_alias)
+    {
+        $this->table = $table;
+        $this->table_alias = $table_alias;
     }
 
     /**

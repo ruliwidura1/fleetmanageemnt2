@@ -1,7 +1,8 @@
 <?php
 
 /**
- * Controller untuk Bensin
+ * Controller for "Pembelian BBM" module on API Admin point of view
+ *   Mostly this controller will produce JSON to support data manipulation for current module
  *
  * @version 1.0.0
  *
@@ -10,37 +11,37 @@
  */
 class Bahanbakar extends \JI_Controller
 {
-    var $is_email = 1;
     public function __construct()
     {
         parent::__construct();
-        $this->load("api_admin/b_bensin_model", 'bbm');
+
         $this->load('a_vehicle_concern');
         $this->load("api_admin/a_vehicle_model", "avm");
+
+        $this->load('b_bensin_concern');
+        $this->load("api_admin/b_bensin_model", "bmm");
         $this->current_parent = 'fleetmanagement';
         $this->current_page = 'fleetmanagement_bahanbakar';
     }
+
+    /**
+     * Render http response in json format with it's http header to supporting data table data
+     *
+     * @return void
+     */
     public function index()
     {
         $d = $this->initialize();
         $data = array();
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-
-        $draw = $this->input->post("draw");
-        $sval = $this->input->post("search");
-        $sSearch = $this->input->post("sSearch");
-        $sEcho = $this->input->post("sEcho");
+        $this->api_admin_authentication($data);
+        
+        $keyword = $this->input->post("sSearch");
         $page = $this->input->post("iDisplayStart");
         $pagesize = $this->input->post("iDisplayLength");
         $iSortCol_0 = $this->input->post("iSortCol_0");
         $sSortDir_0 = $this->input->post("sSortDir_0");
 
+        // advanced filtering
         $sdate = $this->input->request("sdate");
         $edate = $this->input->request("edate");
 
@@ -62,187 +63,211 @@ class Bahanbakar extends \JI_Controller
             $sortDir = "ASC";
         }
 
+        $table_alias = $this->bmm->table_alias;
         switch ($iSortCol_0) {
-            case 0:
-                $sortCol = "id";
-                break;
             case 1:
-                $sortCol = "a_vechicle_id";
+                $sortCol = "$table_alias.created_at";
                 break;
             case 2:
-                $sortCol = "tgl_beli";
+                $sortCol = "$table_alias.kendaraan";
                 break;
             case 3:
-                $sortCol = "jenis";
-                break;
-            case 4:
-                $sortCol = "driver";
-                break;
-            case 5:
-                $sortCol = "jumlah_beli";
-                break;
-            case 6:
-                $sortCol = "harga";
-                break;
-            case 7:
-                $sortCol = "total_harga";
+                $sortCol = "$table_alias.jenis";
                 break;
             default:
-                $sortCol = "id";
+                $sortCol = "$table_alias.id";
         }
-
-        if (empty($draw)) $draw = 0;
         if (empty($pagesize)) $pagesize = 10;
         if (empty($page)) $page = 0;
 
-        $keyword = $sSearch;
-
         $this->status = 200;
-        $this->message = 'Berhasil';
-        $dcount = $this->bbm->countAll($keyword);
-        $ddata = $this->bbm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword);
+        $this->message = 'Success';
+        $datatable_count = $this->dpbbmm->datatable_count($keyword);
+        $datatable_list = $this->dpbbmm->datatable_list($page, $pagesize, $sortCol, $sortDir, $keyword);
 
-        foreach ($ddata as $dt) {
-            $jumlah_beli = isset($dt->jumlah_beli) ? $dt->jumlah_beli : 0;
-            $harga = isset($dt->harga) ? $dt->harga : 0;
-            $dt->total_harga = $jumlah_beli * $harga;
-            
-            if (isset($dt->harga)) {
-                $dt->harga = 'Rp' . number_format($dt->harga);
+        foreach ($datatable_list as &$dt) {
+            $dt->total_pembelian = '-';
+            // optional, reformating before the output
+            if (!is_null($dt->total_pembelian_per_liter)) {
+                $dt->total_pembelian = 'Rp'.number_format($dt->total_pembelian_per_liter, 0, ',', '.');
             }
-            if (isset($dt->total_harga)) {
-                $dt->total_harga = 'Rp' . number_format($dt->total_harga);
-            }
-            if (isset($dt->kapasitas)) {
-                $dt->kapasitas .= ' Liter';
-            }
-            if (isset($dt->jumlah_beli)) {
-                $dt->jumlah_beli .= ' Liter';
-            }
-            if (isset($dt->is_active)) {
-                if (!empty($dt->is_active)) {
-                    $dt->is_active = '<label class="label label-success">Aktif</label>';
-                } else {
-                    $dt->is_active = '<label class="label label-default">Tidak Aktif</label>';
-                }
+            if (!is_null($dt->total_pembelian_harga)) {
+                $dt->total_pembelian = number_format($dt->total_pembelian_harga, 0, ',', '.');
             }
         }
 
-        $this->__jsonDataTable($ddata, $dcount);
+        $this->__jsonDataTable($datatable_list, $datatable_count);
     }
-    public function tambah()
+
+    /**
+     * Process helper for determine value when the value has null
+     *
+     * @param [type] $data_to_insert
+     * @return void
+     */
+    private function adjust_total_pembelian($data_to_insert)
+    {
+        if (isset($data_to_insert['total_pembelian_per_liter']) && empty($data_to_insert['total_pembelian_per_liter'])) {
+            $data_to_insert['total_pembelian_per_liter'] = 'NULL';
+        }
+        if (isset($data_to_insert['total_pembelian_harga']) && empty($data_to_insert['total_pembelian_harga'])) {
+            $data_to_insert['total_pembelian_harga'] = 'NULL';
+        }
+
+        return $data_to_insert;
+    }
+
+
+    /**
+     * Render http response in json format for accomodating insert data
+     *
+     * @return void
+     */
+    public function baru()
     {
         $d = $this->initialize();
         $data = array();
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $di = $_POST;
-        foreach ($di as $k => $v) {
-            $di[$k] = strip_tags($v);
+        $this->api_admin_authentication($data);
+
+        $data_to_insert = $_POST;
+        foreach ($data_to_insert as $k => $v) {
+            $data_to_insert[$k] = strip_tags($v);
         }
 
-        $res = $this->bbm->set($di);
+        // default value fo created_at, please adjust this on the other cases\
+        $data_to_insert['a_vehicle_id'] = 'NOW()';
+        $data_to_insert['c_driver_id'] = 'NOW()';
+        $data_to_insert['created_at'] = 'NOW()';
+        $data_to_insert['updated_at'] = 'NULL';
+
+        // remove or change this validation on other case
+        $data_to_insert = $this->adjust_total_pembelian($data_to_insert);
+        
+        
+        $this->dpbbmm->transaction_start();
+        $res = $this->dpbbmm->insert($data_to_insert);
         if ($res) {
             $this->status = 200;
-            $this->message = 'Data baru berhasil ditambahkan';
+            $this->message = 'New data was inserted successfully';
+            $this->dpbbmm->transaction_commit();
         } else {
             $this->status = 900;
-            $this->message = 'Tidak dapat menyimpan data baru, silakan coba beberapa saat lagi';
+            $this->message = 'Failed inseting new data to table';
+            $this->dpbbmm->transaction_rollback();
         }
+        $this->dpbbmm->transaction_end();
         $this->__json_out($data);
     }
-
+    
+    /**
+     * Render http response in json format for showing detail of data
+     *
+     * @return void
+     */
     public function detail($id)
     {
         $id = (int) $id;
         $d = $this->initialize();
         $data = array();
-        if (!$this->admin_login && empty($id)) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
+        $this->api_admin_authentication($data);
         $this->status = 200;
-        $this->message = 'Berhasil';
-        $data = $this->bbm->getById($id);
+        $this->message = 'Success';
+        $data = $this->dpbbmm->id($id);
+        if (!isset($data->id)) {
+            $data = new \stdClass();
+            $this->status = 441;
+            $this->message = 'No Data';
+        }
         $this->__json_out($data);
     }
-
+    
+    /**
+     * Render http response in json format for edit of data
+     *
+     * @return void
+     */
     public function edit($id)
     {
         $d = $this->initialize();
         $data = array();
+        $this->api_admin_authentication($data);
 
         $id = (int) $id;
         if ($id <= 0) {
             $this->status = 444;
-            $this->message = 'Invalid Departure ID';
+            $this->message = 'Invalid Supplied ID';
             $this->__json_out($data);
-            die();
+            return;
         }
 
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $pengguna = $d['sess']->admin;
-
-        $du = $_POST;
-
-        if (isset($du['id'])) {
-            unset($du['id']);
+        $data_to_update = $_POST;
+        if (isset($data_to_update['id'])) {
+            unset($data_to_update['id']);
         }
 
-        if ($id > 0) {
-            $res = $this->bbm->update($id, $du);
-            if ($res) {
-                $this->status = 200;
-                $this->message = 'Perubahan berhasil diterapkan';
-            } else {
-                $this->status = 901;
-                $this->message = 'Tidak dapat melakukan perubahan ke basis data';
-            }
+        // add updated_at value
+        $data_to_update['updated_at'] = 'NOW()';
+
+        // remove or change this validation on other case
+        $data_to_update = $this->adjust_total_pembelian($data_to_update);
+        
+
+        $this->dpbbmm->transaction_start();
+        $res = $this->dpbbmm->update($id, $data_to_update);
+        if ($res) {
+            $this->status = 200;
+            $this->message = 'Success';
+            $this->dpbbmm->transaction_commit();
         } else {
-            $this->status = 448;
-            $this->message = 'ID Tidak ditemukan';
+            $this->status = 901;
+            $this->message = 'Cannot update the data with supplied ID right now';
+            $this->dpbbmm->transaction_rollback();
         }
+        $this->dpbbmm->transaction_end();
         $this->__json_out($data);
     }
 
+    
+    /**
+     * Render http response in json format for deleting data using supplied ID
+     *
+     * @return void
+     */
     public function hapus($id)
     {
         $id = (int) $id;
         $d = $this->initialize();
         $data = array();
-        if (!$this->admin_login && empty($id)) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
+        $this->api_admin_authentication($data);
+
+        $id = (int) $id;
+        if ($id <= 0) {
+            $this->status = 444;
+            $this->message = 'Invalid Supplied ID';
             $this->__json_out($data);
-            die();
+            return;
         }
-        $this->status = 200;
-        $this->message = 'Berhasil';
-        if ($id > 0) {
-            $res = $this->bbm->del($id);
-            if (!$res) {
-                $this->status = 902;
-                $this->message = 'Data gagal dihapus';
-            }
-        } else {
-            $this->status = 402;
-            $this->message = 'ID tidak ditemukan';
+
+        $dppbbmm = $this->dppbbmm->id($id);
+        if (!isset($dppbbmm->id)) {
+            $this->status = 520;
+            $this->message = 'Data with supplied ID was not exists';
+            $this->__json_out($data);
+            return;
         }
+        
+        $this->dppbbmm->transaction_start();
+        $res = $this->dppbbmm->delete($id);
+        if ($res) {
+            $this->status = 200;
+            $this->message = 'successs';
+            $this->dppbbmm->transaction_commit();
+        }else{
+            $this->status = 902;
+            $this->message = 'Cannot delete data using current ID';
+            $this->dppbbmm->transaction_rollback();
+        }
+        $this->dppbbmm->transaction_end();
         $this->__json_out($data);
     }
 
@@ -253,7 +278,7 @@ class Bahanbakar extends \JI_Controller
         $p = new stdClass();
         $p->id = 'NULL';
         $p->text = '-';
-        $data = $this->bbm->cari($keyword);
+        $data = $this->dpbbmm->cari($keyword);
         array_unshift($data, $p);
         $this->__json_select2($data);
     }

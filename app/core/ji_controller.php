@@ -48,6 +48,31 @@ class JI_Controller extends SENE_Controller
         $this->sene_json->out($data);
         die();
     }
+    protected function api_admin_authentication($data)
+    {
+        if (!$this->admin_login) {
+            $this->status = 400;
+            $this->message = 'Authenticated user required';
+            header("HTTP/1.0 400 ".$this->message);
+            $this->__json_out($data);
+            return;
+        }
+    }
+    protected function admin_authentication()
+    {
+        if (!$this->admin_login) {
+            redir(base_url_admin('login'));
+            return;
+        }
+    }
+    protected function config_semevar($config_key, $default_value = '')
+    {
+        if (isset($this->config->semevar->{$config_key})) {
+            return $this->config->semevar->{$config_key};
+        }
+
+        return $default_value;
+    }
 
     /**
      * Output the json formatted string for select2
