@@ -30,12 +30,12 @@
   				<tr>
 					<th class="text-center">ID</th>
 					<th>Tanggal Pembelian</th>
-					<th>Nama Kendaraan</th>
-					<th>Jenis Bahan Bakar</th>
-                    <th>Kapasitas BBM</th>
+					<th>Kenaraan</th>
+					<th>Jenis BBM</th>
+                    <th>Driver</th>
                     <th>Jumlah Liter</th>
                     <th>Harga Per Liter</th>
-                    <th>Total Harga</th>
+                    <th>Jumlah Pembelian</th>
   				</tr>
   			</thead>
   			<tbody>

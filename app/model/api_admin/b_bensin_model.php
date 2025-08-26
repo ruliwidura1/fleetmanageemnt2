@@ -33,7 +33,7 @@ class B_Bensin_Model extends SENE_Model
         $this->db->select_as("$this->tbl_as.tgl_beli", "tgl_beli", 0);
         $this->db->select_as("$this->tbl2_as.nama", "kendaraan", 0);
         $this->db->select_as("$this->tbl_as.jenis", "jenis", 0);
-        $this->db->select_as("$this->tbl_as.kapasitas", "kapasitas", 0);
+        $this->db->select_as("$this->tbl_as.driver", "driver", 0);
         $this->db->select_as("$this->tbl_as.jumlah_beli", "jumlah_beli", 0);
         $this->db->select_as("$this->tbl_as.harga", "harga", 0);
         $this->db->select_as("$this->tbl_as.total_harga", "total_harga", 0);

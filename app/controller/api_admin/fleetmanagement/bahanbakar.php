@@ -76,7 +76,7 @@ class Bahanbakar extends \JI_Controller
                 $sortCol = "jenis";
                 break;
             case 4:
-                $sortCol = "kapasitas";
+                $sortCol = "driver";
                 break;
             case 5:
                 $sortCol = "jumlah_beli";

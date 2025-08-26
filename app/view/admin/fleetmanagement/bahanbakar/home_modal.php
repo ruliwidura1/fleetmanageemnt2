@@ -75,9 +75,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="ikapasitas">Kapasitas Bbm </label>
+                            <label class="col-md-4 control-label" for="idriver">Driver </label>
                             <div class="col-md-8">
-                                <input id="ikapasitas" type="text" name="kapasitas" class="form-control" placeholder="Jumlah Liter" required />
+                                <input id="idriver" type="text" name="driver" class="form-control" placeholder="Jumlah Liter" required />
                             </div>
                         </div>
                         <div class="form-group">
@@ -158,9 +158,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-4 control-label" for="iekapasitas">Kapasitas Bbm </label>
+                            <label class="col-md-4 control-label" for="iedriver">Driver </label>
                             <div class="col-md-8">
-                                <input id="iekapasitas" type="text" name="kapasitas" class="form-control" placeholder="Jumlah Liter" required />
+                                <input id="iedriver" type="text" name="driver" class="form-control" placeholder="Jumlah Liter" required />
                             </div>
                         </div>
                         <div class="form-group">
