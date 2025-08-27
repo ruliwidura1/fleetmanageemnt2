@@ -24,7 +24,7 @@ class Departure extends \JI_Controller
 
     public function index()
     {
-        $data = $this->__init();
+        $data = $this->initialize();
         if (!$this->admin_login) {
             redir(base_url_admin('login'));
             die();
@@ -41,7 +41,7 @@ class Departure extends \JI_Controller
     }
 
     public function detail($id){
-		$data = $this->__init();
+		$data = $this->initialize();
 		if(!$this->admin_login){
 			redir(base_url_admin('login'));
 			die();

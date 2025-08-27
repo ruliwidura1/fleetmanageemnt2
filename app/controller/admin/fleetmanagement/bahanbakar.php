@@ -22,8 +22,8 @@ class Bahanbakar extends \JI_Controller
         $this->load('a_vehicle_concern');
         $this->load("admin/a_vehicle_model","avm");
 
-        $this->load('b_bensin_concern');
-        $this->load("admin/b_bensin_model","bbm");
+        $this->load('d_pembelianbbm_concern');
+        $this->load("admin/d_pembelianbbm_model","dpbbmm");
     }
 
     /**
@@ -81,23 +81,23 @@ class Bahanbakar extends \JI_Controller
 			return;
 		}
 
-		$bbm = $this->bbm->id($id);
-        if (!isset($bbm->id)) {
+		$dpbbmm = $this->dpbbmm->id($id);
+        if (!isset($dpbbmm->id)) {
 			redir(base_url_admin('fleetmanagement/bahanbakar/'));
 			return;
         }
 
         // generate total pembelian for this case only, please remove on the other case
-        $bbm->jumlah_beli = 0;
-        if (!is_null($bbm->jumlah_beli)) {
-            $bbm->jumlah_beli = number_format($bbm->jumlah_beli, 0, ',', '.').' liter';
+        $dpbbmm->total_pembelian = 0;
+        if (!is_null($dpbbmm->total_pembelian_per_liter)) {
+            $dpbbmm->total_pembelian = number_format($dpbbmm->total_pembelian_per_liter, 0, ',', '.').' liter';
         }
-        if (!is_null($bbm->jumlah_beli)) {
-            $bbm->jumlah_beli = 'Rp'.number_format($bbm->jumlah_beli, 0, ',', '.');
+        if (!is_null($dpbbmm->total_pembelian_harga)) {
+            $dpbbmm->total_pembelian = 'Rp'.number_format($dpbbmm->total_pembelian_harga, 0, ',', '.');
         }
 
 		$data['id'] = $id;
-		$data['current_data'] = $bbm;
+		$data['current_data'] = $dpbbmm;
 
         return $data;
     }

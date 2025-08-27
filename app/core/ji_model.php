@@ -9,17 +9,16 @@
 class JI_Model extends \SENE_Model
 {
     /** @var string  */
-    public $tbl;
+    public $table;
 
     /** @var string  */
-    public $tbl_as;
-
-        public $table_alias;
+    public $table_alias;
 
     public function __construct()
     {
         parent::__construct();
     }
+
     protected function set_table($table, $table_alias)
     {
         $this->table = $table;
@@ -34,8 +33,19 @@ class JI_Model extends \SENE_Model
      */
     public function set($d)
     {
-        $this->db->insert($this->tbl, $d, 0, 0);
+        $this->db->insert($this->table, $d, 0, 0);
         return $this->db->last_id;
+    }
+
+    /**
+     * Alias for method `set`
+     *
+     * @param  array   $d   same as method `set` 
+     * @return int          same return as method `set`
+     */
+    public function insert($d)
+    {
+        return $this->set($d);
     }
 
     /**
@@ -47,7 +57,7 @@ class JI_Model extends \SENE_Model
     public function update($id, $d)
     {
         $this->db->where("id", $id);
-        return $this->db->update($this->tbl, $d, 0);
+        return $this->db->update($this->table, $d, 0);
     }
 
     /**
@@ -59,7 +69,18 @@ class JI_Model extends \SENE_Model
     public function del($id)
     {
         $this->db->where("id", $id);
-        return $this->db->delete($this->tbl);
+        return $this->db->delete($this->table, 0);
+    }
+
+    /**
+     * Alias for `del` method
+     *
+     * @param  int      $id    same as `del` method
+     * @return boolean         same as `del` method
+     */
+    public function delete($id)
+    {
+        return $this->del($id);
     }
 
     /**
@@ -71,14 +92,14 @@ class JI_Model extends \SENE_Model
     public function id($id)
     {
         $this->db->where("id", $id);
-        return $this->db->from($this->tbl, $this->tbl_as)->get_first('', 0);
+        return $this->db->get_first('', 0);
     }
 
     /**
      * Open the database transaction session
      * @return boolean True if succeed, otherwise false
      */
-    public function trans_start()
+    public function transaction_start()
     {
         $r = $this->db->autocommit(0);
         if ($r) {
@@ -91,7 +112,7 @@ class JI_Model extends \SENE_Model
      * Execute `commit` SQL command
      * @return boolean True if succeed, otherwise false
      */
-    public function trans_commit()
+    public function transaction_commit()
     {
         return $this->db->commit();
     }
@@ -100,7 +121,7 @@ class JI_Model extends \SENE_Model
      * Rollback the database transaction session
      * @return boolean True if succeed, otherwise false
      */
-    public function trans_rollback()
+    public function transaction_rollback()
     {
         return $this->db->rollback();
     }
@@ -109,7 +130,7 @@ class JI_Model extends \SENE_Model
      * Finalize the database transaction session
      * @return boolean True if succeed, otherwise false
      */
-    public function trans_end()
+    public function transaction_end()
     {
         return $this->db->autocommit(1);
     }
