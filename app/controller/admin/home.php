@@ -13,7 +13,7 @@
 		$this->current_page = 'dashboard';
 	}
 	public function index(){
-		$data = $this->__init();
+		$data = $this->initialize();
 		if(!$this->admin_login){
 			redir(base_url_admin('login'),0);
 			die();

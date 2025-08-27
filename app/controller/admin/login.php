@@ -62,7 +62,7 @@ class Login extends \JI_Controller
 
 	public function index()
 	{
-		$data = $this->__init();
+		$data = $this->initialize();
         if ($this->validate_admin_session()) {
             redir(base_url_admin('login/authorization/'));
 
@@ -86,7 +86,7 @@ class Login extends \JI_Controller
 	{
 		//init
 		$data = array();
-		$initial_data = $this->__init();
+		$initial_data = $this->initialize();
 		if ($this->validate_admin_session() == true)
         {
             redir(base_url_admin('login/authorization/'));
@@ -129,7 +129,7 @@ class Login extends \JI_Controller
 
 	public function authorization()
 	{
-		$data = $this->__init();
+		$data = $this->initialize();
         if ($this->validate_admin_session()) {
             redir(base_url_admin());
 

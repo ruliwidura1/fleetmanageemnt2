@@ -19,7 +19,7 @@ class Bahanbakar extends \JI_Controller
         $this->load("api_admin/a_vehicle_model", "avm");
 
         $this->load('b_bensin_concern');
-        $this->load("api_admin/b_bensin_model", "bmm");
+        $this->load("api_admin/b_bensin_model", "bbm");
         $this->current_parent = 'fleetmanagement';
         $this->current_page = 'fleetmanagement_bahanbakar';
     }
@@ -63,7 +63,7 @@ class Bahanbakar extends \JI_Controller
             $sortDir = "ASC";
         }
 
-        $table_alias = $this->bmm->table_alias;
+        $table_alias = $this->bbm->table_alias;
         switch ($iSortCol_0) {
             case 1:
                 $sortCol = "$table_alias.created_at";
@@ -82,17 +82,17 @@ class Bahanbakar extends \JI_Controller
 
         $this->status = 200;
         $this->message = 'Success';
-        $datatable_count = $this->dpbbmm->datatable_count($keyword);
-        $datatable_list = $this->dpbbmm->datatable_list($page, $pagesize, $sortCol, $sortDir, $keyword);
+        $datatable_count = $this->bbm->datatable_count($keyword);
+        $datatable_list = $this->bbm->datatable_list($page, $pagesize, $sortCol, $sortDir, $keyword);
 
         foreach ($datatable_list as &$dt) {
             $dt->total_pembelian = '-';
             // optional, reformating before the output
-            if (!is_null($dt->total_pembelian_per_liter)) {
-                $dt->total_pembelian = 'Rp'.number_format($dt->total_pembelian_per_liter, 0, ',', '.');
+            if (!is_null($dt->total_harga)) {
+                $dt->total_pembelian = 'Rp'.number_format($dt->total_harga, 0, ',', '.');
             }
-            if (!is_null($dt->total_pembelian_harga)) {
-                $dt->total_pembelian = number_format($dt->total_pembelian_harga, 0, ',', '.');
+            if (!is_null($dt->total_harga)) {
+                $dt->total_pembelian = number_format($dt->total_harga, 0, ',', '.');
             }
         }
 
@@ -144,18 +144,18 @@ class Bahanbakar extends \JI_Controller
         $data_to_insert = $this->adjust_total_pembelian($data_to_insert);
         
         
-        $this->dpbbmm->transaction_start();
-        $res = $this->dpbbmm->insert($data_to_insert);
+        $this->bbm->transaction_start();
+        $res = $this->bbm->insert($data_to_insert);
         if ($res) {
             $this->status = 200;
             $this->message = 'New data was inserted successfully';
-            $this->dpbbmm->transaction_commit();
+            $this->bbm->transaction_commit();
         } else {
             $this->status = 900;
             $this->message = 'Failed inseting new data to table';
-            $this->dpbbmm->transaction_rollback();
+            $this->bbm->transaction_rollback();
         }
-        $this->dpbbmm->transaction_end();
+        $this->bbm->transaction_end();
         $this->__json_out($data);
     }
     
@@ -172,7 +172,7 @@ class Bahanbakar extends \JI_Controller
         $this->api_admin_authentication($data);
         $this->status = 200;
         $this->message = 'Success';
-        $data = $this->dpbbmm->id($id);
+        $data = $this->bbm->id($id);
         if (!isset($data->id)) {
             $data = new \stdClass();
             $this->status = 441;
@@ -212,18 +212,18 @@ class Bahanbakar extends \JI_Controller
         $data_to_update = $this->adjust_total_pembelian($data_to_update);
         
 
-        $this->dpbbmm->transaction_start();
-        $res = $this->dpbbmm->update($id, $data_to_update);
+        $this->bbm->transaction_start();
+        $res = $this->bbm->update($id, $data_to_update);
         if ($res) {
             $this->status = 200;
             $this->message = 'Success';
-            $this->dpbbmm->transaction_commit();
+            $this->bbm->transaction_commit();
         } else {
             $this->status = 901;
             $this->message = 'Cannot update the data with supplied ID right now';
-            $this->dpbbmm->transaction_rollback();
+            $this->bbm->transaction_rollback();
         }
-        $this->dpbbmm->transaction_end();
+        $this->bbm->transaction_end();
         $this->__json_out($data);
     }
 
@@ -248,26 +248,26 @@ class Bahanbakar extends \JI_Controller
             return;
         }
 
-        $dppbbmm = $this->dppbbmm->id($id);
-        if (!isset($dppbbmm->id)) {
+        $dppbbbm = $this->dppbbbm->id($id);
+        if (!isset($dppbbbm->id)) {
             $this->status = 520;
             $this->message = 'Data with supplied ID was not exists';
             $this->__json_out($data);
             return;
         }
         
-        $this->dppbbmm->transaction_start();
-        $res = $this->dppbbmm->delete($id);
+        $this->dppbbbm->transaction_start();
+        $res = $this->dppbbbm->delete($id);
         if ($res) {
             $this->status = 200;
             $this->message = 'successs';
-            $this->dppbbmm->transaction_commit();
+            $this->dppbbbm->transaction_commit();
         }else{
             $this->status = 902;
             $this->message = 'Cannot delete data using current ID';
-            $this->dppbbmm->transaction_rollback();
+            $this->dppbbbm->transaction_rollback();
         }
-        $this->dppbbmm->transaction_end();
+        $this->dppbbbm->transaction_end();
         $this->__json_out($data);
     }
 
@@ -278,7 +278,7 @@ class Bahanbakar extends \JI_Controller
         $p = new stdClass();
         $p->id = 'NULL';
         $p->text = '-';
-        $data = $this->dpbbmm->cari($keyword);
+        $data = $this->bbm->cari($keyword);
         array_unshift($data, $p);
         $this->__json_select2($data);
     }

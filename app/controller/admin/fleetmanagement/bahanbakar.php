@@ -81,23 +81,23 @@ class Bahanbakar extends \JI_Controller
 			return;
 		}
 
-		$dpbbmm = $this->dpbbmm->id($id);
-        if (!isset($dpbbmm->id)) {
+		$bbm = $this->bbm->id($id);
+        if (!isset($bbm->id)) {
 			redir(base_url_admin('fleetmanagement/bahanbakar/'));
 			return;
         }
 
         // generate total pembelian for this case only, please remove on the other case
-        $dpbbmm->total_pembelian = 0;
-        if (!is_null($dpbbmm->total_pembelian_per_liter)) {
-            $dpbbmm->total_pembelian = number_format($dpbbmm->total_pembelian_per_liter, 0, ',', '.').' liter';
+        $bbm->jumlah_beli = 0;
+        if (!is_null($bbm->jumlah_beli)) {
+            $bbm->jumlah_beli = number_format($bbm->jumlah_beli, 0, ',', '.').' liter';
         }
-        if (!is_null($dpbbmm->total_pembelian_harga)) {
-            $dpbbmm->total_pembelian = 'Rp'.number_format($dpbbmm->total_pembelian_harga, 0, ',', '.');
+        if (!is_null($bbm->jumlah_beli)) {
+            $bbm->jumlah_beli = 'Rp'.number_format($bbm->jumlah_beli, 0, ',', '.');
         }
 
 		$data['id'] = $id;
-		$data['current_data'] = $dpbbmm;
+		$data['current_data'] = $bbm;
 
         return $data;
     }
