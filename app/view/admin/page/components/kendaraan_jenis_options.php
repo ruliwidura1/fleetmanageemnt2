@@ -1,0 +1,10 @@
+<option value="">-- pilih --</option>
+<option value="Pickup">Pickup</option>
+<option value="Van">Van</option>
+<option value="Box">Box</option>
+<option value="Engkel">Engkel</option>
+<option value="Double">Double</option>
+<option value="Fuso">Fuso</option>
+<option value="Tronton">Tronton</option>
+<option value="Wingbox">Wing Box</option>
+<option value="Trailer">Trailer</option>

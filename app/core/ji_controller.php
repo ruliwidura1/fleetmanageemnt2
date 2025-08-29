@@ -13,7 +13,7 @@
 * @package Core\Controller
 * @since 1.0.0
 */
-class JI_Controller extends SENE_Controller
+class JI_Controller extends \SENE_Controller
 {
     public $status = 404;
     public $message = 'Not found';
@@ -21,12 +21,63 @@ class JI_Controller extends SENE_Controller
     public $menu_current = '';
     public $user_login = false;
     public $admin_login = false;
+    public $module_path = '';
 
     public function __construct()
     {
         parent::__construct();
         $this->setLang("id-ID");
+        $this->module_path = '';
+    }
 
+    /**
+     * Get config_semevar configuration value, and return default value if not exists
+     *
+     * @param  string $config_key                     Key string from `$this->config->semevar`
+     * @param  mixed  $default_value                  Default value if the seme framework variable was not exists
+     *
+     * @return mixed                                  Seme framework variable value
+     */
+    protected function config_semevar($config_key, $default_value = '')
+    {
+        if (isset($this->config->semevar->{$config_key})) {
+            return $this->config->semevar->{$config_key};
+        }
+
+        return $default_value;
+    }
+
+    /**
+     * Execute authentication check for API Admin controller
+     *   Will return json output and render http response code
+     *
+     * @param mixed $data   can be anything
+     * @return void
+     */
+    protected function api_admin_authentication($data)
+    {
+        if (!$this->admin_login) {
+            $this->status = 400;
+            $this->message = 'Authenticated user required';
+            header("HTTP/1.0 400 ".$this->message);
+            $this->__json_out($data);
+            return;
+        }
+    }
+
+    /**
+     * Execute authentication check for Admin controller
+     *   Will return json output and render http response code
+     *
+     * @param mixed $data   can be anything
+     * @return void
+     */
+    protected function admin_authentication()
+    {
+        if (!$this->admin_login) {
+            redir(base_url_admin('login'));
+            return;
+        }
     }
 
     /**
@@ -48,31 +99,6 @@ class JI_Controller extends SENE_Controller
         $this->sene_json->out($data);
         die();
     }
-    protected function api_admin_authentication($data)
-    {
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Authenticated user required';
-            header("HTTP/1.0 400 ".$this->message);
-            $this->__json_out($data);
-            return;
-        }
-    }
-    protected function admin_authentication()
-    {
-        if (!$this->admin_login) {
-            redir(base_url_admin('login'));
-            return;
-        }
-    }
-    protected function config_semevar($config_key, $default_value = '')
-    {
-        if (isset($this->config->semevar->{$config_key})) {
-            return $this->config->semevar->{$config_key};
-        }
-
-        return $default_value;
-    }
 
     /**
      * Output the json formatted string for select2
@@ -86,16 +112,23 @@ class JI_Controller extends SENE_Controller
         $this->sene_json->out($dt);
         die();
     }
+    
     public function __json_event($dt)
     {
         $this->lib('sene_json_engine', 'sene_json');
         $this->sene_json->out($dt);
         die();
     }
-
+    /**
+     * Method initialization in controller scope
+     *   Will return current defined array of data
+     * 
+     * @return array
+     */
     public function initialize()
     {
         $data = array();
+        $data['module_path'] = $this->module_path;
         $sess = $this->getKey();
         if (!is_object($sess)) {
             $sess = new stdClass();
@@ -110,6 +143,7 @@ class JI_Controller extends SENE_Controller
         if (!isset($sess->admin)) {
             $sess->admin = new stdClass();
         }
+        $this->admin_login = false;
         if (isset($sess->admin->id)) {
             $this->admin_login = true;
         }

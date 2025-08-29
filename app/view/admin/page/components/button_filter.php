@@ -1,0 +1,1 @@
+<button id="button_filter" class="btn btn-info btn-alt btn-block btn-submit"><i class="fa fa-filter icon-submit"></i></button>

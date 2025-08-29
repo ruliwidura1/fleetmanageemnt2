@@ -1,0 +1,1 @@
+<button id="button_print" onclick="window.print();" class="btn btn-primary"><i class="fa fa-print"></i> Print</button>

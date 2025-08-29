@@ -1,0 +1,15 @@
+<option value="">-- pilih --</option>
+<option value="pertalite">Pertalite</option>
+<option value="pertamax">Pertamax </option>
+<option value="pertamax plus">Pertamax Plus</option>
+<option value="solar">Solar</option>
+<option value="bio solar">Bio Solar</option>
+<option value="pertamina dexlite">Pertamina Dexlite</option>
+<option value="pertamina dex">Pertamina Dex</option>
+<option value="shell super">Shell Super</option>
+<option value="shell v-power">Shell V-Power</option>
+<option value="shell v-power Diesel">Shell V-Power Diesel</option>
+<option value="shell v-nitro+">Shell V-Nitro+</option>
+<option value="vivo revvo 90">Vivo Revvo 90</option>
+<option value="vivo revvo 92">Vivo Revvo 92</option>
+<option value="vivo revvo 95">Vivo Revvo 95</option>
