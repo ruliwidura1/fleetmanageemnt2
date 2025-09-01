@@ -1,5 +1,15 @@
 <?php
-class Kendaraan extends JI_Controller
+
+/**
+ * Controller for Vehicle module on API Admin point of view
+ *   Mostly this controller will produce JSON to support data manipulation for current module
+ *
+ * @version 1.0.0
+ *
+ * @package FleetManagement\Api_Admin
+ * @since 1.0.0
+ */
+class Kendaraan extends \JI_Controller
 {
 
     public function __construct()
@@ -11,25 +21,20 @@ class Kendaraan extends JI_Controller
         $this->current_parent = 'fleetmanagement';
         $this->current_page = 'fleetmanagement_kendaraan';
     }
-
+    
+    /**
+     * Render http response in json format with it's http header to supporting data table data
+     *
+     * @return void
+     */
     public function index()
     {
         $d = $this->initialize();
         $data = array();
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $pengguna = $d['sess']->admin;
+        $this->api_admin_authentication($data);
 
         $draw = $this->input->post("draw");
-        $sval = $this->input->post("search");
         $sSearch = $this->input->post("sSearch");
-        $utype = $this->input->post("utype", '');
-        $sEcho = $this->input->post("sEcho");
         $page = $this->input->post("iDisplayStart");
         $pagesize = $this->input->post("iDisplayLength");
 
@@ -43,44 +48,44 @@ class Kendaraan extends JI_Controller
             $sortDir = "ASC";
         }
 
-        $tbl_as = $this->avm->tbl_as;
+        $table_alias = $this->avm->table_alias;
 
         switch ($iSortCol_0) {
             case 0:
-                $sortCol = "$tbl_as.id";
+                $sortCol = "$table_alias.id";
                 break;
             case 1:
-                $sortCol = "$tbl_as.nama";
+                $sortCol = "$table_alias.nama";
                 break;
             case 2:
-                $sortCol = "$tbl_as.utype";
+                $sortCol = "$table_alias.utype";
                 break;
             case 3:
-                $sortCol = "$tbl_as.no_pol";
+                $sortCol = "$table_alias.plat_nomor";
                 break;
             case 4:
-                $sortCol = "$tbl_as.merk";
+                $sortCol = "$table_alias.merk";
                 break;
             case 5:
-                $sortCol = "$tbl_as.warna";
+                $sortCol = "$table_alias.warna";
                 break;
             case 6:
-                $sortCol = "$tbl_as.kapasitas_mesin";
+                $sortCol = "$table_alias.kapasitas_mesin";
                 break;
             case 7:
-                $sortCol = "$tbl_as.kapasitas_angkutan";
+                $sortCol = "$table_alias.kapasitas_angkutan";
                 break;
             case 8:
-                $sortCol = "$tbl_as.availability";
+                $sortCol = "$table_alias.availability";
                 break;
             case 9:
-                $sortCol = "$tbl_as.created_at";
+                $sortCol = "$table_alias.created_at";
                 break;
             case 10:
-                $sortCol = "$tbl_as.is_active";
+                $sortCol = "$table_alias.is_active";
                 break;
             default:
-                $sortCol = "$tbl_as.id";
+                $sortCol = "$table_alias.id";
         }
 
         if (empty($draw)) $draw = 0;
@@ -88,190 +93,177 @@ class Kendaraan extends JI_Controller
         if (empty($page)) $page = 0;
 
 
-        $created_at_from = $this->input->request('created_at_from');
-        $created_at_to = $this->input->request('created_at_to');
-        $is_active = $this->input->request('is_active');
+        $kendaraan_tipe = $this->input->request('kendaraan_tipe', '');
+        $created_at_from = $this->input->request('created_at_from', '');
+        $created_at_to = $this->input->request('created_at_to', '');
+        $is_active = $this->input->request('is_active', '');
 
         $keyword = $sSearch;
 
         $this->status = 200;
         $this->message = 'Berhasil';
-        $dcount = $this->avm->countAll($keyword, $created_at_from, $created_at_to, $is_active);
-        $ddata = $this->avm->getAll($page, $pagesize, $sortCol, $sortDir, $keyword, $created_at_from, $created_at_to, $is_active);
-
-
-        foreach ($ddata as &$gd) {
-            if (isset($gd->nama)) {
-                $gd->nama = htmlentities(rtrim($gd->nama, ' - '));
+        $datatable_count = $this->avm->datatable_count($keyword, $kendaraan_tipe, $created_at_from, $created_at_to, $is_active);
+        $datatable_list = $this->avm->datatable_list($page, $pagesize, $sortCol, $sortDir, $keyword, $kendaraan_tipe, $created_at_from, $created_at_to, $is_active);
+        foreach ($datatable_list as &$dt) {
+            if (isset($dt->nama)) {
+                $dt->nama = htmlentities(rtrim($dt->nama, ' - '));
             }
-            if (isset($gd->is_active)) {
-                if (!empty($gd->is_active)) {
-                    $gd->is_active = '<label class="label label-success">Aktif</label>';
+            if (isset($dt->created_at)) {
+                $dt->created_at = $this->__dateIndonesia($dt->created_at, 'hari_tanggal_jam');
+            }
+            if (isset($dt->is_active)) {
+                if (!empty($dt->is_active)) {
+                    $dt->is_active = '<label class="label label-success">Aktif</label>';
                 } else {
-                    $gd->is_active = '<label class="label label-default">Tidak Aktif</label>';
+                    $dt->is_active = '<label class="label label-default">Tidak Aktif</label>';
                 }
             }
         }
 
-        $this->__jsonDataTable($ddata, $dcount);
+        $this->__jsonDataTable($datatable_list, $datatable_count);
     }
-
+    
+    /**
+     * Render http response in json format for accomodating insert data
+     *
+     * @return void
+     */
     public function baru()
     {
         $d = $this->initialize();
 
         $data = array();
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $pengguna = $d['sess']->admin;
+        $this->api_admin_authentication($data);
 
-        $di = $_POST;
-        foreach ($di as $key => &$val) {
-            if (is_string($val)) {
-                if ($key == 'deskripsi') {
-                    $val = $this->seme_purifier->richtext($val);
-                } else {
-                    $val = $this->__f($val);
-                }
-            }
+        $data_to_insert = $_POST;
+        foreach ($data_to_insert as $k => $v) {
+            $data_to_insert[$k] = strip_tags($v);
         }
-        if (!isset($di['nama'])) $di['nama'] = "";
-        if (strlen($di['nama']) <= 0) {
-            $this->status = 101;
-            $this->message = 'Diperlukan satu atau lebih paramater';
-            $this->__json_out($data);
-            die();
-        }
-        $this->avm->trans_start();
-        $avm_id = $this->avm->getLastId();
 
-        $di['id'] = $avm_id;
-        $res = $this->avm->set($di);
+        // default value fo created_at, please adjust this on the other cases\
+        $data_to_insert['created_at'] = 'NOW()';
+        $data_to_insert['updated_at'] = 'NULL';
+        
+        
+        $this->avm->transaction_start();
+        $res = $this->avm->set($data_to_insert);
         if ($res) {
-            $this->avm->trans_commit();
             $this->status = 200;
-            $this->message = 'Data baru berhasil ditambahkan';
+            $this->message = 'New data was inserted successfully';
+            $this->avm->transaction_commit();
         } else {
-            $this->status = 110;
-            $this->message = 'Gagal menambahkan data baru';
-            $this->avm->trans_rollback();
+            $this->status = 900;
+            $this->message = 'Failed inseting new data to table';
+            $this->avm->transaction_rollback();
         }
-        $this->avm->trans_end();
+        $this->avm->transaction_end();
         $this->__json_out($data);
     }
-
+    
+    /**
+     * Render http response in json format for showing detail of data
+     *
+     * @return void
+     */
     public function detail($id)
     {
         $id = (int) $id;
         $d = $this->initialize();
         $data = array();
-        if (!$this->admin_login && empty($id)) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $pengguna = $d['sess']->admin;
+        $this->api_admin_authentication($data);
 
         $this->status = 200;
-        $this->message = 'Berhasil';
+        $this->message = 'Success';
         $data = $this->avm->id($id);
         if (!isset($data->id)) {
-            $data = new stdClass();
+            $data = new \stdClass();
             $this->status = 441;
             $this->message = 'No Data';
-            $this->__json_out($data);
-            die();
         }
         $this->__json_out($data);
     }
-
+    
+    /**
+     * Render http response in json format for edit of data
+     *
+     * @return void
+     */
     public function edit($id)
     {
         $d = $this->initialize();
         $data = array();
-
-        $id = (int) $id;
+        $this->api_admin_authentication($data);
         if ($id <= 0) {
             $this->status = 444;
-            $this->message = 'Invalid Kendaraan ID';
+            $this->message = 'Invalid Supplied ID';
             $this->__json_out($data);
-            die();
+            return;
         }
 
-        if (!$this->admin_login) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $pengguna = $d['sess']->admin;
-
-
-        $du = $_POST;
-
-        if (isset($du['id'])) unset($du['id']);
-        if (!isset($du['nama'])) $du['nama'] = "";
-        if (strlen($du['nama']) <= 0) {
-            $this->status = 110;
-            $this->message = 'Nama harus diisi';
-            $this->__json_out($data);
-            die();
+        $data_to_update = $_POST;
+        if (isset($data_to_update['id'])) {
+            unset($data_to_update['id']);
         }
 
-        $res = $this->avm->update($id, $du);
+        // add updated_at value
+        $data_to_update['updated_at'] = 'NOW()';
+
+        $this->avm->transaction_start();
+        $res = $this->avm->update($id, $data_to_update);
         if ($res) {
             $this->status = 200;
             $this->message = 'Success';
+            $this->avm->transaction_commit();
         } else {
             $this->status = 901;
             $this->message = 'Tidak dapat menambahkan data kendaraan';
+            $this->avm->transaction_rollback();
         }
+        $this->avm->transaction_end();
         $this->__json_out($data);
     }
 
+    
+    /**
+     * Render http response in json format for deleting data using supplied ID
+     *
+     * @return void
+     */
     public function hapus($id)
     {
         $id = (int) $id;
         $d = $this->initialize();
         $data = array();
+        $this->api_admin_authentication($data);
+
+        $id = (int) $id;
         if ($id <= 0) {
-            $this->status = 500;
-            $this->message = 'Invalid ID';
+            $this->status = 444;
+            $this->message = 'Invalid Supplied ID';
             $this->__json_out($data);
-            die();
+            return;
         }
-        if (!$this->admin_login && empty($id)) {
-            $this->status = 400;
-            $this->message = 'Harus login';
-            header("HTTP/1.0 400 Harus login");
-            $this->__json_out($data);
-            die();
-        }
-        $pengguna = $d['sess']->admin;
 
         $avm = $this->avm->id($id);
         if (!isset($avm->id)) {
             $this->status = 520;
-            $this->message = 'ID tidak ditemukan atau telah dihapus';
+            $this->message = 'Data with supplied ID was not exists';
             $this->__json_out($data);
-            die();
+            return;
         }
-        $res = $this->avm->del($id);
+
+        $this->avm->transaction_start();
+        $res = $this->avm->delete($id);
         if ($res) {
             $this->status = 200;
-            $this->message = 'Berhasil';
+            $this->message = 'successs';
+            $this->avm->transaction_commit();
         } else {
             $this->status = 902;
-            $this->message = 'Tidak dapat menghapus data kendaraan';
+            $this->message = 'Cannot delete data using current ID';
+            $this->avm->transaction_rollback();
         }
+        $this->avm->transaction_end();
         $this->__json_out($data);
     }
 

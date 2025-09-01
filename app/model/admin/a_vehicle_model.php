@@ -10,13 +10,10 @@
  */
 class A_Vehicle_Model extends \Model\A_Vehicle_Concern
 {
-	var $tbl = 'a_vehicle';
-	var $tbl_as = 'av';
-
 	public function __construct()
 	{
 		parent::__construct();
-		$this->db->from($this->tbl, $this->tbl_as);
+        $this->db->from($this->table, $this->table_alias);
 	}
 	
 	public function get()
